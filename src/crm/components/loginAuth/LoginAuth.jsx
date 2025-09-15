@@ -90,7 +90,7 @@ export default function LoginAuth() {
             login_type: "panel",
           })
         );
-        navigate("/home");
+        navigate("/crm/home");
       } else {
         toast({
           variant: "destructive",

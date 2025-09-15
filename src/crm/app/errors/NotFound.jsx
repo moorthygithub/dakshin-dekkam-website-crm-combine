@@ -11,7 +11,7 @@ const NotFound = () => {
       />
       <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2">
         <Link
-          to="/home"
+          to="/crm/home"
           className="px-6 py-3 rounded-lg bg-sidebar-primary text-sidebar-primary-foreground hover:bg-opacity-90 transition duration-300 shadow-md"
         >
           Go Back Home

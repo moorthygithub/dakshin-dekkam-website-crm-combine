@@ -23,10 +23,10 @@ import {
 } from "../../hooks/useApi";
 import { useApiMutation } from "../../hooks/useApiMutation";
 import { showErrorToast, showSuccessToast } from "../../utils/toast";
-import InputField from "../common/InputField";
 import SelectField from "../common/SelectField";
+import InputField from "../common/InputField";
 
-const CommunityForm = ({ isEditMode = false }) => {
+const CommunityForm = () => {
   const [formData, setFormData] = useState({
     first_name: "",
     middle_name: "",
@@ -114,7 +114,6 @@ const CommunityForm = ({ isEditMode = false }) => {
     e.preventDefault();
     const validationErrors = validate();
     setErrors(validationErrors);
-
     if (Object.keys(validationErrors).length > 0) {
       const firstErrorKey = Object.keys(validationErrors)[0];
       const ref = fieldRefs[firstErrorKey];
@@ -125,6 +124,7 @@ const CommunityForm = ({ isEditMode = false }) => {
           inline: "nearest",
         });
       }
+
       return;
     }
 

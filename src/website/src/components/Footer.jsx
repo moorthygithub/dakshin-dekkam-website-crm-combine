@@ -4,11 +4,11 @@ function Footer() {
       <div className="max-w-lg mx-auto">
         <div className="flex py-12 justify-center text-white items-center px-20 sm:px-36">
           <div className="relative">
-            <h1 className="font-bold text-xl pr-5 relative z-50">
+            <h1 className="font-bold text-xl pr-5 relative z-20">
               Dhakshin Ekkam
             </h1>
             <svg
-              className="w-11 h-11 absolute -top-2 -left-3 z-40"
+              className="w-11 h-11 absolute -top-2 -left-3 z-20"
               viewBox="0 0 79 79"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"

@@ -71,7 +71,7 @@ const Info = () => {
           <div className="lg:col-span-5 text-black" data-aos="fade-right ">
             <div className="flex relative mb-6">
               <div className="bg-yellow-500 rounded-full absolute w-12 h-12 z-0 -left-4 -top-3 animate-pulse"></div>
-              <h1 className="font-semibold text-2xl relative z-50 text-darken lg:pr-10">
+              <h1 className="font-semibold text-2xl relative z-20 text-darken lg:pr-10">
                 Join us Now
               </h1>
             </div>

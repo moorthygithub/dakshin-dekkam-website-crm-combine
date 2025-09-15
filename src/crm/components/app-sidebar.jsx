@@ -4,7 +4,7 @@ import {
   Command,
   Factory,
   House,
-  Settings2
+  Settings2,
 } from "lucide-react";
 
 import { NavMain } from "@/crm/components/nav-main";
@@ -49,13 +49,13 @@ export function AppSidebar({ ...props }) {
     navMain: [
       {
         title: "Dashboard",
-        url: "/home",
+        url: "/crm/home",
         icon: House,
         isActive: false,
       },
       {
         title: "Member",
-        url: "/member",
+        url: "/crm/member",
         icon: House,
         isActive: false,
       },
@@ -70,17 +70,17 @@ export function AppSidebar({ ...props }) {
           //   ? [
           {
             title: "Event",
-            url: "/event",
+            url: "/crm/event",
           },
           //   ]
           // : []),
           {
             title: "Event Register",
-            url: "/event-register",
+            url: "/crm/event-register",
           },
           {
             title: "Event Track",
-            url: "/event-track",
+            url: "/crm/event-track",
           },
         ],
       },
@@ -94,11 +94,11 @@ export function AppSidebar({ ...props }) {
         items: [
           {
             title: "Event",
-            url: "/report-event",
+            url: "/crm/report-event",
           },
           {
             title: "Event Details",
-            url: "/report-event-details",
+            url: "/crm/report-event-details",
           },
           // {
           //   title: "Registered Not Scanned",
@@ -110,7 +110,6 @@ export function AppSidebar({ ...props }) {
           // },
         ],
       },
-
     ],
   };
 

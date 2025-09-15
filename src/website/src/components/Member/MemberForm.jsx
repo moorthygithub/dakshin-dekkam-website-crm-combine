@@ -1,20 +1,23 @@
+import { Loader, Lock, Phone } from "lucide-react";
 import { useState } from "react";
-import { Mail, Lock, Loader, Phone } from "lucide-react";
-import InputField from "../common/InputField";
-import { showErrorToast } from "../../utils/toast";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { useApiMutation } from "../../hooks/useApiMutation";
+import { showErrorToast } from "../../utils/toast";
+import InputField from "../common/InputField";
+import { loginSuccess } from "@/crm/redux/slices/AuthSlice";
 
 const MemberForm = () => {
   const [formData, setFormData] = useState({
     mobile: "",
     password: "",
   });
-  const PANEL_URL = import.meta.env.VITE_PANEL_URL;
-  console.log(PANEL_URL, "PANEL_URL");
+  const PANEL_URL = import.meta.env.VITE_API_BASE_URL;
   const { trigger: submitTrigger, loading: isApiLoading } = useApiMutation();
   const [errors, setErrors] = useState({});
+  const dispatch = useDispatch();
   const [isRedirecting, setIsRedirecting] = useState(false); // new state
-
+  const navigate = useNavigate();
   const handleChange = (e) => {
     let { name, value } = e.target;
 
@@ -50,7 +53,6 @@ const MemberForm = () => {
       setErrors(newErrors);
       return;
     }
-    console.log(PANEL_URL, "PANEL_URL");
     const formDatas = new FormData();
     formDatas.append("username", formData.mobile);
     formDatas.append("password", formData.password);
@@ -62,16 +64,35 @@ const MemberForm = () => {
         data: formDatas,
       });
 
-      const email = encodeURIComponent(formData.mobile);
-      const password = encodeURIComponent(formData.password);
-
-      if (res.code === 200 && res.UserInfo?.token) {
-        setIsRedirecting(true);
-        window.location.href = `${PANEL_URL}/login?email=${email}&password=${password}`;
+      if (res.code == 200 && res.UserInfo?.token) {
+        const { UserInfo } = res;
+        dispatch(
+          loginSuccess({
+            token: UserInfo.token,
+            id: UserInfo.user.id,
+            name: UserInfo.user?.name,
+            mobile: UserInfo.user?.mobile,
+            user_type: UserInfo.user?.user_type,
+            email: UserInfo.user?.email,
+            token_expire_time: UserInfo.token_expires_at,
+            version: res?.version?.version_panel,
+            companyname: res?.company_detils?.company_name,
+            companystatename: res?.company_detils?.company_state_name,
+            company_address: res?.company_detils?.company_address,
+            company_email: res?.company_detils?.company_email,
+            company_gst: res?.company_detils?.company_gst,
+            company_mobile: res?.company_detils?.company_mobile,
+            company_state_code: res?.company_detils?.company_state_code,
+            company_state_name: res?.company_detils?.company_state_name,
+            login_type: "website",
+          })
+        );
+        navigate("/crm/home");
       } else {
         showErrorToast(res?.message || "Login failed: Unexpected response.");
       }
     } catch (error) {
+      console.log(error, "error");
       showErrorToast(error.response?.data?.message || "Please try again.");
     }
   };
