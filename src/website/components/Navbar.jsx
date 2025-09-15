@@ -25,7 +25,7 @@ function Navbar() {
       }`}
     >
       <div className="max-w-screen-xl mx-auto px-6 md:px-8">
-        <div className="flex items-center justify-between py-4">
+        <div className="flex items-center justify-between pt-4 md:py-4">
           <div className="relative">
             <Link
               to="/"
@@ -71,7 +71,7 @@ function Navbar() {
           <nav className="hidden md:flex space-x-6">
             <Link
               to="/"
-              className="px-3 py-2 text-sm font-medium hover:text-gray-900"
+              className="px-3 py-2 text-sm font-medium hover:text-gray-900 "
             >
               Home
             </Link>

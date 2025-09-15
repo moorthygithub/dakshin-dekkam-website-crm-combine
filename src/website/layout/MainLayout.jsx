@@ -1,7 +1,8 @@
-import { Outlet, useLocation } from "react-router-dom";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 import { useEffect } from "react";
+import { Toaster } from "react-hot-toast";
+import { Outlet, useLocation } from "react-router-dom";
+import Footer from "../components/Footer";
+import Navbar from "../components/Navbar";
 import ScrollToTop from "../components/ScrollToTop";
 import RouteLoader from "../components/common/RouteLoader";
 
@@ -13,6 +14,7 @@ function MainLayout() {
   }, [pathname]);
   return (
     <div className="flex flex-col min-h-screen">
+      <Toaster position="top-right" reverseOrder={false} />
       <Navbar />
       <ScrollToTop />
       <RouteLoader />

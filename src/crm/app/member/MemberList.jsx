@@ -137,7 +137,7 @@ const MemberList = () => {
                     size="icon"
                     onClick={() => {
                       navigate(
-                        `/member-form/${encodeURIComponent(encryptId(id))}`
+                        `/crm/member-form/${encodeURIComponent(encryptId(id))}`
                       );
                     }}
                   >
@@ -236,7 +236,7 @@ const MemberList = () => {
             variant="default"
             className={`ml-2 ${ButtonConfig.backgroundColor} ${ButtonConfig.hoverBackgroundColor} ${ButtonConfig.textColor} `}
             onClick={() => {
-              navigate("/member-form");
+              navigate("/crm/member-form");
             }}
           >
             <SquarePlus className="h-4 w-4 " /> Member

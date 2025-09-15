@@ -10,7 +10,7 @@ export function ReportPageHeader({
 }) {
   return (
     <div
-      className={`sticky top-0 z-10 border border-gray-200 rounded-lg ${ButtonConfig.cardheaderColor} shadow-sm p-3 mb-2`}
+      className={`sticky top-0 z-10 border  border-gray-200 rounded-lg ${ButtonConfig.cardheaderColor} shadow-sm p-3 mb-2`}
     >
       <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
         <div className="lg:w-64 xl:w-72 shrink-0">
@@ -20,7 +20,13 @@ export function ReportPageHeader({
 
         <div className="bg-white p-3 rounded-md shadow-xs">
           <div className="flex flex-col lg:flex-col lg:items-end gap-3">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 space-x-3 items-center">
+            <div
+              className={`${
+                className
+                  ? className
+                  : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 space-x-3 items-center"
+              }`}
+            >
               {filters.map(({ label, element }, idx) => (
                 <div className="space-y-1" key={idx}>
                   <label

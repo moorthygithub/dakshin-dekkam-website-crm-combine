@@ -4,6 +4,7 @@ import Page from "@/crm/app/page/page";
 import { ReportPageHeader } from "@/crm/components/common/ReportPageHeader";
 import { downloadPDF } from "@/crm/components/downloadPDF";
 import { exportEventReportToExcel } from "@/crm/components/excel/exportEventReportToExcel";
+import { WithoutLoaderComponent } from "@/crm/components/LoaderComponent/LoaderComponent";
 import { Button } from "@/crm/components/ui/button";
 import { Card, CardContent } from "@/crm/components/ui/card";
 import { Input } from "@/crm/components/ui/input";
@@ -15,18 +16,15 @@ import { useRef, useState } from "react";
 import { useReactToPrint } from "react-to-print";
 
 const EventReport = () => {
-  const [event, setEvent] = useState([]);
   const [filteredEvent, setFilteredEvent] = useState([]);
   const [fromDate, setFromDate] = useState(moment().startOf("month"));
   const [toDate, setToDate] = useState(moment());
-  const [statusFilter, setStatusFilter] = useState("all");
-  const [loading, setLoading] = useState(false);
-
+  const [hasSearched, setHasSearched] = useState(false);
   const eventRef = useRef(null);
-  const { trigger: submitTrigger } = useApiMutation();
-
+  const { trigger: submitTrigger, loading } = useApiMutation();
+  console.log(hasSearched, "hasSearched");
   const handleSubmit = async () => {
-    setLoading(true);
+    setHasSearched(true);
     const payload = {
       from_date: fromDate.format("YYYY-MM-DD"),
       to_date: toDate.format("YYYY-MM-DD"),
@@ -39,13 +37,10 @@ const EventReport = () => {
       });
 
       if (res.code === 201) {
-        setEvent(res.data);
         setFilteredEvent(res.data);
       }
     } catch (err) {
       console.error("Failed to fetch event report:", err);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -67,6 +62,7 @@ const EventReport = () => {
         <ReportPageHeader
           title="Event Report"
           subtitle="View Event Report"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 space-x-3 items-center"
           filters={[
             {
               label: "From Date",
@@ -160,70 +156,79 @@ const EventReport = () => {
         <CardContent>
           <div id="printable-section" ref={eventRef}>
             {loading ? (
-              <div className="flex justify-center py-20">Loading...</div>
-            ) : filteredEvent.length > 0 ? (
-              <div className="overflow-auto">
-                <table className="w-full table-fixed border-collapse border border-gray-300 text-sm">
-                  <thead className="bg-gray-100">
-                    <tr>
-                      <th className="px-2 py-1 border">Name</th>
-                      <th className="px-2 py-1 border">Allowed</th>
-                      <th className="px-2 py-1 border">No of Member</th>
-                      <th className="px-2 py-1 border">From Date</th>
-                      <th className="px-2 py-1 border">To Date</th>
-                      <th className="px-2 py-1 border">Payment</th>
-                      <th className="px-2 py-1 border">Amount</th>
-                      <th className="px-2 py-1 border">Total</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {filteredEvent.map((item) => (
-                      <tr
-                        key={item.id}
-                        className="border-t"
-                        style={{
-                          backgroundColor:
-                            item.event_status === "Active"
-                              ? "#90EE90"
-                              : "transparent",
-                        }}
-                      >
-                        <td className="px-2 py-1 border text-center">
-                          {item.event_name}
-                        </td>
-                        <td className="px-2 py-1 border text-center">
-                          {item.event_member_allowed}
-                        </td>
-                        <td className="px-2 py-1 border text-center">
-                          {item.event_no_member_allowed}
-                        </td>
-                        <td className="px-2 py-1 border text-center">
-                          {item.event_from_date
-                            ? moment(item.event_from_date).format("DD-MMM-YYYY")
-                            : ""}
-                        </td>
-                        <td className="px-2 py-1 border text-center">
-                          {item.event_to_date
-                            ? moment(item.event_to_date).format("DD-MMM-YYYY")
-                            : ""}
-                        </td>
-                        <td className="px-2 py-1 border text-center">
-                          {item.event_payment}
-                        </td>
-                        <td className="px-2 py-1 border text-center">
-                          {item.event_amount}
-                        </td>
-                        <td className="px-2 py-1 border text-center">
-                          {item.total_people}
-                        </td>
+              <WithoutLoaderComponent />
+            ) : hasSearched ? (
+              filteredEvent.length > 0 ? (
+                <div className="overflow-auto">
+                  <h1 className="text-2xl font-bold mb-1">Event Report</h1>
+                  <table className="w-full table-fixed border-collapse border border-gray-300 text-sm">
+                    <thead className="bg-gray-100">
+                      <tr>
+                        <th className="px-2 py-1 border">Name</th>
+                        <th className="px-2 py-1 border">Allowed</th>
+                        <th className="px-2 py-1 border">No of Member</th>
+                        <th className="px-2 py-1 border">From Date</th>
+                        <th className="px-2 py-1 border">To Date</th>
+                        <th className="px-2 py-1 border">Payment</th>
+                        <th className="px-2 py-1 border">Amount</th>
+                        <th className="px-2 py-1 border">Total</th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+                    </thead>
+                    <tbody>
+                      {filteredEvent.map((item) => (
+                        <tr
+                          key={item.id}
+                          className="border-t"
+                          style={{
+                            backgroundColor:
+                              item.event_status === "Active"
+                                ? "#94f1946b"
+                                : "transparent",
+                          }}
+                        >
+                          <td className="px-2 py-1 border text-center">
+                            {item.event_name}
+                          </td>
+                          <td className="px-2 py-1 border text-center">
+                            {item.event_member_allowed}
+                          </td>
+                          <td className="px-2 py-1 border text-center">
+                            {item.event_no_member_allowed}
+                          </td>
+                          <td className="px-2 py-1 border text-center">
+                            {item.event_from_date
+                              ? moment(item.event_from_date).format(
+                                  "DD-MMM-YYYY"
+                                )
+                              : ""}
+                          </td>
+                          <td className="px-2 py-1 border text-center">
+                            {item.event_to_date
+                              ? moment(item.event_to_date).format("DD-MMM-YYYY")
+                              : ""}
+                          </td>
+                          <td className="px-2 py-1 border text-center">
+                            {item.event_payment}
+                          </td>
+                          <td className="px-2 py-1 border text-center">
+                            {item.event_amount}
+                          </td>
+                          <td className="px-2 py-1 border text-center">
+                            {item.total_people}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              ) : (
+                <div className="text-center text-gray-500 py-20">
+                  No data found.
+                </div>
+              )
             ) : (
-              <div className="text-center text-gray-500 py-20">
-                No data found.
+              <div className="text-center text-gray-400 py-20">
+                Search to see results.
               </div>
             )}
           </div>

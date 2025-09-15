@@ -2,10 +2,10 @@ import { Loader, Lock, Phone } from "lucide-react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useApiMutation } from "../../hooks/useApiMutation";
 import { showErrorToast } from "../../utils/toast";
 import InputField from "../common/InputField";
 import { loginSuccess } from "@/crm/redux/slices/AuthSlice";
+import { useApiMutation } from "@/hooks/useApiMutation";
 
 const MemberForm = () => {
   const [formData, setFormData] = useState({
@@ -39,9 +39,7 @@ const MemberForm = () => {
     }
     if (!formData.password.trim()) {
       newErrors.password = "Password is required";
-    } else if (formData.password.length < 6) {
-      newErrors.password = "Password must be at least 6 characters";
-    }
+    } 
 
     return newErrors;
   };

@@ -260,7 +260,7 @@ const EventForm = () => {
           title: "Success",
           description: response.message,
         });
-        navigate("/event");
+        navigate("/crm/event");
       } else {
         toast({
           title: "Error",
@@ -493,7 +493,7 @@ const EventForm = () => {
               <Button
                 type="button"
                 onClick={() => {
-                  navigate("/event");
+                  navigate("/crm/event");
                 }}
                 className={`${ButtonConfig.backgroundColor} ${ButtonConfig.hoverBackgroundColor} ${ButtonConfig.textColor} flex items-center mt-2`}
               >

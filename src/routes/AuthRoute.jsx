@@ -10,12 +10,12 @@ const AuthRoute = () => {
   const user = authData?.user;
 
   const _isAuthRoute = isAuthRoute(location.pathname);
-
+  console.log(_isAuthRoute, "_isAuthRoute");
   if (isLoading && !_isAuthRoute) return null;
 
   if (!user) return <Outlet />;
 
-  return <Navigate to="/home" replace />;
+  return <Navigate to="/crm/home" replace />;
 };
 
 export default AuthRoute;

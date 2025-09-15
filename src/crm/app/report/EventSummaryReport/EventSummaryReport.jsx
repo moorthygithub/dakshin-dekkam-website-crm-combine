@@ -1,5 +1,3 @@
-"use client";
-
 import { ArrowDownToLine, FileSpreadsheet, Printer } from "lucide-react";
 import { useRef, useState } from "react";
 import { useReactToPrint } from "react-to-print";
@@ -16,15 +14,16 @@ import { useApiMutation } from "@/hooks/useApiMutation";
 import { useGetApiMutation } from "@/hooks/useGetApiMutation";
 import Page from "../../page/page";
 import EventCard from "./EventCard";
+import { WithoutLoaderComponent } from "@/crm/components/LoaderComponent/LoaderComponent";
 
-const EventDetailsReport = () => {
+const EventSummaryReport = () => {
   const [eventdetails, setEventDetails] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [hasSearched, setHasSearched] = useState(false);
   const [filters, setFilters] = useState({
     eventId: "",
   });
   const eventRef = useRef(null);
-  const { trigger: submitTrigger } = useApiMutation();
+  const { trigger: submitTrigger, loading } = useApiMutation();
 
   const { data: eventData } = useGetApiMutation({
     url: EVENT,
@@ -44,7 +43,7 @@ const EventDetailsReport = () => {
   };
 
   const handleSubmit = async () => {
-    setLoading(true);
+    setHasSearched(true);
     const payload = {
       event_id: filters.eventId,
     };
@@ -60,8 +59,6 @@ const EventDetailsReport = () => {
       }
     } catch (err) {
       console.error("Failed to fetch event report:", err);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -81,8 +78,9 @@ const EventDetailsReport = () => {
     <Page>
       <Card className="shadow-md rounded-lg p-4">
         <ReportPageHeader
-          title="Event Details Report"
-          subtitle="View Event Details Report"
+          title="Event Summary Report"
+          subtitle="View Event Summary Report"
+          className="grid grid-cols-1 md:grid-cols-2 space-x-3 items-center"
           filters={[
             {
               label: "Event",
@@ -167,57 +165,64 @@ const EventDetailsReport = () => {
         <CardContent>
           <div id="printable-section" ref={eventRef}>
             {loading ? (
-              <div className="flex justify-center py-20">Loading...</div>
-            ) : eventdetails?.eventData?.length > 0 ? (
-              <div className="overflow-auto">
-                <EventCard eventdetails={eventdetails} />
-                <table className="w-full table-fixed border-collapse border border-gray-300 text-sm mt-4">
-                  <thead className="bg-gray-100">
-                    <tr>
-                      <th className="px-3 py-2 text-center ">MID</th>
-                      <th className="px-3 py-2 text-center ">Name</th>
-                      <th className="px-3 py-2 text-center">Mobile</th>
-                      <th className="px-3 py-2 text-center ">Payment Type</th>
-                      <th className="px-3 py-2 text-center ">Transaction</th>
-                      <th className="px-3 py-2 text-center ">No of People</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {eventdetails?.eventData.map((item) => (
-                      <tr
-                        key={item.id}
-                        className="border-t"
-                        style={{
-                          pageBreakInside: "avoid",
-                        }}
-                      >
-                        {" "}
-                        <td className="px-3 py-2 text-center">
-                          {item.event_register_mid}
-                        </td>
-                        <td className="px-3 py-2 text-center">
-                          {item.first_name}.{item.middle_name}.{item.last_name}
-                        </td>
-                        <td className="px-3 py-2 text-center ">
-                          {item.mobile}
-                        </td>
-                        <td className="px-3 py-2 text-center">
-                          {item.event_register_payment_type}
-                        </td>
-                        <td className="px-3 py-2 text-center">
-                          {item.event_register_transaction}
-                        </td>
-                        <td className="px-3 py-2 text-center">
-                          {item.event_no_of_people}
-                        </td>{" "}
+              <WithoutLoaderComponent />
+            ) : hasSearched ? (
+              eventdetails?.eventData?.length > 0 ? (
+                <div className="overflow-auto">
+                  <EventCard eventdetails={eventdetails} />
+                  <table className="w-full table-fixed border-collapse border border-gray-300 text-sm mt-4">
+                    <thead className="bg-gray-100">
+                      <tr>
+                        <th className="px-3 py-2 text-center ">MID</th>
+                        <th className="px-3 py-2 text-center ">Name</th>
+                        <th className="px-3 py-2 text-center">Mobile</th>
+                        <th className="px-3 py-2 text-center ">Payment Type</th>
+                        <th className="px-3 py-2 text-center ">Transaction</th>
+                        <th className="px-3 py-2 text-center ">No of People</th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+                    </thead>
+                    <tbody>
+                      {eventdetails?.eventData.map((item) => (
+                        <tr
+                          key={item.id}
+                          className="border-t"
+                          style={{
+                            pageBreakInside: "avoid",
+                          }}
+                        >
+                          {" "}
+                          <td className="px-3 py-2 text-center">
+                            {item.event_register_mid}
+                          </td>
+                          <td className="px-3 py-2 text-center">
+                            {item.first_name}.{item.middle_name}.
+                            {item.last_name}
+                          </td>
+                          <td className="px-3 py-2 text-center ">
+                            {item.mobile}
+                          </td>
+                          <td className="px-3 py-2 text-center">
+                            {item.event_register_payment_type}
+                          </td>
+                          <td className="px-3 py-2 text-center">
+                            {item.event_register_transaction}
+                          </td>
+                          <td className="px-3 py-2 text-center">
+                            {item.event_no_of_people}
+                          </td>{" "}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              ) : (
+                <div className="text-center text-gray-500 py-20">
+                  No data found.
+                </div>
+              )
             ) : (
-              <div className="text-center text-gray-500 py-20">
-                No data found.
+              <div className="text-center text-gray-400 py-20">
+                Search to see results.
               </div>
             )}
           </div>
@@ -227,4 +232,4 @@ const EventDetailsReport = () => {
   );
 };
 
-export default EventDetailsReport;
+export default EventSummaryReport;

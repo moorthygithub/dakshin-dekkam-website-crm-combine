@@ -1,12 +1,10 @@
 import { Link } from "react-router-dom";
 import PageMeta from "../../components/common/PageMeta";
 
-const NotFound = () => {
+const WebsiteNotFound = () => {
   return (
     <>
-      <PageMeta
-        title="404 Not Found | Dhakshin Ekkam"
-      />
+      <PageMeta title="404 Not Found | Dhakshin Ekkam" />
 
       <section className="bg-white dark:bg-darklight">
         <div className="container mx-auto">
@@ -83,4 +81,4 @@ const NotFound = () => {
   );
 };
 
-export default NotFound;
+export default WebsiteNotFound;

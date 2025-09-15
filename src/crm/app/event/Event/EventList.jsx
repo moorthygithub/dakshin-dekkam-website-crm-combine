@@ -22,7 +22,6 @@ import EventMemberTrackForm from "../EventMemberTrack/EventMemberTrackForm";
 import EventTrackQRScanner from "../EventMemberTrack/EventTrackQRScanner";
 import EventListCard from "./EventCard";
 
-
 const EventList = () => {
   const [open, setOpen] = useState(false);
   const [selectedId, setSelected] = useState(null);
@@ -129,7 +128,7 @@ const EventList = () => {
               variant="default"
               className={`ml-2 ${ButtonConfig.backgroundColor} ${ButtonConfig.hoverBackgroundColor} ${ButtonConfig.textColor}`}
               onClick={() => {
-                navigate("/event-form");
+                navigate("/crm/event-form");
               }}
             >
               <SquarePlus className="h-4 w-4 mr-1" /> Events
@@ -144,7 +143,7 @@ const EventList = () => {
               key={event.id}
               event={event}
               onEdit={(id) =>
-                navigate(`/event-form/${encodeURIComponent(encryptId(id))}`)
+                navigate(`/crm/event-form/${encodeURIComponent(encryptId(id))}`)
               }
               onTrack={() => {
                 setSelected(null);
@@ -154,7 +153,9 @@ const EventList = () => {
               onScan={handleScanner}
               onAttend={(id) =>
                 navigate(
-                  `/event-member-attend/${encodeURIComponent(encryptId(id))}`
+                  `/crm/event-member-attend/${encodeURIComponent(
+                    encryptId(id)
+                  )}`
                 )
               }
               imageUrls={imageUrls}

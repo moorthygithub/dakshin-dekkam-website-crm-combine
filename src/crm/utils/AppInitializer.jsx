@@ -21,12 +21,11 @@ const AppInitializer = ({ children }) => {
   const dispatch = useDispatch();
   const localVersion = useSelector((state) => state.auth?.version);
   const { trigger: StatusTrigger } = useApiMutation();
-
   useEffect(() => {
     const validateEnvironment = async () => {
       try {
         if (!secretKey) {
-          navigate("/maintenance");
+          navigate("/crm/maintenance");
           throw new Error("Missing SECRET_KEY");
         }
 
@@ -65,25 +64,27 @@ const AppInitializer = ({ children }) => {
           throw new Error("Invalid environment config");
         }
 
-        if (location.pathname === "/maintenance") {
-          navigate("/");
+        if (location.pathname === "/crm/maintenance") {
+          // if (loginType == "website") {
+            navigate("/");
+          // } else {
+          //   navigate("/crm");
+          // }
         }
       } catch (error) {
         console.error("❌ App Initialization Error:", error.message);
-
         await persistor.flush();
         localStorage.clear();
         dispatch(logout());
         setTimeout(() => persistor.purge(), 1000);
-
         toast({
           title: "Environment Error",
           description: error.message,
           variant: "destructive",
         });
 
-        if (location.pathname !== "/maintenance") {
-          navigate("/maintenance");
+        if (location.pathname !== "/crm/maintenance") {
+          navigate("/crm/maintenance");
         }
       }
     };

@@ -17,7 +17,7 @@ function AboutUsDetails() {
             Learn More
           </a>
         </div>
-        <div data-aos="fade-left" className="sm:w-1/2 relative mt-10 sm:mt-0">
+        <div data-aos="zoom-in" className="sm:w-1/2 relative mt-10 sm:mt-0">
           <div
             style={{ background: "#23BDEE" }}
             className="floating w-24 h-24 absolute rounded-lg z-0 -top-3 -left-3"

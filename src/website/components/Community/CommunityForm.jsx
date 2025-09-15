@@ -15,16 +15,16 @@ import {
   User,
 } from "lucide-react";
 import { useRef, useState } from "react";
-import { MarriedStatus } from "../../constants/selectOptions";
+import { showErrorToast, showSuccessToast } from "../../utils/toast";
+import SelectField from "../common/SelectField";
+import InputField from "../common/InputField";
+import { useApiMutation } from "@/hooks/useApiMutation";
 import {
   useFetchBloodGroup,
   useFetchBranch,
   useFetchOccupation,
-} from "../../hooks/useApi";
-import { useApiMutation } from "../../hooks/useApiMutation";
-import { showErrorToast, showSuccessToast } from "../../utils/toast";
-import SelectField from "../common/SelectField";
-import InputField from "../common/InputField";
+} from "@/hooks/useApi";
+import { MarriedStatus } from "@/website/constants/selectOptions";
 
 const CommunityForm = () => {
   const [formData, setFormData] = useState({

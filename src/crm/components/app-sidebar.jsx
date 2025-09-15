@@ -97,8 +97,8 @@ export function AppSidebar({ ...props }) {
             url: "/crm/report-event",
           },
           {
-            title: "Event Details",
-            url: "/crm/report-event-details",
+            title: "Event Summary",
+            url: "/crm/report-event-summary",
           },
           // {
           //   title: "Registered Not Scanned",

@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router-dom";
 // CRM Imports
 import Login from "@/crm/app/auth/Login";
 import Dashboard from "@/crm/app/dashboard/Dashboard";
-import NotFound from "@/crm/app/errors/NotFound";
+import PanelNotFound from "@/crm/app/PanelNotFound/PanelNotFound";
 import EventAttendMember from "@/crm/app/event/Event/EventAttendMember";
 import EventForm from "@/crm/app/event/Event/EventForm";
 import EventList from "@/crm/app/event/Event/EventList";
@@ -11,16 +11,15 @@ import EventMemberTractList from "@/crm/app/event/EventMemberTrack/EventMemberTr
 import EventRegisterList from "@/crm/app/event/EventRegister/EventRegisterList";
 import MemberForm from "@/crm/app/member/MemberForm";
 import MemberList from "@/crm/app/member/MemberList";
-import EventDetailsReport from "@/crm/app/report/EventDetailsReport/EventDetailsReport";
 import EventReport from "@/crm/app/report/EventReport/EventReport";
 import Maintenance from "@/crm/components/common/Maintenance";
-import MainLayout from "@/website/src/layout/MainLayout";
-import About from "@/website/src/pages/About/About";
-import Community from "@/website/src/pages/Community/Community";
-import Contact from "@/website/src/pages/Contact/Contact";
-import Gallery from "@/website/src/pages/Gallery/Gallery";
-import Home from "@/website/src/pages/Home";
-import Member from "@/website/src/pages/Member/Member";
+import MainLayout from "@/website/layout/MainLayout";
+import About from "@/website/pages/About/About";
+import Community from "@/website/pages/Community/Community";
+import Contact from "@/website/pages/Contact/Contact";
+import Gallery from "@/website/pages/Gallery/Gallery";
+import Home from "@/website/pages/Home";
+import Member from "@/website/pages/Member/Member";
 import AuthRoute from "./AuthRoute";
 import ProtectedRoute from "./ProtectedRoute";
 import AppInitializer from "@/crm/utils/AppInitializer";
@@ -28,6 +27,8 @@ import SessionTimeoutTracker from "@/crm/components/SessionTimeoutTracker/Sessio
 import useLogout from "@/hooks/useLogout";
 import { useSelector } from "react-redux";
 import VersionCheck from "@/crm/utils/VersionCheck";
+import WebsiteNotFound from "@/website/pages/NotFound/WebsiteNotFound";
+import EventSummaryReport from "@/crm/app/report/EventSummaryReport/EventSummaryReport";
 
 // Website Imports
 
@@ -49,6 +50,7 @@ const AppRoutes = () => {
       >
         <Route index element={<Login />} />
         <Route path="maintenance" element={<Maintenance />} />
+        <Route path="*" element={<PanelNotFound />} />
       </Route>
 
       {/* CRM PROTECTED ROUTES */}
@@ -73,7 +75,8 @@ const AppRoutes = () => {
         <Route path="event-register" element={<EventRegisterList />} />
         <Route path="event-track" element={<EventMemberTractList />} />
         <Route path="report-event" element={<EventReport />} />
-        <Route path="report-event-details" element={<EventDetailsReport />} />
+        <Route path="report-event-summary" element={<EventSummaryReport />} />
+        <Route path="*" element={<PanelNotFound />} />
       </Route>
 
       {/* WEBSITE ROUTES */}
@@ -84,10 +87,9 @@ const AppRoutes = () => {
         <Route path="member" element={<Member />} />
         <Route path="community" element={<Community />} />
         <Route path="contact" element={<Contact />} />
+        <Route path="*" element={<WebsiteNotFound />} />
       </Route>
 
-      {/* CATCH-ALL */}
-      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 };

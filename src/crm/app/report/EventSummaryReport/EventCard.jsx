@@ -35,7 +35,6 @@ export default function EventCard({ eventdetails }) {
           />
         </div>
 
-        {/* Right: Event Details */}
         <div className="sm:w-2/3 w-full space-y-3">
           <Detail label="Member Allowed" value={data.event_member_allowed} />
           <Detail
