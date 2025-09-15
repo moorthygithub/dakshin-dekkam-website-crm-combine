@@ -5,6 +5,7 @@ import {
   Factory,
   House,
   Settings2,
+  Users,
 } from "lucide-react";
 
 import { NavMain } from "@/crm/components/nav-main";
@@ -56,7 +57,7 @@ export function AppSidebar({ ...props }) {
       {
         title: "Member",
         url: "/crm/member",
-        icon: House,
+        icon: Users,
         isActive: false,
       },
 

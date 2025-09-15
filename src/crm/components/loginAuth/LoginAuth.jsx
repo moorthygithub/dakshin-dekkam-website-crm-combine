@@ -75,6 +75,7 @@ export default function LoginAuth() {
             id: UserInfo.user.id,
             name: UserInfo.user?.name,
             mobile: UserInfo.user?.mobile,
+            branch_id: UserInfo.user?.branch_id,
             user_type: UserInfo.user?.user_type,
             email: UserInfo.user?.email,
             token_expire_time: UserInfo.token_expires_at,

@@ -39,7 +39,7 @@ const MemberForm = () => {
     }
     if (!formData.password.trim()) {
       newErrors.password = "Password is required";
-    } 
+    }
 
     return newErrors;
   };
@@ -71,6 +71,7 @@ const MemberForm = () => {
             name: UserInfo.user?.name,
             mobile: UserInfo.user?.mobile,
             user_type: UserInfo.user?.user_type,
+            branch_id: UserInfo.user?.branch_id,
             email: UserInfo.user?.email,
             token_expire_time: UserInfo.token_expires_at,
             version: res?.version?.version_panel,
