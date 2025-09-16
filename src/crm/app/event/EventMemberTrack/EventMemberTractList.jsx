@@ -38,8 +38,16 @@ import {
 } from "@tanstack/react-table";
 import { ChevronDown, Edit, Search } from "lucide-react";
 import moment from "moment";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import EventMemberTrackForm from "./EventMemberTrackForm";
+import { useSelector } from "react-redux";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/crm/components/ui/select";
 const EventMemberTractList = () => {
   const {
     data: eventtrackdata,
@@ -56,6 +64,9 @@ const EventMemberTractList = () => {
   const [columnFilters, setColumnFilters] = useState([]);
   const [columnVisibility, setColumnVisibility] = useState({});
   const [rowSelection, setRowSelection] = useState({});
+  const [branchId, setBranchId] = useState(0);
+  const authBranchId = useSelector((state) => state.auth.branch_id);
+  const userType = useSelector((state) => state.auth.user_type);
   const columns = [
     {
       accessorKey: "event_name",
@@ -73,11 +84,11 @@ const EventMemberTractList = () => {
       accessorKey: "event_entry_date",
       header: "Entry Date",
       cell: ({ row }) => {
-        const date = row.getValue("event_entry_date"); 
+        const date = row.getValue("event_entry_date");
         return date ? (
           <div>{moment(date).format("DD MMM YYYY")}</div>
         ) : (
-          <div>-</div> 
+          <div>-</div>
         );
       },
     },
@@ -119,9 +130,36 @@ const EventMemberTractList = () => {
       },
     },
   ];
+  const filteredData = useMemo(() => {
+    if (!eventtrackdata?.data) return [];
 
+    return eventtrackdata.data.filter((event) => {
+      const matchesBranch =
+        branchId === 0 || event.branch_id === Number(branchId);
+
+      return matchesBranch;
+    });
+  }, [eventtrackdata, branchId]);
+  const branchOptions = useMemo(() => {
+    if (!eventtrackdata?.branch) return [{ value: 0, label: "All Branches" }];
+
+    return [
+      { value: 0, label: "All Branches" },
+      ...eventtrackdata.branch.map((b) => ({
+        value: b.id,
+        label: b.branch_name || `Branch ${b.id}`,
+      })),
+    ];
+  }, [eventtrackdata]);
+  useEffect(() => {
+    if (branchOptions.length > 0) {
+      const defaultBranch =
+        branchOptions.find((b) => b.value === authBranchId) || branchOptions[0];
+      setBranchId(defaultBranch.value);
+    }
+  }, [branchOptions, authBranchId]);
   const table = useReactTable({
-    data: eventtrackdata?.data || [],
+    data: filteredData || [],
     columns,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
@@ -202,6 +240,27 @@ const EventMemberTractList = () => {
                 })}
             </DropdownMenuContent>
           </DropdownMenu>
+          <div className="ml-2">
+            {userType === 3 && (
+              <Select
+                value={String(branchId)}
+                onValueChange={(value) => {
+                  setBranchId(Number(value));
+                }}
+              >
+                <SelectTrigger className="w-full md:w-48 h-9 text-sm border rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500">
+                  <SelectValue placeholder="Select Branch" />
+                </SelectTrigger>
+                <SelectContent>
+                  {branchOptions.map((option) => (
+                    <SelectItem key={option.value} value={String(option.value)}>
+                      {option.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            )}
+          </div>
         </div>
         <div className="rounded-md border">
           <Table>

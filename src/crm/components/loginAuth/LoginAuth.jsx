@@ -171,10 +171,13 @@ export default function LoginAuth() {
                           type="text"
                           value={email}
                           placeholder="Enter your Mobile No"
-                          onChange={(event) => setEmail(event.target.value)}
+                          onChange={(event) => {
+                            const value = event.target.value.replace(/\D/g, ""); 
+                            setEmail(value);
+                          }}
                           required
                           autoComplete="username"
-                          maxLength={30}
+                          maxLength={10}
                         />
                       </motion.div>
                     </div>
