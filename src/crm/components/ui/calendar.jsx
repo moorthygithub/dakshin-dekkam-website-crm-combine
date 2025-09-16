@@ -1,8 +1,8 @@
-import { DayPicker } from "react-day-picker"
+import { DayPicker } from "react-day-picker";
 
-import { buttonVariants } from "@/components/ui/button"
-import { cn } from "@/lib/utils"
-import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons"
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
 
 function Calendar({
   className,
@@ -63,4 +63,5 @@ function Calendar({
 }
 Calendar.displayName = "Calendar"
 
-export { Calendar }
+export { Calendar };
+

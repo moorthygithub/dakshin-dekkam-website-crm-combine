@@ -1,4 +1,4 @@
-import usetoken from "@/api/usetoken";
+import useToken from "@/api/usetoken";
 import { AlertTriangle } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
@@ -7,7 +7,7 @@ const SessionTimeoutTracker = ({ expiryTime, onLogout }) => {
   const [countdown, setCountdown] = useState(300);
   const [isExpiring, setIsExpiring] = useState(false);
   const hasLoggedOut = useRef(false);
-  const token = usetoken();
+  const token = useToken();
 
   const isTokenPresent = () => {
     return !!token;

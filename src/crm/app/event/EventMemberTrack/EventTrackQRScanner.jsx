@@ -15,7 +15,7 @@ const EventTrackQRScanner = ({
   NoofMember,
 }) => {
   const { toast } = useToast();
-  const [scanResult, setScanResult] = useState("");
+  // const [scanResult, setScanResult] = useState("");
   const timeoutRef = useRef(null);
   const { trigger: submitTrigger, loading: submitLoading } = useApiMutation();
 
@@ -66,7 +66,7 @@ const EventTrackQRScanner = ({
   const handleScan = async (detectedCodes) => {
     if (detectedCodes && detectedCodes.length > 0) {
       const scannedValue = detectedCodes[0].rawValue;
-      setScanResult(scannedValue);
+      // setScanResult(scannedValue);
 
       if (scannedValue.includes("mid=")) {
         const midMatch = scannedValue.match(/mid=([^&\s]+)/);
@@ -92,7 +92,7 @@ const EventTrackQRScanner = ({
 
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
       timeoutRef.current = setTimeout(() => {
-        setScanResult("");
+        // setScanResult("");
       }, 3000);
     }
   };

@@ -1,5 +1,5 @@
 import { DOT_ENV, PANEL_CHECK } from "@/api";
-import usetoken from "@/api/usetoken";
+import useToken from "@/api/usetoken";
 import { useToast } from "@/hooks/use-toast";
 import { useApiMutation } from "@/hooks/useApiMutation";
 import { logout } from "@/crm/redux/slices/AuthSlice";
@@ -14,7 +14,7 @@ const secretKey = import.meta.env.VITE_SECRET_KEY;
 const validationKey = import.meta.env.VITE_SECRET_VALIDATION;
 
 const AppInitializer = ({ children }) => {
-  const token = usetoken();
+  const token = useToken();
   const navigate = useNavigate();
   const location = useLocation();
   const { toast } = useToast();
@@ -66,7 +66,7 @@ const AppInitializer = ({ children }) => {
 
         if (location.pathname === "/crm/maintenance") {
           // if (loginType == "website") {
-            navigate("/");
+          navigate("/");
           // } else {
           //   navigate("/crm");
           // }

@@ -1,4 +1,3 @@
-// HeroSub.jsx
 import React from "react";
 import Breadcrumb from "./Breadcrumb";
 

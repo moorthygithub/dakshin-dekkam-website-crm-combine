@@ -1,7 +1,3 @@
-import { Slot } from "@radix-ui/react-slot";
-import { cva } from "class-variance-authority";
-import { PanelLeft } from "lucide-react";
-import * as React from "react";
 import { Button } from "@/crm/components/ui/button";
 import { Input } from "@/crm/components/ui/input";
 import { Separator } from "@/crm/components/ui/separator";
@@ -13,13 +9,17 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/crm/components/ui/tooltip";
-import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/crm/lib/utils";
 import { setSidebarOpen } from "@/crm/redux/slices/sidebarSlice";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { Slot } from "@radix-ui/react-slot";
+import { cva } from "class-variance-authority";
+import { PanelLeft } from "lucide-react";
+import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-const SIDEBAR_COOKIE_NAME = "sidebar:state";
-const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
+// const SIDEBAR_COOKIE_NAME = "sidebar:state";
+// const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
 const SIDEBAR_WIDTH = "16rem";
 const SIDEBAR_WIDTH_MOBILE = "18rem";
 const SIDEBAR_WIDTH_ICON = "3rem";

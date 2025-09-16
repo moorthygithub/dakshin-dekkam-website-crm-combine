@@ -23,7 +23,6 @@ import { useSelector } from "react-redux";
 export function AppSidebar({ ...props }) {
   const nameL = useSelector((state) => state.auth.name);
   const emailL = useSelector((state) => state.auth.email);
-  const userType = useSelector((state) => state.auth.user_type);
 
   const initialData = {
     user: {

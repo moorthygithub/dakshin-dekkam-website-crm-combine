@@ -9,7 +9,7 @@ function AboutUsDetails() {
             <span className="text-yellow-500">you can do with Skilline</span>
           </h1>
           <p className="py-5 lg:pr-32">
-            Skilline's school management software helps traditional and online
+            Skilline&apos;s  school management software helps traditional and online
             schools manage scheduling, attendance, payments and virtual
             classrooms all in one secure cloud-based system.
           </p>

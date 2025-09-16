@@ -1,4 +1,4 @@
-import usetoken from "@/api/usetoken";
+import useToken from "@/api/usetoken";
 import { Button } from "@/crm/components/ui/button";
 import {
   Dialog,
@@ -14,7 +14,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const VersionCheck = () => {
-  const token = usetoken();
+  const token = useToken();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const Logout = useLogout();

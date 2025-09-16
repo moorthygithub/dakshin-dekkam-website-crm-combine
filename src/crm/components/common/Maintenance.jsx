@@ -1,4 +1,3 @@
-import React from "react";
 import maintenanceImg from "../../../../public/img/maintenance.jpg";
 
 const Maintenance = () => {
@@ -14,7 +13,9 @@ const Maintenance = () => {
           🚧 Under Maintenance 🚧
         </h1>
         <p className="text-gray-600 mb-1">
-          We're improving your experience. Please check back shortly.
+      
+            We&apos;re improving your experience. Please check back shortly.
+     
         </p>
         <p className="text-gray-500">Thanks for your patience. 🙏</p>
       </div>

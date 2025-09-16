@@ -5,13 +5,12 @@ import {
   SidebarGroupLabel,
   SidebarMenu,
   SidebarMenuButton,
-  SidebarMenuItem,
-  useSidebar
+  SidebarMenuItem
 } from "@/components/ui/sidebar";
 import { Link, useLocation } from "react-router-dom";
 
 export function NavMainUser({ projects }) {
-  const { isMobile } = useSidebar();
+  // const { isMobile } = useSidebar();
   const location = useLocation();
   const buttonVariants = {
     hover: { scale: 1.05 },

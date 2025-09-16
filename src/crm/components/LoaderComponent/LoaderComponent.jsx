@@ -3,7 +3,7 @@ import { Button } from "@/crm/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/crm/components/ui/card";
 import { motion } from "framer-motion";
 
-export const LoaderComponent = ({ name = "Loading..." }) => {
+export const LoaderComponent = () => {
   return (
     <Page>
       <div className="relative h-96 overflow-hidden flex items-center justify-center">
@@ -71,7 +71,7 @@ export const ErrorComponent = ({ message, refetch }) => {
   );
 };
 
-export const WithoutLoaderComponent = ({ name }) => {
+export const WithoutLoaderComponent = () => {
   return (
     <div className="relative h-96 overflow-hidden flex items-center justify-center">
       <div className="absolute inset-0 pointer-events-none">

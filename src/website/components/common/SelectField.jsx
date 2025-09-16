@@ -1,5 +1,4 @@
-// src/components/common/CustomSelect.jsx
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const Chevron = ({ className = "" }) => (
   <svg

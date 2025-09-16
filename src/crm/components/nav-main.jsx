@@ -29,7 +29,7 @@ export function NavMain({ items }) {
   const location = useLocation();
   const [openItem, setOpenItem] = React.useState(null);
 
-  const handleLinkClick = (e) => {
+  const handleLinkClick = () => {
     const sidebarContent = document.querySelector(".sidebar-content");
     if (sidebarContent) {
       sessionStorage.setItem("sidebarScrollPosition", sidebarContent.scrollTop);
