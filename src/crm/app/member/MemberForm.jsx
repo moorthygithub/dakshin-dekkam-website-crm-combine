@@ -137,14 +137,14 @@ const MemberForm = () => {
         return value.toString().trim() !== "";
       }).length;
 
-      const missingFields = Object.entries(formCopy)
-        .filter(
-          ([, value]) =>
-            value === null ||
-            value === undefined ||
-            value.toString().trim() === ""
-        )
-        .map(([key]) => key);
+      // const missingFields = Object.entries(formCopy)
+      //   .filter(
+      //     ([, value]) =>
+      //       value === null ||
+      //       value === undefined ||
+      //       value.toString().trim() === ""
+      //   )
+      //   .map(([key]) => key);
 
       const totalFields = totalFormFields;
       const filledFields = filledFormFields;

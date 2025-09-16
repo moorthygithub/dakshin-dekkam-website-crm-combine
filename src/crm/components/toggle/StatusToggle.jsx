@@ -1,17 +1,14 @@
 import { EVENT_UPDATE_STATUS } from "@/api";
-import usetoken from "@/api/usetoken";
 import { useToast } from "@/hooks/use-toast";
 import { useApiMutation } from "@/hooks/useApiMutation";
-import axios from "axios";
 import { RefreshCcw } from "lucide-react";
 import { useState } from "react";
 
-const StatusToggle = ({ initialStatus, teamId, onStatusChange }) => {
+const StatusToggle = ({ initialStatus, onStatusChange }) => {
   const [status, setStatus] = useState(initialStatus);
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
-  const token = usetoken();
-  const { trigger: submitTrigger, loading: submitLoading } = useApiMutation();
+  const { trigger: submitTrigger } = useApiMutation();
 
   const handleToggle = async () => {
     setIsLoading(true);

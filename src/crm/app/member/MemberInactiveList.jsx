@@ -1,13 +1,11 @@
-import { MEMBER_LIST } from "@/api";
 import {
   ErrorComponent,
   LoaderComponent,
 } from "@/crm/components/LoaderComponent/LoaderComponent";
-import { useGetApiMutation } from "@/hooks/useGetApiMutation";
-import { useNavigate } from "react-router-dom";
-import Page from "../page/page";
 import MemberTable from "@/crm/components/MemberTable/MemberTable";
 import { useFetchMemberData } from "@/hooks/useApi";
+import { useNavigate } from "react-router-dom";
+import Page from "../page/page";
 
 const MemberInactiveList = () => {
   const {
@@ -24,9 +22,8 @@ const MemberInactiveList = () => {
       <ErrorComponent message="Error Fetching Member Data" refetch={refetch} />
     );
 
-  const allMembers = memberdata?.data || [];
-  const activeMembers = allMembers.filter((m) => m.user_status === "Active");
-  const inactiveMembers = allMembers.filter((m) => m.user_status !== "Active");
+  const inactiveMembers =
+    memberdata?.data.filter((m) => m.user_status !== "Active") || [];
 
   return (
     <Page>

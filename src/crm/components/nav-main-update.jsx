@@ -12,10 +12,10 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
 
-const itemVariants = {
-  open: { opacity: 1, height: "auto", transition: { duration: 0.3 } },
-  closed: { opacity: 0, height: 0, transition: { duration: 0.3 } },
-};
+// const itemVariants = {
+//   open: { opacity: 1, height: "auto", transition: { duration: 0.3 } },
+//   closed: { opacity: 0, height: 0, transition: { duration: 0.3 } },
+// };
 
 const buttonVariants = {
   hover: { scale: 1.05 },

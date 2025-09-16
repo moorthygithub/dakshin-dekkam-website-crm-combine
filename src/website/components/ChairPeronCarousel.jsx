@@ -1,4 +1,3 @@
-import React from "react";
 
 const teamMembers = [
   { name: "Chairperson Name", role: "Chairperson", img: "/img/profile.png" },

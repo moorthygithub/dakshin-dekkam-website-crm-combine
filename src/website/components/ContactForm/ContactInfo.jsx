@@ -1,5 +1,4 @@
 import { Mail, MapPin } from "lucide-react";
-import LazyMap from "./LazyMap";
 
 const ContactInfo = () => {
   return (

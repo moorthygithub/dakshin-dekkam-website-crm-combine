@@ -13,11 +13,9 @@ const MemberForm = () => {
     mobile: "",
     password: "",
   });
-  const PANEL_URL = import.meta.env.VITE_API_BASE_URL;
   const { trigger: submitTrigger, loading: isApiLoading } = useApiMutation();
   const [errors, setErrors] = useState({});
   const dispatch = useDispatch();
-  const [isRedirecting, setIsRedirecting] = useState(false); // new state
   const navigate = useNavigate();
   const handleChange = (e) => {
     let { name, value } = e.target;
@@ -96,7 +94,7 @@ const MemberForm = () => {
       showErrorToast(error.response?.data?.message || "Please try again.");
     }
   };
-  const isLoading = isApiLoading || isRedirecting;
+  const isLoading = isApiLoading;
 
   return (
     <form
@@ -136,7 +134,7 @@ const MemberForm = () => {
         {isLoading ? (
           <>
             <Loader className="h-5 w-5 animate-spin mr-2" />
-            {isRedirecting ? "Redirecting..." : "Logging in..."}
+            {isLoading ? "Redirecting..." : "Logging in..."}
           </>
         ) : (
           "Submit"

@@ -1,11 +1,11 @@
-import usetoken from "@/api/usetoken";
+import useToken from "@/api/usetoken";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 const useAuth = () => {
   const [authData, setAuthData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const token = usetoken();
+  const token = useToken();
   const company = useSelector((state) => state.auth.companyname);
   useEffect(() => {
     const userData = {

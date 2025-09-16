@@ -90,8 +90,6 @@ const ChangePassword = ({ open, setOpen }) => {
           error.response?.data?.message || "Failed to change password",
         variant: "destructive",
       });
-    } finally {
-      setIsLoading(false);
     }
   };
   return (

@@ -37,11 +37,7 @@ const EventRegisterForm = ({ setOpen, open, selectedId = null, refetch }) => {
     event_register_payment_type: "",
     event_register_transaction: "",
   });
-  const {
-    data: eventdata,
-    isLoading,
-    isError,
-  } = useGetApiMutation({
+  const { data: eventdata, isLoading } = useGetApiMutation({
     url: EVENT,
     queryKey: ["eventlistdata"],
   });
@@ -98,14 +94,14 @@ const EventRegisterForm = ({ setOpen, open, selectedId = null, refetch }) => {
         return value.toString().trim() !== "";
       }).length;
 
-      const missingFields = Object.entries(formCopy)
-        .filter(
-          ([, value]) =>
-            value === null ||
-            value === undefined ||
-            value.toString().trim() === ""
-        )
-        .map(([key]) => key);
+      // const missingFields = Object.entries(formCopy)
+      //   .filter(
+      //     ([, value]) =>
+      //       value === null ||
+      //       value === undefined ||
+      //       value.toString().trim() === ""
+      //   )
+      //   .map(([key]) => key);
 
       // console.log(missingFields, "missingFields");
 
