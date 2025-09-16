@@ -1,19 +1,25 @@
 import { DASHBOARD } from "@/api";
+import Page from "@/crm/app/page/page";
 import {
   ErrorComponent,
   LoaderComponent,
 } from "@/crm/components/LoaderComponent/LoaderComponent";
 import { Card, CardContent } from "@/crm/components/ui/card";
-import { Settings2, Users } from "lucide-react";
-import { useGetApiMutation } from "@/hooks/useGetApiMutation";
-import Page from "@/crm/app/page/page";
-import { useNavigate } from "react-router-dom";
-import moment from "moment";
-import { useSelector } from "react-redux";
-import { MemoizedSelect } from "@/crm/components/common/MemoizedSelect";
-import { useState, useMemo, useEffect } from "react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/crm/components/ui/select";
 import { ButtonConfig } from "@/crm/config/ButtonConfig";
-
+import { useGetApiMutation } from "@/hooks/useGetApiMutation";
+import { Settings2, Users } from "lucide-react";
+import moment from "moment";
+import { useEffect, useMemo, useState } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import EventChart from "./EventChart";
 const colors = [
   "bg-blue-600",
   "bg-green-600",
@@ -33,7 +39,7 @@ const Dashboard = () => {
     url: DASHBOARD,
     queryKey: ["dashboard"],
   });
-
+  const userType = useSelector((state) => state.auth.user_type);
   const [formData, setFormData] = useState({
     branch_id: "",
   });
@@ -41,26 +47,18 @@ const Dashboard = () => {
   const authBranchId = useSelector((state) => state.auth.branch_id);
   const navigate = useNavigate();
 
-  // ✅ Build branchOptions from dashboard.upcomingEvent
   const branchOptions = useMemo(() => {
-    if (!dashboard?.upcomingEvent) return [{ value: 0, label: "All Branches" }];
+    if (!dashboard?.branch) return [{ value: 0, label: "All Branches" }];
 
-    const uniqueBranches = [
-      ...new Map(
-        dashboard.upcomingEvent.map((event) => [
-          event.branch_id,
-          {
-            value: event.branch_id,
-            label: event.branch_name || `Branch ${event.branch_id}`,
-          },
-        ])
-      ).values(),
+    return [
+      { value: 0, label: "All Branches" },
+      ...dashboard.branch.map((b) => ({
+        value: b.id,
+        label: b.branch_name || `Branch ${b.id}`,
+      })),
     ];
-
-    return [{ value: 0, label: "All Branches" }, ...uniqueBranches];
   }, [dashboard]);
 
-  // ✅ Set default branch from auth or fallback to "All Branches"
   useEffect(() => {
     if (branchOptions.length > 0) {
       const defaultBranch =
@@ -104,7 +102,6 @@ const Dashboard = () => {
   const eventImageBase =
     dashboard?.image_url?.find((i) => i.image_for === "Event")?.image_url || "";
 
-  // ✅ Filter events by branch_id (if not "All")
   const filteredEvents =
     formData.branch_id && formData.branch_id !== 0
       ? dashboard.upcomingEvent.filter(
@@ -152,36 +149,43 @@ const Dashboard = () => {
             </div>
 
             {/* Chart Placeholder */}
-            <Card className="h-64 flex items-center justify-center">
-              <span className="text-muted-foreground">
-                📊 Chart placeholder (Events / Members trend)
-              </span>
-            </Card>
+            {userType === 3 && (
+              <Card className="h-64 flex items-center justify-center">
+                <EventChart />
+              </Card>
+            )}
           </div>
 
           {/* RIGHT SIDE */}
-          <div className="space-y-4 max-h-screen overflow-y-auto">
-            <h3 className="text-lg font-semibold">Upcoming Events</h3>
-
-            {/* Branch Dropdown */}
-            <div className="mb-4">
-              <div className="flex items-center justify-between mb-2">
-                <label
-                  className={`text-sm font-medium ${ButtonConfig.cardLabel}`}
-                >
-                  Branch
-                </label>
-              </div>
-
-              <MemoizedSelect
-                value={formData.branch_id}
-                onChange={(value) => handleInputChange(value, "branch_id")}
-                options={branchOptions}
-                placeholder="Select Branch"
-              />
+          <div className="space-y-4 max-h-screen overflow-y-auto py-2 px-1">
+            <div className="flex justify-between">
+              <h3 className="text-md font-semibold">Upcoming Events</h3>
+              {userType === 3 && (
+                <div className="mb-4">
+                  <Select
+                    value={String(formData.branch_id)}
+                    onValueChange={(value) =>
+                      handleInputChange(Number(value), "branch_id")
+                    }
+                  >
+                    <SelectTrigger className="w-full md:w-48 h-9 text-sm border rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500">
+                      <SelectValue placeholder="Select Branch" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {branchOptions.map((option) => (
+                        <SelectItem
+                          key={option.value}
+                          value={String(option.value)}
+                        >
+                          {option.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+              )}
             </div>
 
-            {/* Events */}
             <div className="space-y-4">
               {filteredEvents?.length > 0 ? (
                 filteredEvents.map((event, index) => {

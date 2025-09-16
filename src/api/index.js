@@ -12,6 +12,8 @@ export const PANEL_SEND_PASSWORD = `/panel-send-password`;
 export const PANEL_CHANGE_PASSWORD = `/panel-change-password`;
 //MEMBER_LIST
 export const MEMBER_LIST = `/member`;
+//MEMBER_LIST
+export const CREATE_MEMBER = `/create-member`;
 //EVENT
 export const EVENT = `/event`;
 //EVENT

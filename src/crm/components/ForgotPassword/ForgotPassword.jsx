@@ -55,7 +55,6 @@ export default function ForgotPassword({ setForgot }) {
     formData.append("username", username);
 
     try {
-
       const response = await submitTrigger({
         url: PANEL_SEND_PASSWORD,
         method: "post",
@@ -155,7 +154,7 @@ export default function ForgotPassword({ setForgot }) {
               <span className="relative z-10">
                 {isLoading ? loadingMessage : "Reset Password"}
               </span>
-              <span className="absolute left-0 top-0 h-full w-0 bg-[#82b8a4] transition-all duration-700 ease-in-out group-hover:w-full z-0"></span>
+              <span className="absolute left-0 top-0 h-full w-0 bg-[#785db8] transition-all duration-700 ease-in-out group-hover:w-full z-0"></span>
             </Button>
           </form>
           <div className="flex justify-center mt-4">

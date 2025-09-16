@@ -120,7 +120,15 @@ export default function LoginAuth() {
     <div className="min-h-screen flex flex-col md:flex-row font-inter">
       <LoginCarsol />
 
-      <div className="flex flex-1 min-h-screen justify-center items-center bg-[#f7f9fa] px-[12px]">
+      <div className="relative flex flex-1 min-h-screen justify-center items-center  px-[12px]">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage: "url('/img/login-bg.jpg')",
+          }}
+        />
+        <div className="absolute inset-0 bg-white/90 " />
+
         <AnimatePresence
           custom={{ dir: forgot ? 1 : -1 }}
           initial={false}
@@ -134,7 +142,7 @@ export default function LoginAuth() {
             animate="visible"
             exit="exit"
             transition={{ duration: 0.4 }}
-            className="w-full max-w-md"
+            className="w-full z-10  max-w-md"
           >
             {forgot ? (
               <ForgotPassword setForgot={setForgot} />

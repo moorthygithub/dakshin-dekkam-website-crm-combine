@@ -1,13 +1,15 @@
+import { MEMBER_LIST } from "@/api";
 import {
   ErrorComponent,
   LoaderComponent,
 } from "@/crm/components/LoaderComponent/LoaderComponent";
-import MemberTable from "@/crm/components/MemberTable/MemberTable";
-import { useFetchMemberData } from "@/hooks/useApi";
+import { useGetApiMutation } from "@/hooks/useGetApiMutation";
 import { useNavigate } from "react-router-dom";
 import Page from "../page/page";
+import MemberTable from "@/crm/components/MemberTable/MemberTable";
+import { useFetchMemberData } from "@/hooks/useApi";
 
-const MemberList = () => {
+const MemberInactiveList = () => {
   const {
     data: memberdata,
     isLoading,
@@ -23,13 +25,20 @@ const MemberList = () => {
     );
 
   const allMembers = memberdata?.data || [];
+  const activeMembers = allMembers.filter((m) => m.user_status === "Active");
+  const inactiveMembers = allMembers.filter((m) => m.user_status !== "Active");
 
   return (
     <Page>
       <div className="w-full space-y-8">
-        <MemberTable title="Member List" data={allMembers} refetch={refetch} navigate={navigate} />
+        <MemberTable
+          title="Inactive Members List"
+          data={inactiveMembers}
+          refetch={refetch}
+          navigate={navigate}
+        />
       </div>
     </Page>
   );
 };
-export default MemberList;
+export default MemberInactiveList;

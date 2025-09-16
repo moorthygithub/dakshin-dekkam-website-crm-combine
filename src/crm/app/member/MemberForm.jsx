@@ -529,7 +529,7 @@ const MemberForm = () => {
               <Button
                 type="button"
                 onClick={() => {
-                  navigate("/crm/member");
+                  navigate(-1);
                 }}
                 className={`${ButtonConfig.backgroundColor} ${ButtonConfig.hoverBackgroundColor} ${ButtonConfig.textColor} flex items-center mt-2`}
               >

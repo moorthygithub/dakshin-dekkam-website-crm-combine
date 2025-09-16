@@ -29,6 +29,9 @@ import { useSelector } from "react-redux";
 import VersionCheck from "@/crm/utils/VersionCheck";
 import WebsiteNotFound from "@/website/pages/NotFound/WebsiteNotFound";
 import EventSummaryReport from "@/crm/app/report/EventSummaryReport/EventSummaryReport";
+import MemberActiveList from "@/crm/app/member/MemberActiveList";
+import MemberInactiveList from "@/crm/app/member/MemberInactiveList";
+import NewRegister from "@/crm/app/newregister/NewRegister";
 
 // Website Imports
 
@@ -65,7 +68,10 @@ const AppRoutes = () => {
         }
       >
         <Route path="home" element={<Dashboard />} />
+        <Route path="new-register" element={<NewRegister />} />
         <Route path="member" element={<MemberList />} />
+        <Route path="active-member" element={<MemberActiveList />} />
+        <Route path="inactive-member" element={<MemberInactiveList />} />
         <Route path="member-form" element={<MemberForm />} />
         <Route path="member-form/:id" element={<MemberForm />} />
         <Route path="event" element={<EventList />} />
@@ -89,7 +95,6 @@ const AppRoutes = () => {
         <Route path="contact" element={<Contact />} />
         <Route path="*" element={<WebsiteNotFound />} />
       </Route>
-
     </Routes>
   );
 };

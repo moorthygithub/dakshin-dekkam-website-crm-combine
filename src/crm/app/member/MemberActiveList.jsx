@@ -7,7 +7,7 @@ import { useFetchMemberData } from "@/hooks/useApi";
 import { useNavigate } from "react-router-dom";
 import Page from "../page/page";
 
-const MemberList = () => {
+const MemberActiveList = () => {
   const {
     data: memberdata,
     isLoading,
@@ -22,14 +22,20 @@ const MemberList = () => {
       <ErrorComponent message="Error Fetching Member Data" refetch={refetch} />
     );
 
-  const allMembers = memberdata?.data || [];
+  const activeMembers =
+    memberdata?.data?.filter((m) => m.user_status == "Active") || [];
 
   return (
     <Page>
       <div className="w-full space-y-8">
-        <MemberTable title="Member List" data={allMembers} refetch={refetch} navigate={navigate} />
+        <MemberTable
+          title="Active Member List"
+          data={activeMembers}
+          refetch={refetch}
+          navigate={navigate}
+        />
       </div>
     </Page>
   );
 };
-export default MemberList;
+export default MemberActiveList;

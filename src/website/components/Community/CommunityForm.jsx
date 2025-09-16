@@ -25,6 +25,7 @@ import {
   useFetchOccupation,
 } from "@/hooks/useApi";
 import { MarriedStatus } from "@/website/constants/selectOptions";
+import { CREATE_MEMBER } from "@/api";
 
 const CommunityForm = () => {
   const [formData, setFormData] = useState({
@@ -130,7 +131,7 @@ const CommunityForm = () => {
 
     try {
       const response = await submitTrigger({
-        url: "/create-member",
+        url: CREATE_MEMBER,
         method: "post",
         data: formData,
       });

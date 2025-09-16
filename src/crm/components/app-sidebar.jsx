@@ -54,27 +54,42 @@ export function AppSidebar({ ...props }) {
         icon: House,
         isActive: false,
       },
+
       {
         title: "Member",
-        url: "/crm/member",
-        icon: Users,
+        url: "#",
         isActive: false,
+        icon: Users,
+        items: [
+          {
+            title: "New Register",
+            url: "/crm/new-register",
+          },
+          {
+            title: "All",
+            url: "/crm/member",
+          },
+          {
+            title: "Active",
+            url: "/crm/active-member",
+          },
+          {
+            title: "Inactive",
+            url: "/crm/inactive-member",
+          },
+        ],
       },
-
       {
         title: "Event",
         url: "#",
         isActive: false,
         icon: Settings2,
         items: [
-          // ...(userType === 3
-          //   ? [
           {
             title: "Event",
             url: "/crm/event",
           },
-          //   ]
-          // : []),
+
           {
             title: "Event Register",
             url: "/crm/event-register",
@@ -101,14 +116,6 @@ export function AppSidebar({ ...props }) {
             title: "Event Summary",
             url: "/crm/report-event-summary",
           },
-          // {
-          //   title: "Registered Not Scanned",
-          //   url: "/report-register-notscanned",
-          // },
-          // {
-          //   title: "Not Registered Not Scanned",
-          //   url: "/report-notregister-notscanned",
-          // },
         ],
       },
     ],
