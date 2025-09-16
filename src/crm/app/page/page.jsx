@@ -30,7 +30,7 @@ export default function Page({ children }) {
             <Separator orientation="vertical" className="mr-2 h-4" />
             <Breadcrumb>
               <BreadcrumbList>
-                {location.pathname !== "/home" && (
+                {location.pathname !== "/crm/home" && (
                   <BreadcrumbItem className="hidden md:block">
                     <BreadcrumbLink
                       href="#"

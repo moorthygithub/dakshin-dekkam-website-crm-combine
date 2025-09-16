@@ -27,6 +27,7 @@ const buttonVariants = {
 
 export function NavMain({ items }) {
   const location = useLocation();
+  const [openItem, setOpenItem] = React.useState(null);
 
   const handleLinkClick = (e) => {
     const sidebarContent = document.querySelector(".sidebar-content");
@@ -93,7 +94,11 @@ export function NavMain({ items }) {
               <Collapsible
                 key={item.title}
                 asChild
-                defaultOpen={isParentActive}
+                open={openItem == item.title || isParentActive}
+                onOpenChange={(isOpen) =>
+                  setOpenItem(isOpen ? item.title : null)
+                }
+                // defaultOpen={isParentActive}
                 className="group/collapsible"
               >
                 <SidebarMenuItem>
@@ -118,7 +123,12 @@ export function NavMain({ items }) {
                     as={motion.div}
                     variants={itemVariants}
                     initial="closed"
-                    animate={isParentActive ? "open" : "closed"}
+                    animate={
+                      openItem == item.title || isParentActive
+                        ? "open"
+                        : "closed"
+                    }
+                    // animate={isParentActive ? "open" : "closed"}
                   >
                     <SidebarMenuSub
                       className={`border-l border-blue-500 pl-${depth + 2}`}

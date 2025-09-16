@@ -1,24 +1,21 @@
-import { useSelector } from "react-redux";
-
-import SessionTimeoutTracker from "./crm/components/SessionTimeoutTracker/SessionTimeoutTracker";
-import ValidationWrapper from "./crm/utils/ValidationWrapper";
-import VersionCheck from "./crm/utils/VersionCheck";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from "react";
 import { Toaster } from "./crm/components/ui/toaster";
-import useLogout from "./hooks/useLogout";
 import AppRoutes from "./routes/AppRoutes";
 function App() {
-  const time = useSelector((state) => state.auth.token_expire_time);
-  const handleLogout = useLogout();
+  useEffect(() => {
+    AOS.init({
+      // duration: 800,
+      once: false,
+    });
+  }, []);
   return (
     <>
-      <ValidationWrapper>
-        {/* <DevToolBlocker />
+      {/* <DevToolBlocker />
         <DisableRightClick /> */}
-        <VersionCheck />
-        <Toaster />
-        <SessionTimeoutTracker expiryTime={time} onLogout={handleLogout} />
-        <AppRoutes />
-      </ValidationWrapper>
+      <Toaster />
+      <AppRoutes />
     </>
   );
 }

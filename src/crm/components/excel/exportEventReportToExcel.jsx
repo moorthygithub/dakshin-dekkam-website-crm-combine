@@ -82,7 +82,7 @@ export const exportEventReportToExcel = async (data, title = "Report") => {
         cell.fill = {
           type: "pattern",
           pattern: "solid",
-          fgColor: { argb: "90EE90" },
+          fgColor: { argb: "FF94F194" },
         };
       });
     }

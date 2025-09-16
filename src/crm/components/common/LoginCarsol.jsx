@@ -1,22 +1,19 @@
-import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import { Typewriter } from "react-simple-typewriter";
-// import rawmaterial from "@/assets/img/raw-material.jpg";
-// import fabric from "@/assets/img/fabric.jpg";
-// import yarn from "@/assets/img/yarn.jpg";
 
 const images = [
   {
-    src: "",
-    text: "Exploring Plastic Raw Materials Manufacturers",
+    src: "/img/slider-1.jpg",
+    text: "Engaging Events that Bring Members Together",
   },
   {
-    src: "",
-    text: "Reliable solutions for a sustainable future",
+    src: "/img/slider-2.jpg",
+    text: "Building a Strong Community of Active Members",
   },
   {
-    src: "",
-    text: "Delivering performance through precision",
+    src: "/img/slider-3.jpg",
+    text: "Tracking Growth and Celebrating Milestones",
   },
 ];
 

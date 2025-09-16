@@ -10,10 +10,10 @@ export const exportEventDetailsReportToExcel = async (
   const workbook = new ExcelJS.Workbook();
   const sheet = workbook.addWorksheet("Event Report");
 
-  // ----- EVENT SUMMARY TITLE -----
+  // ----- HEADER -----
   sheet.mergeCells(1, 1, 1, 2);
   const summaryTitle = sheet.getCell("A1");
-  summaryTitle.value = title;
+  summaryTitle.value = eventSummary.event_name || title;
   summaryTitle.font = { bold: true, size: 16 };
   summaryTitle.alignment = { horizontal: "center", vertical: "middle" };
   summaryTitle.fill = {
@@ -25,49 +25,66 @@ export const exportEventDetailsReportToExcel = async (
   };
   sheet.getRow(1).height = 25;
 
-  // 👉 Spacing row
   sheet.addRow([]);
 
-  // ----- EVENT SUMMARY ROWS -----
-  const summaryRows = [
-    ["Name", eventSummary.event_name ?? ""],
-    ["Description", eventSummary.event_description ?? ""],
-    ["Member Allowed", eventSummary.event_member_allowed ?? ""],
-    ["No. of Member Allowed", eventSummary.event_no_member_allowed ?? ""],
+  // ----- EVENT DETAILS -----
+  const details = [
+    ["Member Allowed", eventSummary?.data?.event_member_allowed ?? "-"],
+    [
+      "No. of Member Allowed",
+      eventSummary?.data?.event_no_member_allowed ?? "-",
+    ],
     [
       "From Date",
-      eventSummary.event_from_date
-        ? moment(eventSummary.event_from_date).format("DD-MMM-YYYY")
+      eventSummary?.data?.event_from_date
+        ? moment(eventSummary?.data?.event_from_date).format("DD-MMM-YYYY")
         : "-",
     ],
     [
       "To Date",
-      eventSummary.event_to_date
-        ? moment(eventSummary.event_to_date).format("DD-MMM-YYYY")
+      eventSummary?.data?.event_to_date
+        ? moment(eventSummary?.data?.event_to_date).format("DD-MMM-YYYY")
         : "-",
     ],
-    ["Payment", eventSummary.event_payment === "Yes" ? "Yes" : "No"],
+    ["Payment", eventSummary?.data?.event_payment || "-"],
   ];
 
-  // 👉 Only add Amount row if payment is Yes
-  if (eventSummary.event_payment === "Yes") {
-    summaryRows.push(["Amount", eventSummary.event_amount ?? ""]);
+  if (
+    eventSummary?.data?.event_payment == "Cash" ||
+    eventSummary?.data?.event_payment == "Online"
+  ) {
+    details.push(["Amount", eventSummary?.data?.event_amount ?? "-"]);
   }
 
-  summaryRows.push(["Status", eventSummary.event_status ?? ""]);
+  sheet.addRows(details);
 
-  sheet.addRows(summaryRows);
-
-  // 👉 Keep summary area in 2 columns only
   sheet.getColumn(1).width = 25;
   sheet.getColumn(2).width = 50;
   sheet.getColumn(1).font = { bold: true };
 
-  // 👉 Add spacing rows before participant table
+  sheet.addRow([]);
+
+  // ----- DESCRIPTION -----
+  sheet.addRow(["Description", eventSummary.event_description || "-"]);
+  sheet.getRow(sheet.lastRow.number).font = { bold: true };
+  sheet.addRow([]);
+
+  // ----- TOTALS -----
+  const totals = [
+    ["Registered", eventSummary.totalRegister ?? 0],
+    ["Attended", eventSummary.totalAttend ?? 0],
+    ["Not Scanned", eventSummary.totalregisterNotScanned ?? 0],
+    ["Not Registered", eventSummary.totalNotregister ?? 0],
+  ];
+
+  const totalHeaderRow = sheet.addRow(["Totals"]);
+  totalHeaderRow.font = { bold: true, size: 14 };
+  sheet.addRows(totals);
+
   sheet.addRow([]);
   sheet.addRow([]);
 
-  // ----- PARTICIPANT TABLE HEADER -----
+  // ----- PARTICIPANT TABLE -----
   const tableHeader = [
     "MID",
     "Full Name",
@@ -85,9 +102,7 @@ export const exportEventDetailsReportToExcel = async (
     pattern: "solid",
     fgColor: { argb: "f3f4f6" },
   };
-  headerRow.height = 20;
 
-  // 👉 Reset columns for table separately
   sheet.columns = [
     { key: "mid", width: 30 },
     { key: "name", width: 25 },
@@ -97,7 +112,6 @@ export const exportEventDetailsReportToExcel = async (
     { key: "people", width: 15 },
   ];
 
-  // ----- PARTICIPANT DATA -----
   participantData.forEach((item) => {
     const fullName = [item.first_name, item.middle_name, item.last_name]
       .filter(Boolean)

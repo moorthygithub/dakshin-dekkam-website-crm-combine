@@ -59,37 +59,32 @@ const EventMemberTractList = () => {
   const columns = [
     {
       accessorKey: "event_name",
-      id: "Event Name",
       header: "Event Name",
-      cell: ({ row }) => <div>{row.getValue("Event Name")}</div>,
     },
     {
       accessorKey: "name",
-      id: "Name",
       header: "Name",
-      cell: ({ row }) => <div>{row.getValue("Name")}</div>,
     },
     {
       accessorKey: "event_member_mid",
-      id: "MID",
       header: "MID",
-      cell: ({ row }) => <div>{row.getValue("MID")}</div>,
     },
     {
       accessorKey: "event_entry_date",
-      id: "Entry Date",
       header: "Entry Date",
       cell: ({ row }) => {
-        const date = row.getValue("Entry Date");
-        return <div>{moment(date).format("DD MMM YYYY")}</div>;
+        const date = row.getValue("event_entry_date"); 
+        return date ? (
+          <div>{moment(date).format("DD MMM YYYY")}</div>
+        ) : (
+          <div>-</div> 
+        );
       },
     },
 
     {
       accessorKey: "event_no_of_people",
-      id: "No of People",
       header: "No of People",
-      cell: ({ row }) => <div>{row.getValue("No of People")}</div>,
     },
 
     {
@@ -198,7 +193,10 @@ const EventMemberTractList = () => {
                         column.toggleVisibility(!!value)
                       }
                     >
-                      {column.id}
+                      {/* {column.id} */}
+                      {typeof column.columnDef.header == "string"
+                        ? column.columnDef.header
+                        : column.id}
                     </DropdownMenuCheckboxItem>
                   );
                 })}

@@ -9,7 +9,6 @@ const useLogout = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const loginType = useSelector((state) => state.auth.login_type);
-  const backurl = import.meta.env.VITE_BACK_URL;
   const handleLogout = async () => {
     try {
       await persistor.flush();
@@ -17,9 +16,9 @@ const useLogout = () => {
       dispatch(logout());
 
       if (loginType == "website") {
-        window.location.href = backurl;
-      } else {
         navigate("/");
+      } else {
+        navigate("/crm");
       }
       setTimeout(() => persistor.purge(), 1000);
     } catch (error) {

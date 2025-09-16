@@ -210,7 +210,7 @@ const MemberForm = () => {
           title: "Success",
           description: response.message,
         });
-        navigate("/member");
+        navigate("/crm/member");
       } else {
         toast({
           title: "Error",
@@ -529,7 +529,7 @@ const MemberForm = () => {
               <Button
                 type="button"
                 onClick={() => {
-                  navigate("/member");
+                  navigate(-1);
                 }}
                 className={`${ButtonConfig.backgroundColor} ${ButtonConfig.hoverBackgroundColor} ${ButtonConfig.textColor} flex items-center mt-2`}
               >

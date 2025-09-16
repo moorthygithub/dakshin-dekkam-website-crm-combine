@@ -4,7 +4,8 @@ import {
   Command,
   Factory,
   House,
-  Settings2
+  Settings2,
+  Users,
 } from "lucide-react";
 
 import { NavMain } from "@/crm/components/nav-main";
@@ -49,38 +50,53 @@ export function AppSidebar({ ...props }) {
     navMain: [
       {
         title: "Dashboard",
-        url: "/home",
-        icon: House,
-        isActive: false,
-      },
-      {
-        title: "Member",
-        url: "/member",
+        url: "/crm/home",
         icon: House,
         isActive: false,
       },
 
+      {
+        title: "Member",
+        url: "#",
+        isActive: false,
+        icon: Users,
+        items: [
+          {
+            title: "New Register",
+            url: "/crm/new-register",
+          },
+          {
+            title: "All",
+            url: "/crm/member",
+          },
+          {
+            title: "Active",
+            url: "/crm/active-member",
+          },
+          {
+            title: "Inactive",
+            url: "/crm/inactive-member",
+          },
+        ],
+      },
       {
         title: "Event",
         url: "#",
         isActive: false,
         icon: Settings2,
         items: [
-          // ...(userType === 3
-          //   ? [
           {
             title: "Event",
-            url: "/event",
+            url: "/crm/event",
           },
-          //   ]
-          // : []),
+
           {
             title: "Event Register",
-            url: "/event-register",
+            url: "/crm/event-register",
           },
           {
             title: "Event Track",
-            url: "/event-track",
+            url: "/crm/event-track",
           },
         ],
       },
@@ -94,23 +110,14 @@ export function AppSidebar({ ...props }) {
         items: [
           {
             title: "Event",
-            url: "/report-event",
+            url: "/crm/report-event",
           },
           {
-            title: "Event Details",
-            url: "/report-event-details",
+            title: "Event Summary",
+            url: "/crm/report-event-summary",
           },
-          // {
-          //   title: "Registered Not Scanned",
-          //   url: "/report-register-notscanned",
-          // },
-          // {
-          //   title: "Not Registered Not Scanned",
-          //   url: "/report-notregister-notscanned",
-          // },
         ],
       },
-
     ],
   };
 

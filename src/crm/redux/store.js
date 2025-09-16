@@ -25,7 +25,7 @@ if (!secretKey) {
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["auth", "columnVisibility"],
+  whitelist: ["auth", "version", "sidebar"],
   transforms,
 };
 

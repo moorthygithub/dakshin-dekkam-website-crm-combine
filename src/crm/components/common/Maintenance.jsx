@@ -1,12 +1,12 @@
 import React from "react";
-import maintenanceImg from "../../assets/img/maintenance.jpg"; // adjust path to your image
+import maintenanceImg from "../../../../public/img/maintenance.jpg";
 
 const Maintenance = () => {
   return (
     <div className="flex items-center justify-center h-screen bg-gradient-to-br from-gray-100 to-gray-200 px-4">
       <div className="bg-white p-8 rounded-xl shadow-2xl text-center max-w-md w-full">
         <img
-          src={maintenanceImg}
+          src={maintenanceImg || ""}
           alt="Maintenance"
           className="w-48 h-48 mx-auto mb-6 animate-pulse"
         />

@@ -1,3 +1,3 @@
 export const isAuthRoute = (path) => {
-  return ["/", "/maintenance"].includes(path);
+  return ["/crm", "/crm/maintenance"].includes(path);
 };

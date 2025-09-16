@@ -1,3 +1,4 @@
+import { MEMBER_LIST } from "@/api";
 import { useGetApiMutation } from "./useGetApiMutation";
 
 // ---------------New
@@ -23,5 +24,11 @@ export const useFetchBranch = () => {
   return useGetApiMutation({
     url: "/panel-fetch-branch",
     queryKey: ["branch"],
+  });
+};
+export const useFetchMemberData = () => {
+  return useGetApiMutation({
+    url: MEMBER_LIST,
+    queryKey: ["memberdata"],
   });
 };

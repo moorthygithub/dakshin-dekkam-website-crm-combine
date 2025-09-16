@@ -110,67 +110,41 @@ const EventRegisterList = () => {
   const columns = [
     {
       accessorKey: "event_register_mid",
-      id: "Event Id",
       header: "Event Id",
-      cell: ({ row }) => <div>{row.getValue("Event Id")}</div>,
     },
     {
       accessorKey: "event_name",
-      id: "Event Name",
       header: "Event Name",
-      cell: ({ row }) => <div>{row.getValue("Event Name")}</div>,
     },
     {
       accessorKey: "name",
-      id: "Name",
       header: "Name",
-      cell: ({ row }) => <div>{row.getValue("Name")}</div>,
     },
+
     {
       accessorKey: "event_register_date",
-      id: "Register Date",
       header: "Register Date",
       cell: ({ row }) => {
-        const date = row.getValue("Register Date");
-        return <div>{moment(date).format("DD MMM YYYY")}</div>;
+        const date = row.getValue("event_register_date");
+        return date ? (
+          <div>{moment(date).format("DD MMM YYYY")}</div>
+        ) : (
+          <div>-</div>
+        );
       },
     },
     {
       accessorKey: "event_register_name",
-      id: "Register Name",
       header: "Register Name",
-      cell: ({ row }) => <div>{row.getValue("Register Name")}</div>,
     },
     {
       accessorKey: "event_register_mobile",
-      id: "Mobile",
       header: "Mobile",
-      cell: ({ row }) => <div>{row.getValue("Mobile")}</div>,
     },
     {
       accessorKey: "event_register_email",
-      id: "Email",
       header: "Email",
-      cell: ({ row }) => <div>{row.getValue("Email")}</div>,
     },
-    // {
-    //   accessorKey: "event_register_amount",
-    //   id: "Amount",
-    //   header: "Amount",
-    //   cell: ({ row }) => <div>{row.getValue("Amount")}</div>,
-    // },
-    // {
-    //   accessorKey: "event_register_payment_type",
-    //   id: "Payment Type",
-    //   header: "Payment Type",
-    //   cell: ({ row }) => <div>{row.getValue("Payment Type")}</div>,
-    // },
-    // {
-    //   accessorKey: "event_register_transaction",
-    //   id: "Transaction",
-    //   header: "Transaction",
-    //   cell: ({ row }) => <div>{row.getValue("Transaction")}</div>,
-    // },
 
     {
       id: "actions",
@@ -295,7 +269,10 @@ const EventRegisterList = () => {
                         column.toggleVisibility(!!value)
                       }
                     >
-                      {column.id}
+                      {/* {column.id} */}
+                      {typeof column.columnDef.header == "string"
+                        ? column.columnDef.header
+                        : column.id}
                     </DropdownMenuCheckboxItem>
                   );
                 })}
