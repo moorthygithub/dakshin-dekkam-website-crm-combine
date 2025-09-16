@@ -40,9 +40,17 @@ import {
 } from "@tanstack/react-table";
 import { ChevronDown, Edit, Search, SquarePlus, Trash2 } from "lucide-react";
 import moment from "moment";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import EventRegisterForm from "./EventRegisterForm";
 import { useToast } from "@/hooks/use-toast";
+import { useSelector } from "react-redux";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/crm/components/ui/select";
 const EventRegisterList = () => {
   const {
     data: eventregisterdata,
@@ -63,6 +71,10 @@ const EventRegisterList = () => {
   const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
   const [deleteItemId, setDeleteItemId] = useState(null);
   const { trigger: submitTrigger } = useApiMutation();
+  const [branchId, setBranchId] = useState(0);
+  const authBranchId = useSelector((state) => state.auth.branch_id);
+  const userType = useSelector((state) => state.auth.user_type);
+
   const handleDeleteRow = (eventid) => {
     setDeleteItemId(eventid);
     setDeleteConfirmOpen(true);
@@ -195,9 +207,37 @@ const EventRegisterList = () => {
       },
     },
   ];
+  const filteredData = useMemo(() => {
+    if (!eventregisterdata?.data) return [];
 
+    return eventregisterdata.data.filter((event) => {
+      const matchesBranch =
+        branchId === 0 || event.branch_id === Number(branchId);
+
+      return matchesBranch;
+    });
+  }, [eventregisterdata, branchId]);
+  const branchOptions = useMemo(() => {
+    if (!eventregisterdata?.branch)
+      return [{ value: 0, label: "All Branches" }];
+
+    return [
+      { value: 0, label: "All Branches" },
+      ...eventregisterdata.branch.map((b) => ({
+        value: b.id,
+        label: b.branch_name || `Branch ${b.id}`,
+      })),
+    ];
+  }, [eventregisterdata]);
+  useEffect(() => {
+    if (branchOptions.length > 0) {
+      const defaultBranch =
+        branchOptions.find((b) => b.value === authBranchId) || branchOptions[0];
+      setBranchId(defaultBranch.value);
+    }
+  }, [branchOptions, authBranchId]);
   const table = useReactTable({
-    data: eventregisterdata?.data || [],
+    data: filteredData || [],
     columns,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
@@ -239,7 +279,7 @@ const EventRegisterList = () => {
         <div className="flex text-left text-2xl text-gray-800 font-[400]">
           Event Register List
         </div>
-        <div className="flex items-center py-4">
+        <div className="flex items-center py-4 justify-between">
           <div className="relative w-72">
             <Search className="absolute left-2 top-2.5 h-4 w-4 text-gray-500" />
             <Input
@@ -249,46 +289,71 @@ const EventRegisterList = () => {
               className="pl-8 bg-gray-50 border-gray-200 focus:border-gray-300 focus:ring-gray-200"
             />
           </div>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="outline" className="ml-auto ">
-                Columns <ChevronDown className="ml-2 h-4 w-4" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              {table
-                .getAllColumns()
-                .filter((column) => column.getCanHide())
-                .map((column) => {
-                  return (
-                    <DropdownMenuCheckboxItem
-                      key={column.id}
-                      className="capitalize"
-                      checked={column.getIsVisible()}
-                      onCheckedChange={(value) =>
-                        column.toggleVisibility(!!value)
-                      }
-                    >
-                      {/* {column.id} */}
-                      {typeof column.columnDef.header == "string"
-                        ? column.columnDef.header
-                        : column.id}
-                    </DropdownMenuCheckboxItem>
-                  );
-                })}
-            </DropdownMenuContent>
-          </DropdownMenu>
-
-          <Button
-            variant="default"
-            className={`ml-2 ${ButtonConfig.backgroundColor} ${ButtonConfig.hoverBackgroundColor} ${ButtonConfig.textColor} `}
-            onClick={() => {
-              setSelected(null);
-              setOpen(true);
-            }}
-          >
-            <SquarePlus className="h-4 w-4 " /> Event Register
-          </Button>
+          <div className="flex  items-center">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline" className="ml-auto ">
+                  Columns <ChevronDown className="ml-2 h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                {table
+                  .getAllColumns()
+                  .filter((column) => column.getCanHide())
+                  .map((column) => {
+                    return (
+                      <DropdownMenuCheckboxItem
+                        key={column.id}
+                        className="capitalize"
+                        checked={column.getIsVisible()}
+                        onCheckedChange={(value) =>
+                          column.toggleVisibility(!!value)
+                        }
+                      >
+                        {/* {column.id} */}
+                        {typeof column.columnDef.header == "string"
+                          ? column.columnDef.header
+                          : column.id}
+                      </DropdownMenuCheckboxItem>
+                    );
+                  })}
+              </DropdownMenuContent>
+            </DropdownMenu>
+            <div className="ml-2">
+              {userType === 3 && (
+                <Select
+                  value={String(branchId)}
+                  onValueChange={(value) => {
+                    setBranchId(Number(value));
+                  }}
+                >
+                  <SelectTrigger className="w-full md:w-48 h-9 text-sm border rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500">
+                    <SelectValue placeholder="Select Branch" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {branchOptions.map((option) => (
+                      <SelectItem
+                        key={option.value}
+                        value={String(option.value)}
+                      >
+                        {option.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              )}
+            </div>
+            <Button
+              variant="default"
+              className={`ml-2 ${ButtonConfig.backgroundColor} ${ButtonConfig.hoverBackgroundColor} ${ButtonConfig.textColor} `}
+              onClick={() => {
+                setSelected(null);
+                setOpen(true);
+              }}
+            >
+              <SquarePlus className="h-4 w-4 " /> Event Register
+            </Button>
+          </div>
         </div>
         <div className="rounded-md border">
           <Table>

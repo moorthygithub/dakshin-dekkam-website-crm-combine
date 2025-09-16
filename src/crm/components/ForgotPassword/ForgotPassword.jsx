@@ -123,8 +123,12 @@ export default function ForgotPassword({ setForgot }) {
                   type="text"
                   placeholder="Enter your Mobile No"
                   value={username}
-                  onChange={(e) => setUserName(e.target.value)}
+                  onChange={(event) => {
+                    const value = event.target.value.replace(/\D/g, "");
+                    setUserName(value);
+                  }}
                   required
+                  maxLength={10}
                 />
               </motion.div>
             </div>

@@ -28,7 +28,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/crm/components/ui/select";
-import { useSelector } from "react-redux";
 
 const EventList = () => {
   const [open, setOpen] = useState(false);
@@ -37,12 +36,10 @@ const EventList = () => {
   const [scanning, setScanning] = useState(false);
   const [NoofMember, setNoofMember] = useState(null);
   const [eventId, setEventId] = useState(null);
-  const userType = useSelector((state) => state.auth.user_type);
+
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
-  const [branchId, setBranchId] = useState(0);
   const itemsPerPage = 9;
-  const authBranchId = useSelector((state) => state.auth.branch_id);
 
   const [imageUrls, setImageUrls] = useState({
     userImageBase: "",
@@ -62,10 +59,10 @@ const EventList = () => {
   useEffect(() => {
     if (!eventdata) return;
     const userImageObj = eventdata?.image_url?.find(
-      (img) => img.image_for === "Event"
+      (img) => img.image_for == "Event"
     );
     const noImageObj = eventdata?.image_url?.find(
-      (img) => img.image_for === "No Image"
+      (img) => img.image_for == "No Image"
     );
 
     setImageUrls({
@@ -90,18 +87,10 @@ const EventList = () => {
 
   const filteredData = useMemo(() => {
     if (!eventdata?.data) return [];
-
-    return eventdata.data.filter((event) => {
-      const matchesSearch = event.event_name
-        .toLowerCase()
-        .includes(search.toLowerCase());
-
-      const matchesBranch =
-        branchId === 0 || event.branch_id === Number(branchId);
-
-      return matchesSearch && matchesBranch;
-    });
-  }, [eventdata, search, branchId]);
+    return eventdata.data.filter((event) =>
+      event.event_name.toLowerCase().includes(search.toLowerCase())
+    );
+  }, [eventdata, search]);
 
   const totalPages = Math.ceil(filteredData.length / itemsPerPage);
 
@@ -109,31 +98,26 @@ const EventList = () => {
     const start = (page - 1) * itemsPerPage;
     return filteredData.slice(start, start + itemsPerPage);
   }, [filteredData, page]);
-
   const branchOptions = useMemo(() => {
-    if (!eventdata?.branch) return [{ value: 0, label: "All Branches" }];
+    if (!dashboard?.branch) return [{ value: 0, label: "All Branches" }];
 
     return [
       { value: 0, label: "All Branches" },
-      ...eventdata.branch.map((b) => ({
+      ...dashboard.branch.map((b) => ({
         value: b.id,
         label: b.branch_name || `Branch ${b.id}`,
       })),
     ];
-  }, [eventdata]);
-  useEffect(() => {
-    if (branchOptions.length > 0) {
-      const defaultBranch =
-        branchOptions.find((b) => b.value === authBranchId) || branchOptions[0];
-      setBranchId(defaultBranch.value);
-    }
-  }, [branchOptions, authBranchId]);
+  }, [dashboard]);
+  if (isLoading) {
+    return <LoaderComponent />;
+  }
 
-  if (isLoading) return <LoaderComponent />;
-  if (isError)
+  if (isError) {
     return (
       <ErrorComponent message="Error Fetching Event Data" refetch={refetch} />
     );
+  }
 
   return (
     <Page>
@@ -143,7 +127,6 @@ const EventList = () => {
         </div>
 
         <div className="flex items-center justify-between w-full py-4">
-          {/* Search */}
           <div className="relative w-72">
             <Search className="absolute left-2 top-2.5 h-4 w-4 text-gray-500" />
             <Input
@@ -157,38 +140,44 @@ const EventList = () => {
             />
           </div>
 
-          <div className="flex items-center">
+          <div>
             {userType === 3 && (
-              <Select
-                value={String(branchId)}
-                onValueChange={(value) => {
-                  setBranchId(Number(value));
-                  setPage(1);
-                }}
-              >
-                <SelectTrigger className="w-full md:w-48 h-9 text-sm border rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500">
-                  <SelectValue placeholder="Select Branch" />
-                </SelectTrigger>
-                <SelectContent>
-                  {branchOptions.map((option) => (
-                    <SelectItem key={option.value} value={String(option.value)}>
-                      {option.label}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+              <div className="mb-4">
+                <Select
+                // value={String(formData.branch_id)}
+                // onValueChange={(value) =>
+                //   handleInputChange(Number(value), "branch_id")
+                // }
+                >
+                  <SelectTrigger className="w-full md:w-48 h-9 text-sm border rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500">
+                    <SelectValue placeholder="Select Branch" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {branchOptions.map((option) => (
+                      <SelectItem
+                        key={option.value}
+                        value={String(option.value)}
+                      >
+                        {option.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
             )}
             <Button
               variant="default"
               className={`ml-2 ${ButtonConfig.backgroundColor} ${ButtonConfig.hoverBackgroundColor} ${ButtonConfig.textColor}`}
-              onClick={() => navigate("/crm/event-form")}
+              onClick={() => {
+                navigate("/crm/event-form");
+              }}
             >
               <SquarePlus className="h-4 w-4 mr-1" /> Events
             </Button>
           </div>
         </div>
 
-        {/* Events Grid */}
+        {/* 🔹 Events Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {paginatedData.map((event) => (
             <EventListCard
@@ -215,7 +204,6 @@ const EventList = () => {
           ))}
         </div>
 
-        {/* Pagination */}
         <div className="flex items-center justify-end space-x-2 py-4">
           <div className="flex-1 text-sm text-muted-foreground">
             Total Events : {filteredData.length}
@@ -229,6 +217,7 @@ const EventList = () => {
             >
               Previous
             </Button>
+
             <Button
               variant="outline"
               size="sm"
@@ -250,7 +239,6 @@ const EventList = () => {
         />
       )}
 
-      {/* QR Scanner */}
       <Dialog open={openQrDialog} onOpenChange={handleScannerClose}>
         <DialogContent className="max-w-md">
           <DialogHeader>
