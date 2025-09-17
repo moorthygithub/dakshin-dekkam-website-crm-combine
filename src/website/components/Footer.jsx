@@ -1,14 +1,28 @@
+import { Link } from "react-router-dom";
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Facebook,
+  Twitter,
+  Instagram,
+  Linkedin,
+  Send,
+} from "lucide-react";
+import { useSelector } from "react-redux";
+
 function Footer() {
+  const websitecompany = useSelector((state) => state.websitecompany || "");
+  console.log(websitecompany, "websitecompany");
+
   return (
-    <footer style={{ backgroundColor: "rgba(37, 38, 65, 1)" }} >
-      <div className="max-w-lg mx-auto">
-        <div className="flex py-12 justify-center text-white items-center px-20 sm:px-36">
-          <div className="relative">
-            <h1 className="font-bold text-xl pr-5 relative z-20">
-              Dhakshin Ekkam
-            </h1>
+    <footer className="bg-[#252641] text-white pt-12">
+      <div className="container mx-auto px-4 lg:px-16 grid grid-cols-1 md:grid-cols-12 gap-4">
+        <div className="col-span-3">
+          <h1 className="text-2xl font-bold mb-3 relative inline-block">
+            <span className="z-10">{websitecompany?.store_name || ""}</span>
             <svg
-              className="w-11 h-11 absolute -top-2 -left-3 z-20"
+              className="w-6 h-6 absolute -top-0 -left-3 z-20"
               viewBox="0 0 79 79"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -19,58 +33,128 @@ function Footer() {
                 strokeWidth="2"
               />
             </svg>
+          </h1>
+          <p className="text-gray-400 mt-3">
+            {websitecompany?.store_description || ""}
+          </p>
+          <div className="flex space-x-3 mt-4">
+            <Link to="#" className="hover:text-yellow-500">
+              <Facebook size={18} />
+            </Link>
+            <Link to="#" className="hover:text-yellow-500">
+              <Twitter size={18} />
+            </Link>
+            <Link to="#" className="hover:text-yellow-500">
+              <Instagram size={18} />
+            </Link>
+            <Link to="#" className="hover:text-yellow-500">
+              <Linkedin size={18} />
+            </Link>
           </div>
-          <span className="border-l border-gray-500 text-sm pl-5 py-2 font-semibold">
-            {" "}
-            Community Help & Support
-          </span>
         </div>
-        <div className="text-center pb-16 pt-5">
-          <label className="text-gray-300 font-semibold">
-            Subscribe to get our Community
-          </label>
-          <div className="px-5 sm:px-0 flex flex-col sm:flex-row sm:space-x-3 space-y-3 sm:space-y-0 justify-center mt-3">
+
+        {/* Column 2: Quick Links */}
+        <div className="col-span-2">
+          <h2 className="font-semibold text-lg mb-4">Quick Links</h2>
+          <ul className="space-y-2 text-gray-400">
+            <li>
+              <Link to="/" className="hover:text-yellow-500">
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link to="/about" className="hover:text-yellow-500">
+                About Us
+              </Link>
+            </li>
+            <li>
+              <Link to="/gallery" className="hover:text-yellow-500">
+                Gallery
+              </Link>
+            </li>
+
+            <li>
+              <Link to="/community" className="hover:text-yellow-500">
+                Community
+              </Link>
+            </li>
+            <li>
+              <Link to="/contact" className="hover:text-yellow-500">
+                Contact
+              </Link>
+            </li>
+          </ul>
+        </div>
+
+        {/* Column 3: Map */}
+        <div className="col-span-4">
+          <h2 className="font-semibold text-lg mb-4">Our Location</h2>
+          <iframe
+            src={websitecompany?.google_map_url || ""}
+            width="100%"
+            height="150"
+            style={{ border: 0 }}
+            allowFullScreen=""
+            loading="lazy"
+            title="map"
+          ></iframe>
+        </div>
+
+        {/* Column 4: Contact Info */}
+        <div className="col-span-3">
+          <h2 className="font-semibold text-lg mb-4">Contact Us</h2>
+          <p className="flex items-center gap-2 text-gray-400 mb-2">
+            {/* <MapPin size={24} /> */}
+            {websitecompany?.store_address || ""}
+          </p>
+          <p className="flex items-center gap-2 text-gray-400 mb-2">
+            <Phone size={16} />{" "}
+            <Link
+              to={`tel:${websitecompany?.support_phone || ""}`}
+              className="hover:text-yellow-500"
+            >
+              {websitecompany?.support_phone || ""}
+            </Link>
+          </p>
+          <p className="flex items-center gap-2 text-gray-400">
+            <Mail size={16} />{" "}
+            <Link
+              to={`mailto:${websitecompany?.support_email || ""}`}
+              className="hover:text-yellow-500"
+            >
+              {websitecompany?.support_email || ""}
+            </Link>
+          </p>
+          <div className="flex flex-col sm:flex-row  gap-3 mt-2">
             <input
               type="email"
               placeholder="Your Email"
-              className="rounded-full py-2 pl-5 bg-transparent border border-gray-400"
+              className="rounded-full py-2 pl-5 bg-transparent border border-gray-400 text-white placeholder-gray-400"
             />
+
             <button
+              title="Subscribe"
               type="submit"
-              className="text-white w-40 sm:w-auto mx-auto sm:mx-0 font-semibold px-5 py-2 rounded-full"
-              style={{
-                background:
-                  "linear-gradient(105.5deg, #545AE7 19.57%, #393FCF 78.85%)",
-              }}
+              className="flex items-center justify-center gap-2 text-white font-semibold px-5 py-2 rounded-full bg-gradient-to-r from-[#545AE7] to-[#393FCF] hover:opacity-90 transition"
             >
-              Subscribe
+              <Send size={18} />
             </button>
           </div>
         </div>
-        <div className="flex items-center text-gray-400 text-sm justify-center">
-          <a href="" className="pr-3">
-            Careers
-          </a>
-          <a href="" className="border-l border-gray-400 px-3">
-            Privacy
-          </a>
-          <a href="" className="border-l border-gray-400 pl-3">
-            Terms & Conditions
-          </a>
-        </div>
-        <div className="text-center text-white">
-          <p className="my-3 text-gray-400 text-sm">
-            &copy; 2025 AG solutions{" "}
-          </p>
-          {/* <div className="py-3 tracking-wide">
-            <p>
-              Code By <span className="font-semibold">mhaecal</span>
-            </p>
-            <p>
-              UI/UX By <span className="font-semibold">Irvan Moses</span>
-            </p>
-          </div> */}
-        </div>
+      </div>
+
+      {/* Copyright */}
+      <div className="text-center text-gray-400 mt-12 pb-6">
+        &copy; 2025{" "}
+        <a
+          href="https://ag-solutions.in/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-500 hover:underline"
+        >
+          AG Solutions
+        </a>
+        . All rights reserved.
       </div>
     </footer>
   );

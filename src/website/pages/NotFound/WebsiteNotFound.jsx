@@ -6,7 +6,7 @@ const WebsiteNotFound = () => {
     <>
       <PageMeta title="404 Not Found | Dhakshin Ekkam" />
 
-      <section className="bg-white dark:bg-darklight">
+      <section className="bg-white mb-10 p-2 mt-16">
         <div className="container mx-auto">
           <div className="-mx-4 flex flex-wrap items-center">
             <div className="w-full px-4 md:w-5/12 lg:w-6/12">

@@ -1,9 +1,9 @@
-import AboutSection from "../../components/AboutSection";
+import AboutSection from "../../About/AboutSection";
 import HeroSub from "../../components/HeroSub";
-import ChairPeronCarousel from "../../components/ChairPeronCarousel";
+import ChairPeronCarousel from "../../About/ChairPeronCarousel";
 import TeamCarousel from "../../components/TeamCarousel";
 import PageMeta from "../../components/common/PageMeta";
-import AboutUsDetails from "../../components/AboutUsDetails";
+import AboutUsDetails from "../../About/AboutUsDetails";
 
 const About = () => {
   const breadcrumbLinks = [
@@ -18,9 +18,9 @@ const About = () => {
         description="Discover who we are, what we do, and how we work together to create meaningful experiences."
         breadcrumbLinks={breadcrumbLinks}
       />
+      <AboutSection />
       <AboutUsDetails />
       <ChairPeronCarousel />
-      <AboutSection />
       <TeamCarousel />
     </>
   );

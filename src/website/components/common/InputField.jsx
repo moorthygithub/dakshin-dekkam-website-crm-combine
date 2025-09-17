@@ -1,4 +1,3 @@
-
 import { forwardRef } from "react";
 
 const InputField = forwardRef(
@@ -14,6 +13,7 @@ const InputField = forwardRef(
       error,
       rows = 4,
       required,
+      maxLength,
     },
     ref
   ) => {
@@ -47,6 +47,7 @@ const InputField = forwardRef(
               onChange={onChange}
               rows={rows}
               placeholder={placeholder}
+              maxLength={maxLength}
               className="w-full resize-none outline-none bg-transparent text-gray-700 placeholder-gray-400"
             />
           ) : (
@@ -58,6 +59,7 @@ const InputField = forwardRef(
               value={value}
               onChange={onChange}
               placeholder={placeholder}
+              maxLength={maxLength}
               className="w-full outline-none bg-transparent text-gray-700 placeholder-gray-400"
             />
           )}

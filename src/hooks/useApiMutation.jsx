@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 export function useApiMutation() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const token = useSelector((state) => state.auth.token);
+  const token = useSelector((state) => state?.auth?.token || "");
 
   const trigger = async ({
     url,
