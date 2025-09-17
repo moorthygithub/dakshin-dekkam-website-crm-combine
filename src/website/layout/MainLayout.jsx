@@ -5,6 +5,7 @@ import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import ScrollToTop from "../components/ScrollToTop";
 import RouteLoader from "../components/common/RouteLoader";
+import CompanyData from "../utils/CompanyData";
 
 function MainLayout() {
   const { pathname } = useLocation();
@@ -16,6 +17,7 @@ function MainLayout() {
     <div className="flex flex-col min-h-screen">
       <Toaster position="top-right" reverseOrder={false} />
       <Navbar />
+      <CompanyData />
       <ScrollToTop />
       <RouteLoader />
       <main className="flex-grow">
