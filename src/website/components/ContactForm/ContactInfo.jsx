@@ -1,6 +1,6 @@
 import { Mail, MapPin } from "lucide-react";
 
-const ContactInfo = () => {
+const ContactInfo = ({ websitecompany }) => {
   return (
     <section className="py-12">
       <div className="container mx-auto px-4">
@@ -9,8 +9,6 @@ const ContactInfo = () => {
             className="flex items-start gap-5 bg-white shadow-md p-6 rounded-2xl hover:shadow-lg transition"
             data-aos="zoom-in"
           >
-            {/* 101, Tara Apartments, 132, Infantry Road, Bangalore – 560001 |
-            e-mail: kdo.bangalore@gmail.com For Correspondence: */}
             <div className="flex-shrink-0 w-16 h-16 bg-yellow-100 flex items-center justify-center rounded-full">
               <Mail size={28} className="text-yellow-600" />
             </div>
@@ -21,10 +19,10 @@ const ContactInfo = () => {
               <p className="text-black/60 text-base mt-2">
                 Feel free to contact us at{" "}
                 <a
-                  href="mailto:dbkdoekkam@gmail.com"
+                  href={`mailto:${websitecompany?.support_email || ""}`}
                   className="font-medium text-yellow-600 hover:underline"
                 >
-                  dbkdoekkam@gmail.com
+                  {websitecompany?.support_email || ""}
                 </a>{" "}
                 — we’ll respond promptly.
               </p>
@@ -44,14 +42,11 @@ const ContactInfo = () => {
                 Address
               </h3>
               <p className="text-black/60 text-base mt-2">
-                Kutchi Bhavan, # 44B, 1st Main Road, J P Nagar 3rd Phase,
-                Bangalore - 560078
+                {websitecompany?.store_address || ""}
               </p>
             </div>
           </div>
         </div>
-
-  
       </div>
     </section>
   );

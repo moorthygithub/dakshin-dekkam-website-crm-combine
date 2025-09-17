@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-function LazyMap() {
+function LazyMap({ websitecompany }) {
   const [isVisible, setIsVisible] = useState(false);
   const [mapLoaded, setMapLoaded] = useState(false);
   const mapRef = useRef(null);
@@ -41,7 +41,7 @@ function LazyMap() {
               )}
               <iframe
                 title="Kutchi Bhavan"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d507.2010896665353!2d77.5983429677261!3d12.911707600000005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae150c8e8367cf%3A0x51965e263a2f0b9e!2sMTR!5e1!3m2!1sen!2sin!4v1758102368828!5m2!1sen!2sin"
+                src={websitecompany.google_map_url || ""}
                 width="1114"
                 height="477"
                 loading="lazy"

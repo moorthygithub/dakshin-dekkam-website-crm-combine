@@ -18,7 +18,7 @@ const CompanyData = () => {
     }
   }, [eventdata, dispatch]);
 
-  return <div>{isLoading ? "Loading..." : "Events loaded"}</div>;
+  return <div></div>;
 };
 
 export default CompanyData;

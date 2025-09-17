@@ -5,6 +5,7 @@ import storage from "redux-persist/lib/storage";
 import authReducer from "./slices/AuthSlice";
 import sidebarReducer from "./slices/sidebarSlice";
 import versionReducer from "./slices/versionSlice";
+import companySlice from "@/website/redux/slices/companySlice";
 const secretKey = import.meta.env.VITE_SECRET_KEY;
 
 let transforms = [];
@@ -25,7 +26,7 @@ if (!secretKey) {
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["auth", "version", "sidebar"],
+  whitelist: ["auth", "version", "sidebar", "websitecompany"],
   transforms,
 };
 
@@ -33,6 +34,7 @@ const rootReducer = combineReducers({
   auth: authReducer,
   sidebar: sidebarReducer,
   version: versionReducer,
+  websitecompany: companySlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

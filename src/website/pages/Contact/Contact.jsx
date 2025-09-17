@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import PageMeta from "../../components/common/PageMeta";
 import ContactForm from "../../components/ContactForm/ContactForm";
 import ContactInfo from "../../components/ContactForm/ContactInfo";
@@ -10,6 +11,8 @@ const Contact = () => {
     { href: "/", text: "Home" },
     { href: "/contact", text: "Contact" },
   ];
+  const websitecompany = useSelector((state) => state.websitecompany || "");
+
   return (
     <>
       <PageMeta title="Contact | Dhakshin Ekkam" />
@@ -18,10 +21,10 @@ const Contact = () => {
         description="We’d love to hear from you! Whether you have questions, suggestions, or just want to connect, our team is here to help. Reach out to us and become part of a growing community built on care, support, and togetherness."
         breadcrumbLinks={breadcrumbLinks}
       />
-      <ContactInfo />
+      <ContactInfo websitecompany={websitecompany} />
       <ContactForm />
-      <LazyMap />
-      <ContactLocation />
+      <LazyMap websitecompany={websitecompany} />
+      <ContactLocation websitecompany={websitecompany} />
     </>
   );
 };
