@@ -11,7 +11,7 @@ const ContactLocation = () => {
             data-aos-delay="200"
           >
             <div>
-              <h2 className="text-4xl leading-tight font-bold">
+              <h2 className="text-3xl leading-tight font-bold">
                 Pune Head Office
               </h2>
             </div>
@@ -41,27 +41,28 @@ const ContactLocation = () => {
             data-aos-delay="200"
           >
             <div>
-              <h2 className=" text-3xl leading-tight font-bold">
+              <h2 className="text-3xl leading-tight font-bold">
                 Bengaluru Office
               </h2>
             </div>
             <div>
               <p className="text-lg  font-normal leading-10">
-                3502 Marcus Street Geraldine Zip code 35974
+                Kutchi Bhavan, # 44B, 1st Main Road, J P Nagar 3rd Phase,
+                Bangalore - 560078
               </p>
             </div>
             <div>
               <Link
-                to="mailto:Office@banglore.com"
+                to="mailto:dbkdoekkam@gmail.com"
                 className="text-lg  font-medium underline"
               >
-                Office@banglore.com
+                mailto:dbkdoekkam@gmail.com
               </Link>
               <Link
-                to="tel:731-235-7993"
+                to="tel:26586798"
                 className="text-lg  flex items-center gap-2 hover:text-opacity-100 w-fit"
               >
-                <span>Call :</span>731-235-7993
+                <span>Tel :</span>2658 6798
               </Link>
             </div>
           </div>

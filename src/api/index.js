@@ -32,3 +32,8 @@ export const EVENT_REGISTER_NOTSCANNED_REPORT = `/panel-fetch-event-register-not
 //EVENT_NOTREGISTER_NOTSCANNED_REPORT
 export const EVENT_NOTREGISTER_NOTSCANNED_REPORT = `/panel-fetch-event-notregister-notscanned-report`;
 export const DASHBOARD = `/dashboard`;
+
+// ------------------website----------------------------
+export const COMMITTE_MEMBER = `/getCurrentYearCommitteeMember`;
+export const CREATE_WEB_ENQUIRY = `/createWebenquiry`;
+export const GET_COMPANY_DETAILS = `/getCompany`;

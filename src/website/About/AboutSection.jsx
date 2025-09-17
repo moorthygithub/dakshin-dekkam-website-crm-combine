@@ -1,4 +1,4 @@
-import ImageSlider from "./ImageCarsol";
+import ImageSlider from "../components/ImageCarsol";
 
 function AboutSection() {
   return (
@@ -28,7 +28,7 @@ function AboutSection() {
               copiosae legendos at vix ad putent delectus delicata usu. Vidit
               dissentiet eos cu eum an brute copiosae hendrerit. Eos.
             </p>
-            <div >
+            <div>
               <button className="flex items-center space-x-3 pl-3 border-b border-l border-t border-yellow-500 text-yellow-500 font-medium my-4 focus:outline-none transform transition hover:scale-110 duration-300 ease-in-out rounded-full">
                 <span>More Info</span>
                 <div className="border border-yellow-500 h-14 w-14 rounded-full flex items-center justify-center">

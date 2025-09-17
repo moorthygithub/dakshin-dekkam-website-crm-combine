@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
-import SingleTestimonial from "./SingleTestimonial";
 import { TestimonialData } from "../data/testimonial";
+import Form from "./ContactForm/Form";
+import SingleTestimonial from "./SingleTestimonial";
 import InputField from "./common/InputField";
+import { Link } from "react-router-dom";
 
 const Info = () => {
   const [formData, setFormData] = useState({
@@ -105,7 +106,7 @@ const Info = () => {
                 className="w-5 h-5 rounded-full absolute z-0 left-36 -top-12 animate-ping"
               ></div>
 
-              <form
+              {/* <form
                 onSubmit={handleSubmit}
                 className=" bg-white p-6 rounded-xl shadow-lg relative z-20 floating w-full"
               >
@@ -172,7 +173,10 @@ const Info = () => {
                     {loader ? "Submitting..." : "Try For Free"}
                   </button>
                 </div>
-              </form>
+              </form> */}
+              <div className=" bg-white p-6 rounded-xl shadow-lg relative z-20 floating w-full">
+                <Form />
+              </div>
 
               <div
                 style={{ background: "#5B61EB" }}
