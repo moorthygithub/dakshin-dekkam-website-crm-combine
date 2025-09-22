@@ -8,7 +8,7 @@ import {
   DialogTitle,
 } from "@/crm/components/ui/dialog";
 import useLogout from "@/hooks/useLogout";
-import { setShowUpdateDialog } from "@/crm/redux/slices/versionSlice";
+import { setShowUpdateDialog } from "@/redux/slices/versionSlice";
 import { RefreshCw } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";

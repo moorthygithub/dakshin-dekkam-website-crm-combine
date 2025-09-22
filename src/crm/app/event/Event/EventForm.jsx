@@ -510,7 +510,7 @@ const EventForm = () => {
           setCropState((prev) => ({ ...prev, modalVisible: false }))
         }
         onCropComplete={handleCroppedImage}
-        maxCropSize={{ width: 400, height: 400 }}
+        maxCropSize={{ width: 500, height: 400 }}
         title="Crop Event Image"
         cropstucture={true}
       />

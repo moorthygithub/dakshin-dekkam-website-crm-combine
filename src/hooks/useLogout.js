@@ -1,8 +1,8 @@
-import { logout } from "@/crm/redux/slices/AuthSlice";
-import { persistor } from "@/crm/redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "./use-toast";
+import { logout } from "@/redux/slices/AuthSlice";
+import { persistor } from "@/redux/store";
 
 const useLogout = () => {
   const dispatch = useDispatch();

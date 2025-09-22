@@ -7,9 +7,7 @@ import sidebarReducer from "./slices/sidebarSlice";
 import versionReducer from "./slices/versionSlice";
 import companySlice from "@/website/redux/slices/companySlice";
 const secretKey = import.meta.env.VITE_SECRET_KEY;
-
 let transforms = [];
-
 if (!secretKey) {
   console.warn(
     "❌ Missing SECRET_KEY — AppInitializer will handle redirection."

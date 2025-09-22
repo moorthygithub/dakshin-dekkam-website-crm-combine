@@ -10,8 +10,8 @@ import {
   TooltipTrigger,
 } from "@/crm/components/ui/tooltip";
 import { cn } from "@/crm/lib/utils";
-import { setSidebarOpen } from "@/crm/redux/slices/sidebarSlice";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { setSidebarOpen } from "@/redux/slices/sidebarSlice";
 import { Slot } from "@radix-ui/react-slot";
 import { cva } from "class-variance-authority";
 import { PanelLeft } from "lucide-react";
@@ -674,6 +674,5 @@ export {
   SidebarRail,
   SidebarSeparator,
   SidebarTrigger,
-  useSidebar
+  useSidebar,
 };
-

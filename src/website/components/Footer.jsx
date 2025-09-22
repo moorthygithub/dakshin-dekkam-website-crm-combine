@@ -13,7 +13,6 @@ import { useSelector } from "react-redux";
 
 function Footer() {
   const websitecompany = useSelector((state) => state.websitecompany || "");
-  console.log(websitecompany, "websitecompany");
 
   return (
     <footer className="bg-[#252641] text-white pt-12">

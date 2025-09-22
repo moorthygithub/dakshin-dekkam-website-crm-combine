@@ -12,7 +12,6 @@ import { Label } from "@/crm/components/ui/label";
 import { ButtonConfig } from "@/crm/config/ButtonConfig";
 import { useToast } from "@/hooks/use-toast";
 import { useApiMutation } from "@/hooks/useApiMutation";
-import { loginSuccess } from "@/crm/redux/slices/AuthSlice";
 import { AnimatePresence, motion } from "framer-motion";
 import { Eye, EyeOff } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -21,6 +20,7 @@ import { useNavigate } from "react-router-dom";
 import LoginCarsol from "../common/LoginCarsol";
 import Logo from "../common/Logo";
 import ForgotPassword from "../ForgotPassword/ForgotPassword";
+import { loginSuccess } from "@/redux/slices/AuthSlice";
 
 export default function LoginAuth() {
   const [email, setEmail] = useState("");
@@ -172,7 +172,7 @@ export default function LoginAuth() {
                           value={email}
                           placeholder="Enter your Mobile No"
                           onChange={(event) => {
-                            const value = event.target.value.replace(/\D/g, ""); 
+                            const value = event.target.value.replace(/\D/g, "");
                             setEmail(value);
                           }}
                           required
