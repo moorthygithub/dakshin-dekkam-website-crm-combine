@@ -18,8 +18,8 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/crm/components/ui/sidebar";
-import { setShowUpdateDialog } from "@/crm/redux/slices/versionSlice";
 import useLogout from "@/hooks/useLogout";
+import { setShowUpdateDialog } from "@/redux/slices/versionSlice";
 import { ArrowRight, ChevronsUpDown, Key, LogOut } from "lucide-react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";

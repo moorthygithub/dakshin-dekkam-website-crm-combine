@@ -7,7 +7,6 @@ const ChairPersonCarousel = () => {
   const {
     data: committedata,
     isLoading,
-    isError,
   } = useGetApiMutation({
     url: COMMITTE_MEMBER,
     queryKey: ["commmittemember"],

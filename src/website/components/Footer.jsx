@@ -13,7 +13,6 @@ import { useSelector } from "react-redux";
 
 function Footer() {
   const websitecompany = useSelector((state) => state.websitecompany || "");
-  console.log(websitecompany, "websitecompany");
 
   return (
     <footer className="bg-[#252641] text-white pt-12">
@@ -87,7 +86,7 @@ function Footer() {
         </div>
 
         {/* Column 3: Map */}
-        <div className="col-span-4">
+        <div className="col-span-3">
           <h2 className="font-semibold text-lg mb-4">Our Location</h2>
           <iframe
             src={websitecompany?.google_map_url || ""}
@@ -101,7 +100,7 @@ function Footer() {
         </div>
 
         {/* Column 4: Contact Info */}
-        <div className="col-span-3">
+        <div className="col-span-4">
           <h2 className="font-semibold text-lg mb-4">Contact Us</h2>
           <p className="flex items-center gap-2 text-gray-400 mb-2">
             {/* <MapPin size={24} /> */}

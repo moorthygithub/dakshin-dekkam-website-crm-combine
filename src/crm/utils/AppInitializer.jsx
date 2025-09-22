@@ -2,13 +2,13 @@ import { DOT_ENV, PANEL_CHECK } from "@/api";
 import useToken from "@/api/usetoken";
 import { useToast } from "@/hooks/use-toast";
 import { useApiMutation } from "@/hooks/useApiMutation";
-import { logout } from "@/crm/redux/slices/AuthSlice";
-import { setShowUpdateDialog } from "@/crm/redux/slices/versionSlice";
-import { persistor } from "@/crm/redux/store";
 import CryptoJS from "crypto-js";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
+import { logout } from "@/redux/slices/AuthSlice";
+import { persistor } from "@/redux/store";
+import { setShowUpdateDialog } from "@/redux/slices/versionSlice";
 
 const secretKey = import.meta.env.VITE_SECRET_KEY;
 const validationKey = import.meta.env.VITE_SECRET_VALIDATION;

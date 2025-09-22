@@ -1,5 +1,4 @@
 import { PANEL_LOGIN } from "@/api";
-import { loginSuccess } from "@/crm/redux/slices/AuthSlice";
 import { useApiMutation } from "@/hooks/useApiMutation";
 import { Loader, Lock, Phone } from "lucide-react";
 import { useState } from "react";
@@ -7,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { showErrorToast } from "../../utils/toast";
 import InputField from "../common/InputField";
+import { loginSuccess } from "@/redux/slices/AuthSlice";
 
 const MemberForm = () => {
   const [formData, setFormData] = useState({

@@ -4,27 +4,37 @@ import { useEffect, useState } from "react";
 export default function ScrollToTop() {
   const [isVisible, setIsVisible] = useState(false);
 
-  // Top: 0 takes us all the way back to the top of the page
-  // Behavior: smooth keeps it smooth!
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
+  // Custom easing function: easeInOutCubic
+  const easeInOutCubic = (t) =>
+    t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 
-  useEffect(() => {
-    // Button is displayed after scrolling for 500 pixels
-    const toggleVisibility = () => {
-      if (window.pageYOffset > 300) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
+  const scrollToTop = () => {
+    const start = window.scrollY;
+    const duration = 600; // total animation time (ms)
+    let startTime = null;
+
+    const animateScroll = (timestamp) => {
+      if (!startTime) startTime = timestamp;
+      const elapsed = timestamp - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+
+      const ease = easeInOutCubic(progress);
+      window.scrollTo(0, start * (1 - ease));
+
+      if (elapsed < duration) {
+        requestAnimationFrame(animateScroll);
       }
     };
 
-    window.addEventListener("scroll", toggleVisibility);
+    requestAnimationFrame(animateScroll);
+  };
 
+  useEffect(() => {
+    const toggleVisibility = () => {
+      setIsVisible(window.pageYOffset > 300);
+    };
+
+    window.addEventListener("scroll", toggleVisibility);
     return () => window.removeEventListener("scroll", toggleVisibility);
   }, []);
 
@@ -35,7 +45,7 @@ export default function ScrollToTop() {
           <div
             onClick={scrollToTop}
             aria-label="scroll to top"
-            className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-md bg-yellow-100 text-black shadow-md transition duration-300 ease-in-out"
+            className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-md bg-yellow-100 text-black shadow-md transition duration-300 ease-in-out hover:scale-110"
           >
             <ArrowUp className="h-5 w-5" />
           </div>
