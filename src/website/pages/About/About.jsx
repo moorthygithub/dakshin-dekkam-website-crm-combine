@@ -3,7 +3,7 @@ import HeroSub from "../../components/HeroSub";
 import ChairPeronCarousel from "../../About/ChairPeronCarousel";
 import TeamCarousel from "../../components/TeamCarousel";
 import PageMeta from "../../components/common/PageMeta";
-import AboutUsDetails from "../../About/AboutUsDetails";
+import OurHistory from "../../About/OurHistory";
 
 const About = () => {
   const breadcrumbLinks = [
@@ -19,8 +19,7 @@ const About = () => {
         breadcrumbLinks={breadcrumbLinks}
       />
       <AboutSection />
-      <AboutUsDetails />
-      <ChairPeronCarousel />
+      <OurHistory />
       <TeamCarousel />
     </>
   );

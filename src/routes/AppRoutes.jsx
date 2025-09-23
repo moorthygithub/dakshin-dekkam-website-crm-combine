@@ -3,16 +3,25 @@ import { Route, Routes } from "react-router-dom";
 // CRM Imports
 import Login from "@/crm/app/auth/Login";
 import Dashboard from "@/crm/app/dashboard/Dashboard";
-import PanelNotFound from "@/crm/app/PanelNotFound/PanelNotFound";
 import EventAttendMember from "@/crm/app/event/Event/EventAttendMember";
 import EventForm from "@/crm/app/event/Event/EventForm";
 import EventList from "@/crm/app/event/Event/EventList";
 import EventMemberTractList from "@/crm/app/event/EventMemberTrack/EventMemberTractList";
 import EventRegisterList from "@/crm/app/event/EventRegister/EventRegisterList";
+import MemberActiveList from "@/crm/app/member/MemberActiveList";
 import MemberForm from "@/crm/app/member/MemberForm";
+import MemberInactiveList from "@/crm/app/member/MemberInactiveList";
 import MemberList from "@/crm/app/member/MemberList";
+import NewRegister from "@/crm/app/newregister/NewRegister";
+import PanelNotFound from "@/crm/app/PanelNotFound/PanelNotFound";
 import EventReport from "@/crm/app/report/EventReport/EventReport";
+import EventSummaryReport from "@/crm/app/report/EventSummaryReport/EventSummaryReport";
 import Maintenance from "@/crm/components/common/Maintenance";
+import SessionTimeoutTracker from "@/crm/components/SessionTimeoutTracker/SessionTimeoutTracker";
+import AppInitializer from "@/crm/utils/AppInitializer";
+import VersionCheck from "@/crm/utils/VersionCheck";
+import useLogout from "@/hooks/useLogout";
+import Extra from "@/website/Extra/Extra";
 import MainLayout from "@/website/layout/MainLayout";
 import About from "@/website/pages/About/About";
 import Community from "@/website/pages/Community/Community";
@@ -20,18 +29,11 @@ import Contact from "@/website/pages/Contact/Contact";
 import Gallery from "@/website/pages/Gallery/Gallery";
 import Home from "@/website/pages/Home";
 import Member from "@/website/pages/Member/Member";
+import WebsiteNotFound from "@/website/pages/NotFound/WebsiteNotFound";
+import Signup from "@/website/pages/SiginUp/Signup";
+import { useSelector } from "react-redux";
 import AuthRoute from "./AuthRoute";
 import ProtectedRoute from "./ProtectedRoute";
-import AppInitializer from "@/crm/utils/AppInitializer";
-import SessionTimeoutTracker from "@/crm/components/SessionTimeoutTracker/SessionTimeoutTracker";
-import useLogout from "@/hooks/useLogout";
-import { useSelector } from "react-redux";
-import VersionCheck from "@/crm/utils/VersionCheck";
-import WebsiteNotFound from "@/website/pages/NotFound/WebsiteNotFound";
-import EventSummaryReport from "@/crm/app/report/EventSummaryReport/EventSummaryReport";
-import MemberActiveList from "@/crm/app/member/MemberActiveList";
-import MemberInactiveList from "@/crm/app/member/MemberInactiveList";
-import NewRegister from "@/crm/app/newregister/NewRegister";
 
 // Website Imports
 
@@ -88,13 +90,15 @@ const AppRoutes = () => {
       {/* WEBSITE ROUTES */}
       <Route element={<MainLayout />}>
         <Route index element={<Home />} />
-        <Route path="about" element={<About />} />
+        <Route path="aboutus" element={<About />} />
         <Route path="gallery" element={<Gallery />} />
         <Route path="member" element={<Member />} />
+        {/* <Route path="signup" element={<Signup />} /> */}
         <Route path="community" element={<Community />} />
         <Route path="contact" element={<Contact />} />
         <Route path="*" element={<WebsiteNotFound />} />
       </Route>
+      <Route path="extra" element={<Extra />} />
     </Routes>
   );
 };

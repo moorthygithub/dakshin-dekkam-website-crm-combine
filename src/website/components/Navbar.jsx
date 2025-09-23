@@ -1,35 +1,94 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import MobileBottomNav from "./MobileBottomNav";
+import { Home, Info, Image, Users, User, Phone } from "lucide-react";
+import DesktopNavbar from "./DesktopNavbar";
 
 function Navbar() {
   const [open, setOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [showNavbar, setShowNavbar] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const location = useLocation();
+  const isHome = location.pathname === "/";
+  const menuItems = [
+    {
+      label: "Home",
+      path: "/",
+      icon: <Home className="h-5 w-5" />,
+      onClick: () => setOpen(false),
+    },
+    {
+      label: "About",
+      path: "/aboutus",
+      icon: <Info className="h-5 w-5" />,
+      onClick: () => setOpen(false),
+    },
 
+    {
+      label: "Community",
+      path: "/community",
+      icon: <Users className="h-5 w-5" />,
+      onClick: () => setOpen(false),
+    },
+    {
+      label: "Member Area",
+      path: "/member",
+      icon: <User className="h-5 w-5" />,
+      onClick: () => setOpen(false),
+    },
+    {
+      label: "Gallery",
+      path: "/gallery",
+      icon: <Image className="h-5 w-5" />,
+      onClick: () => setOpen(false),
+    },
+    {
+      label: "Contact",
+      path: "/contact",
+      icon: <Phone className="h-5 w-5" />,
+      onClick: () => setOpen(false),
+    },
+  ];
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsScrolled(true);
+      const currentScrollY = window.scrollY;
+      const isLargeScreen = window.innerWidth >= 768;
+
+      setIsScrolled(currentScrollY > 40);
+
+      if (isLargeScreen) {
+        if (currentScrollY < 40) setShowNavbar(true);
+        else if (currentScrollY > lastScrollY && currentScrollY < 500)
+          setShowNavbar(false);
+        else setShowNavbar(true);
       } else {
-        setIsScrolled(false);
+        setShowNavbar(true);
       }
+
+      setLastScrollY(currentScrollY);
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [lastScrollY]);
 
   return (
-    <div
-      className={`w-full fixed top-0 left-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-yellow-100 shadow-md" : "bg-transparent"
-      }`}
-    >
-      <div className="max-w-screen-xl mx-auto px-6 md:px-8">
-        <div className="flex items-center justify-between pt-4 md:py-4">
+    <div>
+      <div
+        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 py-3 ${
+          showNavbar
+            ? isScrolled
+              ? "bg-yellow-100 shadow-md !text-black"
+              : "bg-transparent"
+            : "-translate-y-full"
+        } ${isHome ? "text-white" : "text-black"}`}
+      >
+        <div className="max-w-screen-xl mx-auto px-6 md:px-8 flex items-center justify-between">
           <div className="relative">
             <Link
               to="/"
-              className="text-lg relative z-50 font-bold tracking-widest text-gray-900 rounded-lg focus:outline-none focus:shadow-outline"
+              className="text-lg relative z-50 font-bold tracking-widest rounded-lg focus:outline-none focus:shadow-outline"
             >
               Dhakshin Ekkam
             </Link>
@@ -45,124 +104,11 @@ function Navbar() {
               />
             </svg>
           </div>
-
-          {/* ---- Hamburger (Mobile only) ---- */}
-          <button
-            className="md:hidden rounded-lg focus:outline-none focus:shadow-outline"
-            onClick={() => setOpen(!open)}
-          >
-            <svg fill="currentColor" viewBox="0 0 20 20" className="w-6 h-6">
-              {!open ? (
-                <path
-                  fillRule="evenodd"
-                  d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z"
-                  clipRule="evenodd"
-                ></path>
-              ) : (
-                <path
-                  fillRule="evenodd"
-                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                  clipRule="evenodd"
-                ></path>
-              )}
-            </svg>
-          </button>
-
-          <nav className="hidden md:flex space-x-6">
-            <Link
-              to="/"
-              className="px-3 py-2 text-sm font-medium hover:text-gray-900 "
-            >
-              Home
-            </Link>
-            <Link
-              to="/about"
-              className="px-3 py-2 text-sm font-medium hover:text-gray-900"
-            >
-              About Us
-            </Link>
-            <Link
-              to="/gallery"
-              className="px-3 py-2 text-sm font-medium hover:text-gray-900"
-            >
-              Gallery
-            </Link>
-            <Link
-              to="/member"
-              className="px-3 py-2 text-sm font-medium hover:text-gray-900"
-            >
-              Member
-            </Link>
-            <Link
-              to="/community"
-              className="px-3 py-2 text-sm font-medium hover:text-gray-900"
-            >
-              Community
-            </Link>
-            <Link
-              to="/contact"
-              className="px-3 py-2 text-sm font-medium hover:text-gray-900"
-            >
-              Contact
-            </Link>
-          </nav>
+          <DesktopNavbar menuItems={menuItems} />
         </div>
-        {/* {open && (
-          // <div
-          //   className={`flex flex-col space-y-2  pb-4 md:hidden ${
-          //     isScrolled ? "" : "bg-cream"
-          //   } `}
-          // > */}
-        <div
-          className={`flex flex-col space-y-2 pb-4 md:hidden overflow-hidden transition-all duration-500 ease-in-out ${
-            open ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
-          } ${isScrolled ? "" : "bg-cream"}`}
-        >
-          <Link
-            to="/"
-            className="px-3 py-2 text-sm font-medium hover:text-gray-900"
-            onClick={() => setOpen(false)}
-          >
-            Home
-          </Link>
-          <Link
-            to="/about"
-            className="px-3 py-2 text-sm font-medium hover:text-gray-900"
-            onClick={() => setOpen(false)}
-          >
-            About Us
-          </Link>
-          <Link
-            to="/gallery"
-            onClick={() => setOpen(false)}
-            className="px-3 py-2 text-sm font-medium hover:text-gray-900"
-          >
-            Gallery
-          </Link>
-          <Link
-            to="/member"
-            onClick={() => setOpen(false)}
-            className="px-3 py-2 text-sm font-medium hover:text-gray-900"
-          >
-            Member
-          </Link>
-          <Link
-            to="/community"
-            onClick={() => setOpen(false)}
-            className="px-3 py-2 text-sm font-medium hover:text-gray-900"
-          >
-            Community
-          </Link>
-          <Link
-            to="/contact"
-            onClick={() => setOpen(false)}
-            className="px-3 py-2 text-sm font-medium hover:text-gray-900"
-          >
-            Contact
-          </Link>
-        </div>
-        {/* )} */}
       </div>
+
+      <MobileBottomNav open={open} menuItems={menuItems} setOpen={setOpen} />
     </div>
   );
 }
