@@ -44,7 +44,7 @@ const HeroSub = ({ title, description, breadcrumbLinks }) => {
             fill="currentColor"
           ></path>
         </svg>
-        <div className="bg-white w-full h-20 -mt-px"></div>
+        <div className="bg-white w-full h-10 -mt-px"></div>
       </div>
 
       {/* <div className="bg-white h-12 relative z-0" /> */}

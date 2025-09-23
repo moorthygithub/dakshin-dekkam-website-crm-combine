@@ -68,7 +68,7 @@ const WebsiteNotFound = () => {
                 </p>
                 <Link
                   to="/"
-                  className="rounded-lg px-7 py-3 text-base font-medium text-white transition bg-primary hover:bg-black duration-500"
+                  className="rounded-lg px-7 py-3 text-base font-medium text-white transition bg-yellow-500 hover:bg-yellow-600  duration-500"
                 >
                   Go To Home
                 </Link>

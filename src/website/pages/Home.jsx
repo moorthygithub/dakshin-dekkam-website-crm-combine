@@ -1,15 +1,18 @@
+import AboutSection from "../About/AboutSection";
+import OurObjectives from "../components/AllInOne";
 import AllInOne from "../components/AllInOne";
-import Hero from "../components/Hero";
+import HeroMain from "../components/HeroMain";
 import Info from "../components/Info";
 import LatestNews from "../components/LatestNews";
 
 function Home() {
   return (
     <div>
-      <Hero />
-      <AllInOne />
+      <HeroMain />
+      <AboutSection />
+
       <LatestNews />
-      <Info />
+      {/* <Info /> */}
     </div>
   );
 }

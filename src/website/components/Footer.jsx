@@ -17,7 +17,7 @@ function Footer() {
   return (
     <footer className="bg-[#252641] text-white pt-12">
       <div className="container mx-auto px-4 lg:px-16 grid grid-cols-1 md:grid-cols-12 gap-4">
-        <div className="col-span-3">
+        <div className="col-span-4">
           <h1 className="text-2xl font-bold mb-3 relative inline-block">
             <span className="z-10">{websitecompany?.store_name || ""}</span>
             <svg
@@ -53,7 +53,7 @@ function Footer() {
         </div>
 
         {/* Column 2: Quick Links */}
-        <div className="col-span-2">
+        <div className="col-span-3">
           <h2 className="font-semibold text-lg mb-4">Quick Links</h2>
           <ul className="space-y-2 text-gray-400">
             <li>
@@ -86,7 +86,7 @@ function Footer() {
         </div>
 
         {/* Column 3: Map */}
-        <div className="col-span-3">
+        {/* <div className="col-span-3">
           <h2 className="font-semibold text-lg mb-4">Our Location</h2>
           <iframe
             src={websitecompany?.google_map_url || ""}
@@ -97,10 +97,10 @@ function Footer() {
             loading="lazy"
             title="map"
           ></iframe>
-        </div>
+        </div> */}
 
         {/* Column 4: Contact Info */}
-        <div className="col-span-4">
+        <div className="col-span-5">
           <h2 className="font-semibold text-lg mb-4">Contact Us</h2>
           <p className="flex items-center gap-2 text-gray-400 mb-2">
             {/* <MapPin size={24} /> */}

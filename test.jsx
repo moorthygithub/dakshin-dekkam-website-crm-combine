@@ -1,108 +1,170 @@
-import { GET_UPCOMING_EVENTS } from "@/api";
-import { useGetApiMutation } from "@/hooks/useGetApiMutation";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
-function LatestNews() {
-  const { data: upcomingevent, isLoading } = useGetApiMutation({
-    url: GET_UPCOMING_EVENTS,
-    queryKey: ["getupcoming event"],
-  });
-  console.log(upcomingevent, "upcomingevent");
+function Navbar() {
+  const [open, setOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <div className="container px-4 lg:px-8 mx-auto max-w-screen-xl text-gray-700">
-      <div data-aos="zoom-in" className="mt-16 text-center">
-        <h1 className="text-darken text-2xl font-semibold">
-          Latest Community Events
-        </h1>
-        <p className="text-gray-500 my-5">
-          Stay updated with the recent activities and gatherings from our
-          community
-        </p>
-      </div>
-      <div
-        data-aos="zoom-in-up"
-        className="my-14 flex flex-col lg:flex-row lg:space-x-20"
-      >
-        <div className="lg:w-6/12">
-          <img className="w-full mb-6" src="img/laptop-news.png" />
-          <span className="bg-yellow-300 text-darken font-semibold px-4 py-px text-sm rounded-full">
-            FEATURED EVENT
-          </span>
-          <h1 className="text-gray-800 font-semibold my-3 text-xl">
-            Annual Community Gathering 2025 – Celebrating Togetherness
-          </h1>
-          <p className="text-gray-500 mb-3">
-            A wonderful evening filled with cultural programs, guest speakers,
-            and community bonding activities.
-          </p>
-          <a href="" className="underline">
-            Read more
-          </a>
+    <div
+      className={`w-full fixed top-0 left-0 z-50 transition-all duration-300 ${
+        isScrolled ? "bg-yellow-100 shadow-md" : "bg-transparent"
+      }`}
+    >
+      <div className="max-w-screen-xl mx-auto px-6 md:px-8">
+        <div className="flex items-center justify-between pt-4 md:py-4">
+          <div className="relative">
+            <Link
+              to="/"
+              className="text-lg relative z-50 font-bold tracking-widest text-gray-900 rounded-lg focus:outline-none focus:shadow-outline"
+            >
+              Dhakshin Ekkam
+            </Link>
+            <svg
+              className="h-11 z-40 absolute -top-2 -left-3"
+              viewBox="0 0 79 79"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M35.2574 2.24264C37.6005 -0.100501 41.3995 -0.100505 43.7426 2.24264L76.7574 35.2574C79.1005 37.6005 79.1005 41.3995 76.7574 43.7426L43.7426 76.7574C41.3995 79.1005 37.6005 79.1005 35.2574 76.7574L2.24264 43.7426C-0.100501 41.3995 -0.100505 37.6005 2.24264 35.2574L35.2574 2.24264Z"
+                fill="#65DAFF"
+              />
+            </svg>
+          </div>
+
+          {/* ---- Hamburger (Mobile only) ---- */}
+          <button
+            className="md:hidden rounded-lg focus:outline-none focus:shadow-outline"
+            onClick={() => setOpen(!open)}
+          >
+            <svg fill="currentColor" viewBox="0 0 20 20" className="w-6 h-6">
+              {!open ? (
+                <path
+                  fillRule="evenodd"
+                  d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z"
+                  clipRule="evenodd"
+                ></path>
+              ) : (
+                <path
+                  fillRule="evenodd"
+                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                  clipRule="evenodd"
+                ></path>
+              )}
+            </svg>
+          </button>
+
+          <nav className="hidden md:flex space-x-6">
+            <Link
+              to="/"
+              className="px-3 py-2 text-sm font-medium hover:text-gray-900 "
+            >
+              Home
+            </Link>
+            <Link
+              to="/about"
+              className="px-3 py-2 text-sm font-medium hover:text-gray-900"
+            >
+              About Us
+            </Link>
+            <Link
+              to="/gallery"
+              className="px-3 py-2 text-sm font-medium hover:text-gray-900"
+            >
+              Gallery
+            </Link>
+            <Link
+              to="/member"
+              className="px-3 py-2 text-sm font-medium hover:text-gray-900"
+            >
+              Member
+            </Link>
+            <Link
+              to="/community"
+              className="px-3 py-2 text-sm font-medium hover:text-gray-900"
+            >
+              Community
+            </Link>
+            <Link
+              to="/contact"
+              className="px-3 py-2 text-sm font-medium hover:text-gray-900"
+            >
+              Contact
+            </Link>
+          </nav>
         </div>
-        <div className="lg:w-7/12 flex flex-col justify-between mt-12 space-y-5 lg:space-y-0 lg:mt-0">
-          <div className="flex space-x-5">
-            <div className="w-4/12">
-              <div className="relative">
-                <img
-                  className="rounded-xl w-full"
-                  src="img/children-laptop.png"
-                />
-                <span className="absolute bottom-2 right-2 bg-yellow-300 text-darken font-semibold px-4 py-px text-sm rounded-full hidden sm:block">
-                  WORKSHOP
-                </span>
-              </div>
-            </div>
-            <div className="w-8/12">
-              <h1 className="text-gray-800 text-sm sm:text-lg font-semibold">
-                Digital Literacy Workshop for Youth
-              </h1>
-              <p className="text-gray-500 my-2 sm:my-4 text-xs sm:text-md">
-                Empowering young members with digital skills to build better
-                opportunities.
-              </p>
-            </div>
-          </div>
-          <div className="flex space-x-5">
-            <div className="w-4/12">
-              <div className="relative">
-                <img className="rounded-xl w-full" src="img/girl-laptop.png" />
-                <span className="absolute bottom-2 right-2 bg-yellow-300 text-darken font-semibold px-4 py-px text-sm rounded-full hidden sm:block">
-                  HEALTH CAMP
-                </span>
-              </div>
-            </div>
-            <div className="w-8/12">
-              <h1 className="text-gray-800 text-sm sm:text-lg font-semibold">
-                Free Community Health Check-up
-              </h1>
-              <p className="text-gray-500 my-2 sm:my-4 text-xs sm:text-md">
-                Doctors and volunteers joined hands to provide free health
-                consultations and awareness.
-              </p>
-            </div>
-          </div>
-          <div className="flex space-x-5">
-            <div className="w-4/12">
-              <div className="relative">
-                <img className="rounded-xl w-full" src="img/cat-laptop.png" />
-                <span className="absolute bottom-2 right-2 bg-yellow-300 text-darken font-semibold px-4 py-px text-sm rounded-full hidden sm:block">
-                  VOLUNTEER DRIVE
-                </span>
-              </div>
-            </div>
-            <div className="w-8/12">
-              <h1 className="text-gray-800 text-sm sm:text-lg font-semibold">
-                Neighborhood Clean-up Campaign
-              </h1>
-              <p className="text-gray-500 my-2 sm:my-4 text-xs sm:text-md">
-                Members united to clean public spaces and spread awareness about
-                sustainable living.
-              </p>
-            </div>
-          </div>
+        {/* {open && (
+          // <div
+          //   className={`flex flex-col space-y-2  pb-4 md:hidden ${
+          //     isScrolled ? "" : "bg-cream"
+          //   } `}
+          // > */}
+        <div
+          className={`flex flex-col space-y-2 pb-4 md:hidden overflow-hidden transition-all duration-500 ease-in-out ${
+            open ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+          } ${isScrolled ? "" : "bg-cream"}`}
+        >
+          <Link
+            to="/"
+            className="px-3 py-2 text-sm font-medium hover:text-gray-900"
+            onClick={() => setOpen(false)}
+          >
+            Home
+          </Link>
+          <Link
+            to="/about"
+            className="px-3 py-2 text-sm font-medium hover:text-gray-900"
+            onClick={() => setOpen(false)}
+          >
+            About Us
+          </Link>
+          <Link
+            to="/gallery"
+            onClick={() => setOpen(false)}
+            className="px-3 py-2 text-sm font-medium hover:text-gray-900"
+          >
+            Gallery
+          </Link>
+          <Link
+            to="/member"
+            onClick={() => setOpen(false)}
+            className="px-3 py-2 text-sm font-medium hover:text-gray-900"
+          >
+            Member
+          </Link>
+          <Link
+            to="/community"
+            onClick={() => setOpen(false)}
+            className="px-3 py-2 text-sm font-medium hover:text-gray-900"
+          >
+            Community
+          </Link>
+          <Link
+            to="/contact"
+            onClick={() => setOpen(false)}
+            className="px-3 py-2 text-sm font-medium hover:text-gray-900"
+          >
+            Contact
+          </Link>
         </div>
+        {/* )} */}
       </div>
     </div>
   );
 }
 
-export default LatestNews;
+export default Navbar;

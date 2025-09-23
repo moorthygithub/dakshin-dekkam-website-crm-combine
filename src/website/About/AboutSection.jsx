@@ -2,14 +2,14 @@ import ImageSlider from "../components/ImageCarsol";
 
 function AboutSection() {
   return (
-    <div className="container px-4 sm:px-6 lg:px-8 mx-auto max-w-screen-xl text-gray-700 ">
+    <div className="container px-4 sm:px-6 lg:px-8 mx-auto max-w-screen-xl text-gray-700">
       <div className="mt-24 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
         <div data-aos="fade-right" className="w-full">
           <div className="relative w-full overflow-hidden rounded-lg">
             <ImageSlider />
           </div>
         </div>
-        <div data-aos="flip-right" data-aos-delay={200} className="w-full">
+        <div data-aos="fade-up" data-aos-delay={200} className="w-full">
           <div className="flex flex-col justify-center">
             <h1 className="font-semibold text-darken text-xl sm:text-2xl lg:text-3xl mb-5">
               Our Story: How Ekkam Started?

@@ -3,7 +3,7 @@ import { useApiMutation } from "@/hooks/useApiMutation";
 import { Loader, Lock, Phone } from "lucide-react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { showErrorToast } from "../../utils/toast";
 import InputField from "../common/InputField";
 import { loginSuccess } from "@/redux/slices/AuthSlice";
@@ -97,50 +97,60 @@ const MemberForm = () => {
   const isLoading = isApiLoading;
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="max-w-md mx-auto bg-white shadow-md my-6 rounded-xl p-6"
-    >
-      <h2 className="text-xl font-semibold mb-4 text-gray-800">Member Area</h2>
+    <div className="max-w-md mx-auto  my-6 rounded-xl px-6">
+      <form onSubmit={handleSubmit}>
+        <h2 className="text-xl font-semibold mb-4 text-gray-800">
+          Member Area
+        </h2>
 
-      <InputField
-        label="Mobile"
-        name="mobile"
-        value={formData.mobile}
-        onChange={handleChange}
-        placeholder="Enter your mobile"
-        startIcon={<Phone size={18} />}
-        error={errors.mobile}
-      />
+        <InputField
+          label="Mobile"
+          name="mobile"
+          value={formData.mobile}
+          onChange={handleChange}
+          placeholder="Enter your mobile"
+          startIcon={<Phone size={18} />}
+          error={errors.mobile}
+        />
 
-      <InputField
-        label="Password"
-        type="password"
-        name="password"
-        value={formData.password}
-        onChange={handleChange}
-        placeholder="Enter your password"
-        startIcon={<Lock size={18} />}
-        error={errors.password}
-      />
+        <InputField
+          label="Password"
+          type="password"
+          name="password"
+          value={formData.password}
+          onChange={handleChange}
+          placeholder="Enter your password"
+          startIcon={<Lock size={18} />}
+          error={errors.password}
+        />
 
-      <button
-        type="submit"
-        disabled={isLoading}
-        className={`w-full mt-3 flex items-center justify-center bg-yellow-500 hover:bg-yellow-600 text-white font-medium py-2 px-4 rounded-lg transition ${
-          isLoading ? "opacity-70 cursor-not-allowed" : ""
-        }`}
-      >
-        {isLoading ? (
-          <>
-            <Loader className="h-5 w-5 animate-spin mr-2" />
-            {isLoading ? "Redirecting..." : "Logging in..."}
-          </>
-        ) : (
-          "Submit"
-        )}
-      </button>
-    </form>
+        <button
+          type="submit"
+          disabled={isLoading}
+          className={`w-full mt-3 flex items-center justify-center bg-yellow-500 hover:bg-yellow-600 text-white font-medium py-2 px-4 rounded-lg transition ${
+            isLoading ? "opacity-70 cursor-not-allowed" : ""
+          }`}
+        >
+          {isLoading ? (
+            <>
+              <Loader className="h-5 w-5 animate-spin mr-2" />
+              {isLoading ? "Redirecting..." : "Logging in..."}
+            </>
+          ) : (
+            "Submit"
+          )}
+        </button>
+      </form>
+      <div className="text-sm text-gray-600 mt-4 flex justify-end">
+        <span>Don't have an account? </span>
+        <Link
+          to="/signup"
+          className="text-yellow-500 font-medium hover:underline"
+        >
+          Sign up
+        </Link>
+      </div>
+    </div>
   );
 };
 

@@ -156,7 +156,7 @@ const Dashboard = () => {
           </div>
 
           {/* RIGHT SIDE */}
-          <div className="space-y-4 max-h-screen overflow-y-auto py-2 px-1">
+          <div className="space-y-4  py-2 px-1">
             <div className="flex justify-between">
               <h3 className="text-md font-semibold">Upcoming Events</h3>
               {userType === 3 && (
@@ -185,7 +185,7 @@ const Dashboard = () => {
               )}
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-4 overflow-y-auto max-h-screen">
               {filteredEvents?.length > 0 ? (
                 filteredEvents.map((event, index) => {
                   const eventDate = moment(event.event_from_date);
@@ -220,10 +220,10 @@ const Dashboard = () => {
 
                         {/* Event Info */}
                         <CardContent className="p-4 flex flex-col justify-center">
-                          <p className="font-semibold text-gray-800">
+                          <p className="font-semibold text-gray-800 text-sm">
                             {event.event_name}
                           </p>
-                          <p className="text-sm text-muted-foreground">
+                          <p className="text-sm text-muted-foreground line-clamp-2">
                             {event.event_description}
                           </p>
                           <span
