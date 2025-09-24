@@ -5,7 +5,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const NextArrow = ({ onClick }) => (
   <div
-    className="absolute top-1/2 right-4 z-50 w-10 h-10 bg-white/70 rounded-full flex items-center justify-center cursor-pointer -translate-y-1/2 hover:bg-white"
+    className="absolute top-1/2 right-4 z-20 w-10 h-10 bg-white/70 rounded-full flex items-center justify-center cursor-pointer -translate-y-1/2 hover:bg-white"
     onClick={onClick}
   >
     <ChevronRight className="w-5 h-5 text-black" />
@@ -14,7 +14,7 @@ const NextArrow = ({ onClick }) => (
 
 const PrevArrow = ({ onClick }) => (
   <div
-    className="absolute top-1/2 left-4 z-50 w-10 h-10 bg-white/70 rounded-full flex items-center justify-center cursor-pointer -translate-y-1/2 hover:bg-white"
+    className="absolute top-1/2 left-4 z-20 w-10 h-10 bg-white/70 rounded-full flex items-center justify-center cursor-pointer -translate-y-1/2 hover:bg-white"
     onClick={onClick}
   >
     <ChevronLeft className="w-5 h-5 text-black" />

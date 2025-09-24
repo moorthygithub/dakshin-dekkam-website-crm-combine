@@ -93,7 +93,7 @@ const AppRoutes = () => {
         <Route path="aboutus" element={<About />} />
         <Route path="gallery" element={<Gallery />} />
         <Route path="member" element={<Member />} />
-        {/* <Route path="signup" element={<Signup />} /> */}
+        <Route path="signup" element={<Signup />} />
         <Route path="community" element={<Community />} />
         <Route path="contact" element={<Contact />} />
         <Route path="*" element={<WebsiteNotFound />} />

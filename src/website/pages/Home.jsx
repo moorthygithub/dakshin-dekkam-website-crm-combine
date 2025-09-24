@@ -9,6 +9,7 @@ function Home() {
   return (
     <div>
       <HeroMain />
+      <OurObjectives/>
       <AboutSection />
 
       <LatestNews />
