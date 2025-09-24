@@ -4,26 +4,27 @@ import "slick-carousel/slick/slick-theme.css";
 import TeamSkeletonCard from "../TeamSkeletonCard";
 
 const MemberCard = ({ member, getImage }) => (
-  <div className="bg-white rounded-2xl shadow-lg pt-6 pb-4 px-1 flex flex-col items-center hover:shadow-2xl transition duration-300 my-4">
+  <div className="bg-white rounded-2xl shadow-lg pt-6 pb-4 px-1 flex flex-col items-center hover:shadow-2xl transition duration-300 my-4 min-h-[220px]">
     <div className="w-24 h-24 mb-4 rounded-full overflow-hidden border-4 border-yellow-400 shadow-md relative">
       <img
         src={getImage(member)}
-        alt={member.committee_member}
+        alt={member.committee_member || "Member"}
         className="w-full h-full object-cover"
       />
     </div>
 
-    <h3 className="text-md md:text-sm font-bold text-gray-800 text-center">
-      {member.committee_member}
+    <h3 className="text-md md:text-xs font-bold text-gray-800 text-center">
+      {member.committee_member || "\u00A0"}
     </h3>
     <p className="text-sm md:text-xs text-yellow-600 font-semibold text-center mt-1">
-      {member.committee_type}
+      {member.committee_type || "\u00A0"}
     </p>
     <p className="text-sm md:text-xs text-gray-500 text-center mt-1">
-      {member.committee_year}
+      {member.committee_year || "\u00A0"}
     </p>
   </div>
 );
+
 
 const GeneralMembersGrid = ({ members, getImage, isLoading }) => {
   const settings = {
