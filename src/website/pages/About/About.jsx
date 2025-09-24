@@ -15,7 +15,6 @@ const About = () => {
       <PageMeta title="About Us | Dhakshin Ekkam" />
       <HeroSub
         title="About Us"
-        description="Discover who we are, what we do, and how we work together to create meaningful experiences."
         breadcrumbLinks={breadcrumbLinks}
       />
       <AboutSection />

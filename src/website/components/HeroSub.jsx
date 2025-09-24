@@ -4,7 +4,7 @@ import Breadcrumb from "./Breadcrumb";
 const HeroSub = ({ title, description, breadcrumbLinks }) => {
   return (
     <header className="relative bg-cream max-w-full">
-      <section className="relative z-20 pt-24 pb-16 lg:pt-28 lg:pb-20">
+      <section className="relative z-20 pt-24 pb-16 lg:pt-28 lg:pb-14">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto">
             <h1
@@ -14,15 +14,6 @@ const HeroSub = ({ title, description, breadcrumbLinks }) => {
               {title}
             </h1>
 
-            {description && (
-              <p
-                className="mt-4 md:text-xl text-lg text-gray-600"
-                data-aos="fade-down"
-                data-aos-delay="300"
-              >
-                {description}
-              </p>
-            )}
 
             <div className="mt-6" data-aos="fade-up" data-aos-delay="700">
               <Breadcrumb links={breadcrumbLinks} />

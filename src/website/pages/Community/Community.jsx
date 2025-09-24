@@ -14,7 +14,6 @@ const Community = () => {
       <PageMeta title="Community | Dhakshin Ekkam" />
       <HeroSub
         title="Community"
-        description="Discover the vibrant Dhakshin Ekkam community — a family bound by unity, culture, and shared values. Together, we celebrate traditions, foster friendships, and create a supportive space where everyone belongs."
         breadcrumbLinks={breadcrumbLinks}
       />
       <OurObjectives />

@@ -1,0 +1,27 @@
+.customDots {
+  display: flex !important;
+  justify-content: center;
+  gap: 4px; /* smaller gap between dots */
+  padding: 0;
+  list-style: none;
+}
+
+.customDots li {
+  flex: 1;
+  height: 4px; /* smaller height */
+  border-radius: 2px; /* smaller rounding */
+  background: #e5e7eb; /* gray-200 */
+  overflow: hidden;
+  position: relative;
+}
+
+.customDots li .fill {
+  height: 100%;
+  background: #facc15; /* yellow */
+  width: 0%;
+  transition: width 0.3s linear;
+}
+
+.customDots li.activeDot .fill {
+  width: 100%;
+}

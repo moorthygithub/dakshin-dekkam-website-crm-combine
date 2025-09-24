@@ -1,170 +1,161 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import { useEffect, useState, useRef } from "react";
+import ProgressDots from "./ProgressDots"; // Make sure this exists
 
-function Navbar() {
-  const [open, setOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
+const COMMITTEE_MEMBERS = [
+  { name: "Punamchand L Dharamshi", role: "President", place: "Hubli" },
+  { name: "Satish Devji Shah", role: "Hon. Secretary", place: "Bangalore" },
+  { name: "Kirti Dhanji Dharamshi", role: "Treasurer", place: "Bangalore" },
+  { name: "Dineshchand K Lodaya", role: "Member", place: "Gadag" },
+  { name: "Harish S Munavar", role: "Member", place: "Gadag" },
+  { name: "Sharad H Momaya", role: "Member", place: "Hubli" },
+  { name: "Kishor Shamji Kuruwe", role: "Member", place: "Cochin" },
+  { name: "Hemang M Momaya", role: "Member", place: "" },
+  { name: "Mulchand P Shah", role: "Member", place: "" },
+  { name: "Pradip Ratila Lodaya", role: "Member", place: "" },
+  { name: "Rajendra D Shah", role: "Member", place: "Bangalore" },
+  { name: "Dhirish Momaya", role: "Member", place: "Bangalore" },
+  { name: "Hiren Mulji Patel", role: "Member", place: "Hyderabad" },
+  { name: "Hema Gulab Chheda", role: "Member", place: "Bangalore" },
+];
 
+const CO_OPT_MEMBERS = [
+  { name: "Bharat L Dharamshi", role: "Joint Secretary", place: "Hubli" },
+  { name: "Mitesh P Lodaya", role: "Joint Secretary", place: "Bangalore" },
+  { name: "Satish P Luthia", role: "Joint Treasurer", place: "Gadag" },
+  { name: "Litin N Lodaya", role: "Co-Opt. Member", place: "Coimbatore" },
+  { name: "Sujeev J Soni", role: "Co-Opt. Member", place: "Gadag" },
+  { name: "Hiren K Chheda", role: "Co-Opt. Member", place: "Hubli" },
+  { name: "Chetan S Munvar", role: "Co-Opt. Member", place: "Bellary" },
+];
+
+const Card = ({ person, isAlt }) => (
+  <div
+    className={`rounded-xl shadow-md p-6 my-1 text-center border hover:shadow-lg transition ${
+      isAlt ? "bg-gray-50" : "bg-white"
+    }`}
+  >
+    <img
+      src="/img/profile.png"
+      alt={person.name}
+      className="w-20 h-20 mx-auto rounded-full object-cover mb-4"
+    />
+    <h3 className="font-bold text-gray-800 text-sm">{person.name}</h3>
+    <p className="text-xs text-yellow-600 font-medium">{person.role}</p>
+    <p className="text-xs text-gray-500 min-h-[16px]">
+      {person.place || "\u00A0"}
+    </p>
+  </div>
+);
+
+const CommitteeGrid = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [progress, setProgress] = useState(0);
+  const sliderRef = useRef(null);
+
+  const autoplaySpeed = 3000;
+  const intervalTime = 50; // 50ms per update
+
+  // Progress bar effect
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const interval = setInterval(() => {
+      setProgress((prev) => {
+        if (prev >= 100) {
+          sliderRef.current.slickNext(); // move to next slide
+          return 0;
+        }
+        return prev + (intervalTime / autoplaySpeed) * 100;
+      });
+    }, intervalTime);
+    return () => clearInterval(interval);
   }, []);
 
+  const sliderSettings = {
+    dots: false, // we use custom progress dots
+    arrows: false,
+    infinite: true,
+    speed: 600,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    beforeChange: (_, next) => {
+      setActiveIndex(next);
+      setProgress(0);
+    },
+  };
+
   return (
-    <div
-      className={`w-full fixed top-0 left-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-yellow-100 shadow-md" : "bg-transparent"
-      }`}
-    >
-      <div className="max-w-screen-xl mx-auto px-6 md:px-8">
-        <div className="flex items-center justify-between pt-4 md:py-4">
-          <div className="relative">
-            <Link
-              to="/"
-              className="text-lg relative z-50 font-bold tracking-widest text-gray-900 rounded-lg focus:outline-none focus:shadow-outline"
-            >
-              Dhakshin Ekkam
-            </Link>
-            <svg
-              className="h-11 z-40 absolute -top-2 -left-3"
-              viewBox="0 0 79 79"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M35.2574 2.24264C37.6005 -0.100501 41.3995 -0.100505 43.7426 2.24264L76.7574 35.2574C79.1005 37.6005 79.1005 41.3995 76.7574 43.7426L43.7426 76.7574C41.3995 79.1005 37.6005 79.1005 35.2574 76.7574L2.24264 43.7426C-0.100501 41.3995 -0.100505 37.6005 2.24264 35.2574L35.2574 2.24264Z"
-                fill="#65DAFF"
-              />
-            </svg>
-          </div>
-
-          {/* ---- Hamburger (Mobile only) ---- */}
-          <button
-            className="md:hidden rounded-lg focus:outline-none focus:shadow-outline"
-            onClick={() => setOpen(!open)}
-          >
-            <svg fill="currentColor" viewBox="0 0 20 20" className="w-6 h-6">
-              {!open ? (
-                <path
-                  fillRule="evenodd"
-                  d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z"
-                  clipRule="evenodd"
-                ></path>
-              ) : (
-                <path
-                  fillRule="evenodd"
-                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                  clipRule="evenodd"
-                ></path>
-              )}
-            </svg>
-          </button>
-
-          <nav className="hidden md:flex space-x-6">
-            <Link
-              to="/"
-              className="px-3 py-2 text-sm font-medium hover:text-gray-900 "
-            >
-              Home
-            </Link>
-            <Link
-              to="/about"
-              className="px-3 py-2 text-sm font-medium hover:text-gray-900"
-            >
-              About Us
-            </Link>
-            <Link
-              to="/gallery"
-              className="px-3 py-2 text-sm font-medium hover:text-gray-900"
-            >
-              Gallery
-            </Link>
-            <Link
-              to="/member"
-              className="px-3 py-2 text-sm font-medium hover:text-gray-900"
-            >
-              Member
-            </Link>
-            <Link
-              to="/community"
-              className="px-3 py-2 text-sm font-medium hover:text-gray-900"
-            >
-              Community
-            </Link>
-            <Link
-              to="/contact"
-              className="px-3 py-2 text-sm font-medium hover:text-gray-900"
-            >
-              Contact
-            </Link>
-          </nav>
+    <section className="relative">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="max-w-xl mx-auto text-center">
+          <h1 className="font-bold text-darken my-3 text-2xl">
+            OUR ASSOCIATED MEMBERS{" "}
+            <span className="text-yellow-500">2022 - 2023</span>
+          </h1>
+          <p className="text-gray-500">
+            Dedicated members serving the community
+          </p>
         </div>
-        {/* {open && (
-          // <div
-          //   className={`flex flex-col space-y-2  pb-4 md:hidden ${
-          //     isScrolled ? "" : "bg-cream"
-          //   } `}
-          // > */}
-        <div
-          className={`flex flex-col space-y-2 pb-4 md:hidden overflow-hidden transition-all duration-500 ease-in-out ${
-            open ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
-          } ${isScrolled ? "" : "bg-cream"}`}
-        >
-          <Link
-            to="/"
-            className="px-3 py-2 text-sm font-medium hover:text-gray-900"
-            onClick={() => setOpen(false)}
-          >
-            Home
-          </Link>
-          <Link
-            to="/about"
-            className="px-3 py-2 text-sm font-medium hover:text-gray-900"
-            onClick={() => setOpen(false)}
-          >
-            About Us
-          </Link>
-          <Link
-            to="/gallery"
-            onClick={() => setOpen(false)}
-            className="px-3 py-2 text-sm font-medium hover:text-gray-900"
-          >
-            Gallery
-          </Link>
-          <Link
-            to="/member"
-            onClick={() => setOpen(false)}
-            className="px-3 py-2 text-sm font-medium hover:text-gray-900"
-          >
-            Member
-          </Link>
-          <Link
-            to="/community"
-            onClick={() => setOpen(false)}
-            className="px-3 py-2 text-sm font-medium hover:text-gray-900"
-          >
-            Community
-          </Link>
-          <Link
-            to="/contact"
-            onClick={() => setOpen(false)}
-            className="px-3 py-2 text-sm font-medium hover:text-gray-900"
-          >
-            Contact
-          </Link>
+
+        {/* Committee Members */}
+        <h2 className="text-xl font-semibold text-center mt-12 mb-6">
+          Committee Members
+        </h2>
+
+        {/* Mobile: Slider with progress dots */}
+        <div >
+          <Slider ref={sliderRef} {...sliderSettings}>
+            {COMMITTEE_MEMBERS.map((person, idx) => (
+              <div key={idx} className="px-2">
+                <Card person={person} />
+              </div>
+            ))}
+          </Slider>
+          <ProgressDots
+            slidesCount={COMMITTEE_MEMBERS.length}
+            activeIndex={activeIndex}
+            progress={progress}
+          />
         </div>
-        {/* )} */}
+
+        {/* Desktop: Grid */}
+        <div className="hidden md:grid gap-6 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">
+          {COMMITTEE_MEMBERS.map((person, idx) => (
+            <Card key={idx} person={person} />
+          ))}
+        </div>
+
+        {/* Co-opt Members */}
+        <h2 className="text-xl font-semibold text-center mt-16 mb-6">
+          Co-Opted Members
+        </h2>
+
+        {/* Mobile: Slider with progress dots */}
+        <div >
+          <Slider ref={sliderRef} {...sliderSettings}>
+            {CO_OPT_MEMBERS.map((person, idx) => (
+              <div key={idx} className="px-2">
+                <Card person={person} isAlt />
+              </div>
+            ))}
+          </Slider>
+          <ProgressDots
+            slidesCount={CO_OPT_MEMBERS.length}
+            activeIndex={activeIndex}
+            progress={progress}
+          />
+        </div>
+
+        {/* Desktop: Grid */}
+        <div className="hidden md:grid gap-6 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">
+          {CO_OPT_MEMBERS.map((person, idx) => (
+            <Card key={idx} person={person} isAlt />
+          ))}
+        </div>
       </div>
-    </div>
+    </section>
   );
-}
+};
 
-export default Navbar;
+export default CommitteeGrid;

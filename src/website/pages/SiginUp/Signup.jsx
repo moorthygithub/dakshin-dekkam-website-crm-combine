@@ -12,7 +12,6 @@ const Signup = () => {
       <PageMeta title="Sign up | Dhakshin Ekkam" />
       <HeroSub
         title="Sign up"
-        description="Join the Dhakshin Ekkam community today! Connect with like-minded members, share experiences, and be part of a supportive, vibrant network where culture, friendship, and growth come together."
         breadcrumbLinks={breadcrumbLinks}
       />
       <CommunityForm />
