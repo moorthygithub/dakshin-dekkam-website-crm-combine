@@ -18,7 +18,6 @@ const Contact = () => {
       <PageMeta title="Contact | Dhakshin Ekkam" />
       <HeroSub
         title="Contact"
-        description="We’d love to hear from you! Whether you have questions, suggestions, or just want to connect, our team is here to help. Reach out to us and become part of a growing community built on care, support, and togetherness."
         breadcrumbLinks={breadcrumbLinks}
       />
       <ContactInfo websitecompany={websitecompany} />

@@ -10,7 +10,9 @@ import Navbar from "../components/Navbar";
 import Info from "../components/Info";
 import ChairPersonCarousel from "../About/ChairPeronCarousel";
 import CommunityForm from "../components/Community/CommunityForm";
-
+import { useEffect, useState } from "react";
+import { useRef } from "react";
+import ProgressDots from "../About/ProgressDots";
 const images = [
   {
     src: "https://demo.gloriathemes.com/eventchamp/demo/wp-content/uploads/2018/11/event-14-1920x1100.jpg",
@@ -64,7 +66,118 @@ const settings = {
   pauseOnHover: false,
 };
 
+const COMMITTEE_MEMBERS = [
+  { name: "Punamchand L Dharamshi", role: "President", place: "Hubli" },
+  { name: "Satish Devji Shah", role: "Hon. Secretary", place: "Bangalore" },
+  { name: "Kirti Dhanji Dharamshi", role: "Treasurer", place: "Bangalore" },
+  { name: "Dineshchand K Lodaya", role: "Member", place: "Gadag" },
+  { name: "Harish S Munavar", role: "Member", place: "Gadag" },
+  { name: "Sharad H Momaya", role: "Member", place: "Hubli" },
+  { name: "Kishor Shamji Kuruwe", role: "Member", place: "Cochin" },
+  { name: "Hemang M Momaya", role: "Member", place: "" },
+  { name: "Mulchand P Shah", role: "Member", place: "" },
+  { name: "Pradip Ratila Lodaya", role: "Member", place: "" },
+  { name: "Rajendra D Shah", role: "Member", place: "Bangalore" },
+  { name: "Dhirish Momaya", role: "Member", place: "Bangalore" },
+  { name: "Hiren Mulji Patel", role: "Member", place: "Hyderabad" },
+  { name: "Hema Gulab Chheda", role: "Member", place: "Bangalore" },
+];
+
+const CO_OPT_MEMBERS = [
+  { name: "Bharat L Dharamshi", role: "Joint Secretary", place: "Hubli" },
+  { name: "Mitesh P Lodaya", role: "Joint Secretary", place: "Bangalore" },
+  { name: "Satish P Luthia", role: "Joint Treasurer", place: "Gadag" },
+  { name: "Litin N Lodaya", role: "Co-Opt. Member", place: "Coimbatore" },
+  { name: "Sujeev J Soni", role: "Co-Opt. Member", place: "Gadag" },
+  { name: "Hiren K Chheda", role: "Co-Opt. Member", place: "Hubli" },
+  { name: "Chetan S Munvar", role: "Co-Opt. Member", place: "Bellary" },
+];
+const Card = ({ person, isAlt }) => (
+  <div
+    className={`rounded-xl shadow-md p-6 my-1 text-center border hover:shadow-lg transition ${
+      isAlt ? "bg-gray-50" : "bg-white"
+    }`}
+  >
+    <img
+      src="/img/profile.png"
+      alt={person.name}
+      className="w-20 h-20 mx-auto rounded-full object-cover mb-4"
+    />
+    <h3 className="font-bold text-gray-800 text-sm">{person.name}</h3>
+    <p className="text-xs text-yellow-600 font-medium">{person.role}</p>
+    <p className="text-xs text-gray-500 min-h-[16px]">
+      {person.place || "\u00A0"}
+    </p>{" "}
+  </div>
+);
 const Extra = () => {
+  const sliderRef = useRef(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [progress, setProgress] = useState(0);
+
+  const autoplaySpeed = 3000;
+  const intervalTime = 50; // update every 50ms
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setProgress((prev) => {
+        if (prev >= 100) {
+          const nextIndex = (activeIndex + 1) % CO_OPT_MEMBERS.length;
+          setActiveIndex(nextIndex);
+          sliderRef.current?.slickGoTo(nextIndex); // move slider
+          return 0;
+        }
+        return prev + (intervalTime / autoplaySpeed) * 100;
+      });
+    }, intervalTime);
+
+    return () => clearInterval(interval);
+  }, [activeIndex]);
+  const sliderSettings = {
+    dots: true,
+    arrows: false,
+    infinite: true,
+    speed: 600,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    slidesToShow: 4, // show 4 cards at once on large screens
+    slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 1024, // tablets
+        settings: { slidesToShow: 3 },
+      },
+      {
+        breakpoint: 768, // mobile
+        settings: { slidesToShow: 1 },
+      },
+    ],
+  };
+  const sliderSettingsone = {
+    dots: false,
+    arrows: false,
+    infinite: true,
+    speed: 600,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    slidesToShow: 4, // show 4 cards at once on large screens
+    slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 1024, // tablets
+        settings: { slidesToShow: 3 },
+      },
+      {
+        breakpoint: 768, // mobile
+        settings: { slidesToShow: 1 },
+      },
+    ],
+  };
+  const handleDotClick = (index) => {
+    setActiveIndex(index);
+    sliderRef.current?.slickGoTo(index);
+    setProgress(0); // reset progress
+  };
   return (
     <div>
       <Navbar />
@@ -117,6 +230,108 @@ const Extra = () => {
       <Info />
 
       <CommunityForm />
+      <section className="relative">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="max-w-xl mx-auto text-center">
+            <h1 className="font-bold text-darken my-3 text-2xl">
+              OUR ASSOCIATED MEMBERS{" "}
+              <span className="text-yellow-500">2022 - 2023</span>
+            </h1>
+            <p className="text-gray-500">
+              Dedicated members serving the community
+            </p>
+          </div>
+
+          {/* Committee Members */}
+          <h2 className="text-xl font-semibold text-center mt-12 mb-6">
+            Committee Members
+          </h2>
+
+          {/* Mobile: Slider */}
+          <div className="block md:hidden">
+            <Slider {...sliderSettings}>
+              {COMMITTEE_MEMBERS.map((person, idx) => (
+                <div key={idx} className="px-2">
+                  <Card person={person} />
+                </div>
+              ))}
+            </Slider>
+          </div>
+
+          {/* Desktop: Grid */}
+          <div className="hidden md:grid gap-6 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">
+            {COMMITTEE_MEMBERS.map((person, idx) => (
+              <Card key={idx} person={person} />
+            ))}
+          </div>
+
+          {/* Co-opt Members */}
+          <h2 className="text-xl font-semibold text-center mt-16 mb-6">
+            Co-Opted Members
+          </h2>
+
+          {/* Mobile: Slider */}
+          <div className="block md:hidden">
+            <Slider {...sliderSettings}>
+              {CO_OPT_MEMBERS.map((person, idx) => (
+                <div key={idx} className="px-2">
+                  <Card person={person} isAlt />
+                </div>
+              ))}
+            </Slider>
+          </div>
+
+          {/* Desktop: Grid */}
+          <div className="hidden md:grid gap-6 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">
+            {CO_OPT_MEMBERS.map((person, idx) => (
+              <Card key={idx} person={person} isAlt />
+            ))}
+          </div>
+          <section className="relative">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+              <div className="max-w-xl mx-auto text-center">
+                <h1 className="font-bold text-darken my-3 text-2xl">
+                  OUR ASSOCIATED MEMBERS{" "}
+                  <span className="text-yellow-500">2022 - 2023</span>
+                </h1>
+                <p className="text-gray-500">
+                  Dedicated members serving the community
+                </p>
+              </div>
+
+              {/* Committee Members */}
+              <h2 className="text-xl font-semibold text-center mt-12 mb-6">
+                Committee Members
+              </h2>
+              <Slider {...sliderSettings}>
+                {COMMITTEE_MEMBERS.map((person, idx) => (
+                  <div key={idx} className="px-2">
+                    <Card person={person} />
+                  </div>
+                ))}
+              </Slider>
+
+              {/* Co-opt Members */}
+              <h2 className="text-xl font-semibold text-center mt-16 mb-6">
+                Co-Opted Members
+              </h2>
+              <Slider ref={sliderRef} {...sliderSettingsone}>
+                {CO_OPT_MEMBERS.map((person, idx) => (
+                  <div key={idx} className="px-2">
+                    <Card person={person} isAlt />
+                  </div>
+                ))}
+              </Slider>
+              <ProgressDots
+                slidesCount={CO_OPT_MEMBERS.length}
+                activeIndex={activeIndex}
+                progress={progress}
+                onDotClick={handleDotClick}
+              />
+            </div>
+          </section>
+        </div>
+      </section>
     </div>
   );
 };

@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function OurHistory() {
   return (
     <div className="container px-4 lg:px-8 mx-auto max-w-screen-xl text-gray-700">
@@ -28,12 +30,9 @@ function OurHistory() {
               introduced AI-driven tools.
             </li>
           </ul>
-          <a
-            href="#history"
-            className="underline mt-5 inline-block text-yellow-500"
-          >
+          <Link className="underline mt-5 inline-block text-yellow-500">
             Learn More
-          </a>
+          </Link>
         </div>
 
         {/* Image / Illustration Section */}

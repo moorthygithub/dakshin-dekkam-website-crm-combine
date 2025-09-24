@@ -13,7 +13,6 @@ const Member = () => {
       <PageMeta title="Member | Dhakshin Ekkam" />
       <HeroSub
         title="Member"
-        description="Meet the proud members of Dhakshin Ekkam, who form the heart of our community. Each member contributes their time, talent, and passion to build lasting connections and create meaningful impact together."
         breadcrumbLinks={breadcrumbLinks}
       />
       <Info />

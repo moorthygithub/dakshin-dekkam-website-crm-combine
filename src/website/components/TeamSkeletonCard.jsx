@@ -1,5 +1,5 @@
 const TeamSkeletonCard = ({ idx }) => (
-  <div key={idx} className="px-4" data-aos="fade-up" data-aos-delay={idx * 150}>
+  <div key={idx} className="px-2" data-aos="fade-up" data-aos-delay={idx * 150}>
     <div className="bg-gray-100 rounded-xl shadow-lg p-6 flex flex-col items-center animate-pulse my-2">
       <div className="w-20 h-20 mb-4 rounded-full bg-gray-300 border-4 border-gray-200 shadow-md" />
 

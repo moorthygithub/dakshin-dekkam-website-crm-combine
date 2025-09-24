@@ -1,8 +1,6 @@
 import AboutSection from "../About/AboutSection";
 import OurObjectives from "../components/AllInOne";
-import AllInOne from "../components/AllInOne";
 import HeroMain from "../components/HeroMain";
-import Info from "../components/Info";
 import LatestNews from "../components/LatestNews";
 
 function Home() {
@@ -10,9 +8,8 @@ function Home() {
     <div>
       <HeroMain />
       <AboutSection />
-
+      <OurObjectives />
       <LatestNews />
-      {/* <Info /> */}
     </div>
   );
 }
