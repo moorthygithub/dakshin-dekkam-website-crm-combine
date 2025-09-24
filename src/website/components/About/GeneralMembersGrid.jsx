@@ -64,7 +64,7 @@ const GeneralMembersGrid = ({ members, getImage, isLoading }) => {
           : members.map((member, idx) => (
               <div
                 key={idx}
-                className="px-3"
+                // className="px-3"
                 data-aos="fade-up"
                 data-aos-delay={idx * 100}
               >
