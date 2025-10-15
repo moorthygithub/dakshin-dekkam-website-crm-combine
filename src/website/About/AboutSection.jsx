@@ -6,7 +6,8 @@ function AboutSection() {
       <div className="mt-24 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
         <div data-aos="fade-right" className="w-full">
           <div className="relative w-full overflow-hidden rounded-lg">
-            <ImageSlider />
+            {/* <ImageSlider /> */}
+            <img src="/img/testimonials.png" />
           </div>
         </div>
         <div data-aos="fade-up" data-aos-delay={200} className="w-full">
@@ -14,20 +15,28 @@ function AboutSection() {
             <h1 className="font-semibold text-darken text-xl sm:text-2xl lg:text-3xl mb-5">
               Our Story: How Ekkam Started?
             </h1>
-            <p className="text-gray-500 mb-4">
-              Lorem ipsum dolor sit amet et delectus accommodare his consul
-              copiosae legendos at vix ad putent delectus delicata usu. Vidit
-              dissentiet eos cu eum an brute copiosae hendrerit. Eos.
+            <p className="text-gray-500 mb-4 text-justify">
+              Dakshin Bharat Kutchi Dasha Oswal Jain Ekkam is a South
+              India-based association dedicated to fostering unity,
+              philanthropy, and cultural enrichment. Headquartered in Hubli, our
+              operations span Karnataka, Andhra Pradesh, Tamil Nadu, Kerala,
+              Pondicherry, and Goa.
             </p>
-            <p className="text-gray-500 mb-4">
-              Some of the students and teachers were greatly helped by the
-              Dhakshin Ekkam.
+
+            <p className="text-gray-500 mb-4 text-justify">
+              We promote literature, art, science, and non-violence, while
+              supporting education, healthcare, and social welfare across
+              communities. Our initiatives include establishing institutions,
+              aiding the needy, advocating for animal welfare, and representing
+              societal concerns to government bodies.
             </p>
-            <p className="text-gray-500 mb-4">
-              Lorem ipsum dolor sit amet et delectus accommodare his consul
-              copiosae legendos at vix ad putent delectus delicata usu. Vidit
-              dissentiet eos cu eum an brute copiosae hendrerit. Eos.
+
+            <p className="text-gray-500 mb-4 text-justify">
+              Ekkam strives to cultivate harmony, brotherhood, and responsible
+              citizenship through constructive activities that uplift humanity
+              and advance moral, economic, and technological progress.
             </p>
+
             <div>
               <button className="flex items-center space-x-3 pl-3 border-b border-l border-t border-yellow-500 text-yellow-500 font-medium my-4 focus:outline-none transform transition hover:scale-110 duration-300 ease-in-out rounded-full">
                 <span>More Info</span>

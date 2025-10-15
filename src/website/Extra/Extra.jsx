@@ -13,6 +13,9 @@ import CommunityForm from "../components/Community/CommunityForm";
 import { useEffect, useState } from "react";
 import { useRef } from "react";
 import ProgressDots from "../About/ProgressDots";
+import SingleTestimonial from "../components/SingleTestimonial";
+import { TestimonialData } from "../data/testimonial";
+import ImageSlider from "../components/ImageCarsol";
 const images = [
   {
     src: "https://demo.gloriathemes.com/eventchamp/demo/wp-content/uploads/2018/11/event-14-1920x1100.jpg",
@@ -178,6 +181,15 @@ const Extra = () => {
     sliderRef.current?.slickGoTo(index);
     setProgress(0); // reset progress
   };
+  const settings = {
+    autoplay: true,
+    dots: false,
+    arrows: false,
+    infinite: true,
+    speed: 600,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
   return (
     <div>
       <Navbar />
@@ -227,8 +239,24 @@ const Extra = () => {
           ))}
         </Slider>
       </div>
-      <Info />
-
+      <div className="w-[300px] h-[300px] py-4 mx-auto">
+        <h1 className="text-3xl font-bold">Image SLiders</h1>
+        <ImageSlider />
+      </div>
+      <h1 className="text-3xl font-bold">Card sliders</h1>
+      <div className="bg-white shadow-xl rounded-xl p-6 w-96 mt-20 mx-auto">
+        <Slider {...settings}>
+          {TestimonialData.map((item, index) => (
+            <SingleTestimonial
+              key={index}
+              review={item.review}
+              image={item.Image}
+              name={item.name}
+              post={item.post}
+            />
+          ))}
+        </Slider>
+      </div>
       <CommunityForm />
       <section className="relative">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">

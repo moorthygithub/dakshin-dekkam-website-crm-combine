@@ -39,7 +39,7 @@ export default function ScrollToTop() {
   }, []);
 
   return (
-    <div className="fixed bottom-8 right-8 z-20">
+    <div className="fixed bottom-20 md:bottom-8 right-8 z-20">
       <div className="flex items-center gap-2.5">
         {isVisible && (
           <div

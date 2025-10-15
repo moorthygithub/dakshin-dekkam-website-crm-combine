@@ -89,14 +89,14 @@ export function AppSidebar({ ...props }) {
             url: "/crm/event",
           },
 
-          {
-            title: "Event Register",
-            url: "/crm/event-register",
-          },
-          {
-            title: "Event Track",
-            url: "/crm/event-track",
-          },
+          // {
+          //   title: "Event Register",
+          //   url: "/crm/event-register",
+          // },
+          // {
+          //   title: "Event Track",
+          //   url: "/crm/event-track",
+          // },
         ],
       },
 
@@ -112,9 +112,13 @@ export function AppSidebar({ ...props }) {
             url: "/crm/report-event",
           },
           {
-            title: "Event Summary",
-            url: "/crm/report-event-summary",
+            title: "Member",
+            url: "/crm/report-member",
           },
+          // {
+          //   title: "Event Summary",
+          //   url: "/crm/report-event-summary",
+          // },
         ],
       },
     ],
