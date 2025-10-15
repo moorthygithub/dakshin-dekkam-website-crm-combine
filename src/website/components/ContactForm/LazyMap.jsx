@@ -30,7 +30,7 @@ function LazyMap({ websitecompany }) {
       <div className="container mx-auto px-4">
         <div
           ref={mapRef}
-          className="min-h-[400px]"
+          className="min-h-[300px]"
           data-aos="fade-up"
           data-aos-delay="200"
         >

@@ -34,6 +34,7 @@ import Signup from "@/website/pages/SiginUp/Signup";
 import { useSelector } from "react-redux";
 import AuthRoute from "./AuthRoute";
 import ProtectedRoute from "./ProtectedRoute";
+import MemberReport from "@/crm/app/report/MemberReport/MemberReport";
 
 // Website Imports
 
@@ -84,6 +85,7 @@ const AppRoutes = () => {
         <Route path="event-track" element={<EventMemberTractList />} />
         <Route path="report-event" element={<EventReport />} />
         <Route path="report-event-summary" element={<EventSummaryReport />} />
+        <Route path="report-member" element={<MemberReport />} />
         <Route path="*" element={<PanelNotFound />} />
       </Route>
 

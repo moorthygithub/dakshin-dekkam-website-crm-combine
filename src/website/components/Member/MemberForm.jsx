@@ -97,7 +97,7 @@ const MemberForm = () => {
   const isLoading = isApiLoading;
 
   return (
-    <div className="max-w-md mx-auto  my-6 rounded-xl px-6">
+    <div className="max-w-md mx-auto  my-6 rounded-xl  md:px-6">
       <form onSubmit={handleSubmit}>
         <h2 className="text-xl font-semibold mb-4 text-gray-800">
           Member Area

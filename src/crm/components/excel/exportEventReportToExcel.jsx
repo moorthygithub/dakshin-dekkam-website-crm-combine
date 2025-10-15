@@ -9,13 +9,13 @@ export const exportEventReportToExcel = async (data, title = "Report") => {
   // Define columns
   const columns = [
     { header: "Name", key: "event_name", width: 25 },
-    { header: "Allowed", key: "event_member_allowed", width: 25 },
-    { header: "No of Member", key: "event_no_member_allowed", width: 25 },
+    { header: "Allowed", key: "event_member_allowed", width: 20 },
+    { header: "No of Member", key: "event_no_member_allowed", width: 15 },
     { header: "From Date", key: "event_from_date", width: 25 },
     { header: "To Date", key: "event_to_date", width: 25 },
     { header: "Payment", key: "event_payment", width: 25 },
     { header: "Amount", key: "event_amount", width: 25 },
-    { header: "Total", key: "total_people", width: 25 },
+    { header: "Total", key: "total_people", width: 15 },
   ];
   worksheet.columns = columns;
 

@@ -2,47 +2,49 @@ import { Mail, MapPin } from "lucide-react";
 
 const ContactInfo = ({ websitecompany }) => {
   return (
-    <section className="py-12">
+    <section className="py-12 bg-gray-50">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
+          {/* Email Card */}
           <div
-            className="flex items-start gap-5 bg-white shadow-md p-6 rounded-2xl hover:shadow-lg transition"
+            className="flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-5 bg-white shadow-md p-6 rounded-2xl hover:shadow-lg transition"
             data-aos="zoom-in"
           >
             <div className="flex-shrink-0 w-16 h-16 bg-yellow-100 flex items-center justify-center rounded-full">
               <Mail size={28} className="text-yellow-600" />
             </div>
-            <div>
-              <h3 className="text-midnight_text text-lg font-semibold">
+            <div className="flex-1 text-center sm:text-left">
+              <h3 className="text-midnight_text text-lg sm:text-xl font-semibold">
                 Email Us
               </h3>
-              <p className="text-black/60 text-base mt-2">
+              <p className="text-black/70 text-sm sm:text-base mt-2 leading-relaxed">
                 Feel free to contact us at{" "}
                 <a
                   href={`mailto:${websitecompany?.support_email || ""}`}
                   className="font-medium text-yellow-600 hover:underline"
                 >
-                  {websitecompany?.support_email || ""}
+                  {websitecompany?.support_email || "example@email.com"}
                 </a>{" "}
                 — we’ll respond promptly.
               </p>
             </div>
           </div>
 
+          {/* Address Card */}
           <div
-            className="flex items-start gap-5 bg-white shadow-md p-6 rounded-2xl hover:shadow-lg transition"
+            className="flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-5 bg-white shadow-md p-6 rounded-2xl hover:shadow-lg transition"
             data-aos="zoom-in"
             data-aos-delay="200"
           >
             <div className="flex-shrink-0 w-16 h-16 bg-yellow-100 flex items-center justify-center rounded-full">
               <MapPin size={28} className="text-yellow-600" />
             </div>
-            <div>
-              <h3 className="text-midnight_text text-lg font-semibold">
+            <div className="flex-1 text-center sm:text-left">
+              <h3 className="text-midnight_text text-lg sm:text-xl font-semibold">
                 Address
               </h3>
-              <p className="text-black/60 text-base mt-2">
-                {websitecompany?.store_address || ""}
+              <p className="text-black/70 text-sm sm:text-base mt-2 leading-relaxed">
+                {websitecompany?.store_address || "No address provided"}
               </p>
             </div>
           </div>

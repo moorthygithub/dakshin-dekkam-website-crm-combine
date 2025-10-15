@@ -24,7 +24,7 @@ const EventListCard = ({
     : imageUrls.noImage;
 
   return (
-    <Card className="w-full md:w-[300px] rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition">
+    <Card className="w-full md:w-[340px] rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition">
       {/* Header */}
       <CardHeader className="p-0">
         <div className="relative">
@@ -33,13 +33,13 @@ const EventListCard = ({
             alt={event.event_name}
             className="w-full h-[180px] object-cover"
           />
-          <div className="mt-2 absolute top-0 right-2 bg-white rounded-sm">
+          {/* <div className="mt-2 absolute top-0 right-2 bg-white rounded-sm">
             <EventStatusToggle
               initialStatus={event.event_status}
               teamId={event.id}
               onStatusChange={() => refetch()}
             />
-          </div>
+          </div> */}
         </div>
       </CardHeader>
 
@@ -65,7 +65,8 @@ const EventListCard = ({
           )}
         </div>
 
-        <div className="flex justify-between pt-3">
+        {/* <div className="flex justify-between pt-3"> */}
+        <div className="flex justify-end">
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
@@ -80,8 +81,12 @@ const EventListCard = ({
               <TooltipContent>Edit Event</TooltipContent>
             </Tooltip>
           </TooltipProvider>
-
-          <TooltipProvider>
+          <EventStatusToggle
+            initialStatus={event.event_status}
+            teamId={event.id}
+            onStatusChange={() => refetch()}
+          />
+          {/* <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button
@@ -94,9 +99,9 @@ const EventListCard = ({
               </TooltipTrigger>
               <TooltipContent>Create Track</TooltipContent>
             </Tooltip>
-          </TooltipProvider>
+          </TooltipProvider> */}
 
-          <TooltipProvider>
+          {/* <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button
@@ -124,7 +129,7 @@ const EventListCard = ({
               </TooltipTrigger>
               <TooltipContent>Event Member Attend</TooltipContent>
             </Tooltip>
-          </TooltipProvider>
+          </TooltipProvider> */}
         </div>
       </CardContent>
     </Card>

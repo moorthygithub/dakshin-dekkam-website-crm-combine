@@ -12,7 +12,7 @@ import { ButtonConfig } from "@/crm/config/ButtonConfig";
 import { useApiMutation } from "@/hooks/useApiMutation";
 import { ArrowDownToLine, FileSpreadsheet, Printer } from "lucide-react";
 import moment from "moment";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useReactToPrint } from "react-to-print";
 
 const EventReport = () => {
@@ -22,12 +22,13 @@ const EventReport = () => {
   const [hasSearched, setHasSearched] = useState(false);
   const eventRef = useRef(null);
   const { trigger: submitTrigger, loading } = useApiMutation();
-  console.log(hasSearched, "hasSearched");
-  const handleSubmit = async () => {
+
+  // API call function
+  const fetchEventReport = async (from = fromDate, to = toDate) => {
     setHasSearched(true);
     const payload = {
-      from_date: fromDate.format("YYYY-MM-DD"),
-      to_date: toDate.format("YYYY-MM-DD"),
+      from_date: from.format("YYYY-MM-DD"),
+      to_date: to.format("YYYY-MM-DD"),
     };
     try {
       const res = await submitTrigger({
@@ -42,6 +43,24 @@ const EventReport = () => {
     } catch (err) {
       console.error("Failed to fetch event report:", err);
     }
+  };
+
+  // Trigger API on page load
+  useEffect(() => {
+    fetchEventReport();
+  }, []);
+
+  // Handle date change immediately
+  const handleFromDateChange = (e) => {
+    const date = moment(e.target.value);
+    setFromDate(date);
+    fetchEventReport(date, toDate);
+  };
+
+  const handleToDateChange = (e) => {
+    const date = moment(e.target.value);
+    setToDate(date);
+    fetchEventReport(fromDate, date);
   };
 
   const handlePrint = useReactToPrint({
@@ -70,7 +89,7 @@ const EventReport = () => {
                 <Input
                   type="date"
                   value={fromDate.format("YYYY-MM-DD")}
-                  onChange={(e) => setFromDate(moment(e.target.value))}
+                  onChange={handleFromDateChange}
                   className="h-8"
                 />
               ),
@@ -81,27 +100,13 @@ const EventReport = () => {
                 <Input
                   type="date"
                   value={toDate.format("YYYY-MM-DD")}
-                  onChange={(e) => setToDate(moment(e.target.value))}
+                  onChange={handleToDateChange}
                   className="h-8"
                 />
               ),
             },
           ]}
           actionButtons={[
-            {
-              title: "Submit",
-              element: (
-                <Button
-                  type="button"
-                  size="sm"
-                  variant="outline"
-                  className={`${ButtonConfig.backgroundColor} ${ButtonConfig.hoverBackgroundColor} ${ButtonConfig.textColor} flex items-center `}
-                  onClick={handleSubmit}
-                >
-                  Submit{" "}
-                </Button>
-              ),
-            },
             {
               title: "Print Report",
               element: (
@@ -118,7 +123,6 @@ const EventReport = () => {
             },
             {
               title: "PDF Report",
-
               element: (
                 <Button
                   type="button"
@@ -135,7 +139,6 @@ const EventReport = () => {
             },
             {
               title: "Excel Report",
-
               element: (
                 <Button
                   type="button"
@@ -155,82 +158,57 @@ const EventReport = () => {
 
         <CardContent>
           <div id="printable-section" ref={eventRef}>
-            {loading ? (
-              <WithoutLoaderComponent />
-            ) : hasSearched ? (
-              filteredEvent.length > 0 ? (
-                <div className="overflow-auto">
-                  <h1 className="text-2xl font-bold mb-1">Event Report</h1>
-                  <table className="w-full table-fixed border-collapse border border-gray-300 text-sm">
-                    <thead className="bg-gray-100">
-                      <tr>
-                        <th className="px-2 py-1 border">Name</th>
-                        <th className="px-2 py-1 border">Allowed</th>
-                        <th className="px-2 py-1 border">No of Member</th>
-                        <th className="px-2 py-1 border">From Date</th>
-                        <th className="px-2 py-1 border">To Date</th>
-                        <th className="px-2 py-1 border">Payment</th>
-                        <th className="px-2 py-1 border">Amount</th>
-                        <th className="px-2 py-1 border">Total</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {filteredEvent.map((item) => (
-                        <tr
-                          key={item.id}
-                          className="border-t"
-                          style={{
-                            backgroundColor:
-                              item.event_status === "Active"
-                                ? "#94f1946b"
-                                : "transparent",
-                          }}
-                        >
-                          <td className="px-2 py-1 border text-center">
-                            {item.event_name}
-                          </td>
-                          <td className="px-2 py-1 border text-center">
-                            {item.event_member_allowed}
-                          </td>
-                          <td className="px-2 py-1 border text-center">
-                            {item.event_no_member_allowed}
-                          </td>
-                          <td className="px-2 py-1 border text-center">
-                            {item.event_from_date
-                              ? moment(item.event_from_date).format(
-                                  "DD-MMM-YYYY"
-                                )
-                              : ""}
-                          </td>
-                          <td className="px-2 py-1 border text-center">
-                            {item.event_to_date
-                              ? moment(item.event_to_date).format("DD-MMM-YYYY")
-                              : ""}
-                          </td>
-                          <td className="px-2 py-1 border text-center">
-                            {item.event_payment}
-                          </td>
-                          <td className="px-2 py-1 border text-center">
-                            {item.event_amount}
-                          </td>
-                          <td className="px-2 py-1 border text-center">
-                            {item.total_people}
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              ) : (
-                <div className="text-center text-gray-500 py-20">
-                  No data found.
-                </div>
-              )
-            ) : (
-              <div className="text-center text-gray-400 py-20">
-                Search to see results.
-              </div>
-            )}
+            <div className="overflow-x-auto">
+  {loading ? (
+    <WithoutLoaderComponent />
+  ) : filteredEvent.length > 0 ? (
+    <div >
+      <h1 className="text-2xl font-bold mb-4 text-start">Event Report</h1>
+      <table className="w-full table-auto border border-gray-300 text-sm">
+        <thead className="bg-gray-100">
+          <tr>
+            <th className="px-3 py-2 border text-center">Name</th>
+            <th className="px-3 py-2 border text-center">Allowed</th>
+            <th className="px-3 py-2 border text-center">No of Member</th>
+            <th className="px-3 py-2 border text-center">From Date</th>
+            <th className="px-3 py-2 border text-center">To Date</th>
+            <th className="px-3 py-2 border text-center">Payment</th>
+            <th className="px-3 py-2 border text-center">Amount</th>
+            <th className="px-3 py-2 border text-center">Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          {filteredEvent.map((item) => (
+            <tr
+              key={item.id}
+              className="border-t"
+              style={{
+                backgroundColor:
+                  item.event_status === "Active" ? "#94f1946b" : "transparent",
+              }}
+            >
+              <td className="px-2 py-1 border text-left">{item.event_name}</td>
+              <td className="px-2 py-1 border text-center">{item.event_member_allowed}</td>
+              <td className="px-2 py-1 border text-center">{item.event_no_member_allowed}</td>
+              <td className="px-2 py-1 border text-center">
+                {item.event_from_date ? moment(item.event_from_date).format("DD-MMM-YYYY") : ""}
+              </td>
+              <td className="px-2 py-1 border text-center">
+                {item.event_to_date ? moment(item.event_to_date).format("DD-MMM-YYYY") : ""}
+              </td>
+              <td className="px-2 py-1 border text-center">{item.event_payment}</td>
+              <td className="px-2 py-1 border text-center">{item.event_amount}</td>
+              <td className="px-2 py-1 border text-center">{item.total_people}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  ) : (
+    <div className="text-center text-gray-500 py-20">No data found.</div>
+  )}
+</div>
+
           </div>
         </CardContent>
       </Card>

@@ -30,9 +30,8 @@ export function ReportPageHeader({
               {filters.map(({ label, element }, idx) => (
                 <div className="space-y-1" key={idx}>
                   <label
-                    className={`text-xs ${
-                      ButtonConfig.cardLabel || "text-gray-700"
-                    } block`}
+                    className={`text-xs text-gray-700
+                     block`}
                   >
                     {label}
                   </label>
