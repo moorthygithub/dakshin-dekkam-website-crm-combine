@@ -35,6 +35,7 @@ import { useSelector } from "react-redux";
 import AuthRoute from "./AuthRoute";
 import ProtectedRoute from "./ProtectedRoute";
 import MemberReport from "@/crm/app/report/MemberReport/MemberReport";
+import BookingRoom from "@/website/pages/BookingRoom/BookingRoom";
 
 // Website Imports
 
@@ -98,6 +99,7 @@ const AppRoutes = () => {
         <Route path="signup" element={<Signup />} />
         <Route path="community" element={<Community />} />
         <Route path="contact" element={<Contact />} />
+        <Route path="booking-room" element={<BookingRoom />} />
         <Route path="*" element={<WebsiteNotFound />} />
       </Route>
       <Route path="extra" element={<Extra />} />

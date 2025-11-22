@@ -14,6 +14,8 @@ export const PANEL_CHANGE_PASSWORD = `/panel-change-password`;
 export const MEMBER_LIST = `/member`;
 //MEMBER_LIST
 export const CREATE_MEMBER = `/create-member`;
+//BOOKING_ROOM_FORM
+export const CREATE_BOOKING_ROOM = `/createWebenquiry`;
 //EVENT
 export const EVENT = `/event`;
 //EVENT

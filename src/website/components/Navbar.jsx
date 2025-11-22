@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import MobileBottomNav from "./MobileBottomNav";
-import { Home, Info, Image, Users, User, Phone } from "lucide-react";
+import { Home, Info, Image, Users, User, Phone, House, HousePlus } from "lucide-react";
 import DesktopNavbar from "./DesktopNavbar";
 
 function Navbar() {
@@ -47,6 +47,12 @@ function Navbar() {
       label: "Contact",
       path: "/contact",
       icon: <Phone className="h-5 w-5" />,
+      onClick: () => setOpen(false),
+    },
+    {
+      label: "Booking Room",
+      path: "/booking-room",
+      icon: <HousePlus className="h-5 w-5" />,
       onClick: () => setOpen(false),
     },
   ];
