@@ -53,6 +53,7 @@ export function AppSidebar({ ...props }) {
         icon: House,
         isActive: false,
       },
+      
 
       {
         title: "Member",
@@ -99,7 +100,12 @@ export function AppSidebar({ ...props }) {
           // },
         ],
       },
-
+      {
+        title: "Booking Form",
+        url: "/crm/booking-form",
+        icon: House,
+        isActive: false,
+      },
       {
         title: "Report",
         url: "#",

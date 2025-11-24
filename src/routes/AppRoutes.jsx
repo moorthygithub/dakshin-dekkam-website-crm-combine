@@ -36,6 +36,9 @@ import AuthRoute from "./AuthRoute";
 import ProtectedRoute from "./ProtectedRoute";
 import MemberReport from "@/crm/app/report/MemberReport/MemberReport";
 import BookingRoom from "@/website/pages/BookingRoom/BookingRoom";
+import LoanIndex from "@/website/pages/loan/LoanIndex";
+import BookingFormList from "@/crm/app/booking-form/BookingFormList";
+import BhavanIndex from "@/website/pages/bhavan/BhavanIndex";
 
 // Website Imports
 
@@ -84,6 +87,11 @@ const AppRoutes = () => {
         <Route path="event-member-attend/:id" element={<EventAttendMember />} />
         <Route path="event-register" element={<EventRegisterList />} />
         <Route path="event-track" element={<EventMemberTractList />} />
+
+
+        <Route path="booking-form" element={<BookingFormList />} />
+
+
         <Route path="report-event" element={<EventReport />} />
         <Route path="report-event-summary" element={<EventSummaryReport />} />
         <Route path="report-member" element={<MemberReport />} />
@@ -100,6 +108,8 @@ const AppRoutes = () => {
         <Route path="community" element={<Community />} />
         <Route path="contact" element={<Contact />} />
         <Route path="booking-room" element={<BookingRoom />} />
+        <Route path="loan" element={<LoanIndex />} />
+        <Route path="bhavan-rorm" element={<BhavanIndex />} />
         <Route path="*" element={<WebsiteNotFound />} />
       </Route>
       <Route path="extra" element={<Extra />} />

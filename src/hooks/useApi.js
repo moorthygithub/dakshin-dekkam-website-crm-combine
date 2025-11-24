@@ -1,4 +1,4 @@
-import { MEMBER_LIST } from "@/api";
+import { BOOKING_FORM_LIST, MEMBER_LIST } from "@/api";
 import { useGetApiMutation } from "./useGetApiMutation";
 
 // ---------------New
@@ -30,5 +30,11 @@ export const useFetchMemberData = () => {
   return useGetApiMutation({
     url: MEMBER_LIST,
     queryKey: ["memberdata"],
+  });
+};
+export const useFetchBookingFormData = () => {
+  return useGetApiMutation({
+    url: BOOKING_FORM_LIST,
+    queryKey: ["bookingFormData"],
   });
 };
