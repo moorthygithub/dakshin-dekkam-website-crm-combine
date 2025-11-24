@@ -15,10 +15,16 @@ export const MEMBER_LIST = `/member`;
 //MEMBER_LIST
 export const CREATE_MEMBER = `/create-member`;
 //BOOKING_ROOM_FORM
-export const CREATE_BOOKING_ROOM = `/createWebenquiry`;
+export const CREATE_BOOKING_ROOM = `/create-booking-room`;
 
 // BOOKING_FORM_LIST
 export const BOOKING_FORM_LIST = `/booking-room`;
+
+
+
+// CREATE_BOOKING_HALL
+export const CREATE_BOOKING_HALL = `/create-booking-hall`;
+
 export const BOOKING_FORM_UPDATE_LIST = `booking-room`;
 //EVENT
 export const EVENT = `/event`;

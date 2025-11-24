@@ -17,8 +17,9 @@ import { useFetchBranch } from '@/hooks/useApi';
 import InputField from '@/website/components/common/InputField';
 import SelectField from '@/website/components/common/SelectField';
 import { showErrorToast, showSuccessToast } from '../../utils/toast';
+import { CREATE_BOOKING_ROOM } from '@/api';
 
-const CREATE_BOOKING_ROOM = 'create-booking-room';
+
 
 const BookingRoomForm = () => {
   const [formData, setFormData] = useState({
