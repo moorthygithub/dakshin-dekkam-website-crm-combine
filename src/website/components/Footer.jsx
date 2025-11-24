@@ -82,6 +82,11 @@ function Footer() {
                 Contact
               </Link>
             </li>
+            <li>
+              <Link to="/booking-room" className="hover:text-yellow-500">
+                Booking Form
+              </Link>
+            </li>
           </ul>
         </div>
 

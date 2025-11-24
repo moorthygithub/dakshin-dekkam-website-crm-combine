@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { 
   Calendar, 
   Clock, 
@@ -86,8 +86,7 @@ const BookingRoomForm = () => {
   const validate = () => {
     let newErrors = {};
 
-    
-    if (!formData.branch_id) newErrors.branch_id = 'Branch is required';
+   
     if (!formData.guest_name?.trim()) newErrors.guest_name = 'Full Name of the Guest is required';
     if (!formData.guest_email?.trim()) {
       newErrors.guest_email = 'Email is required';
@@ -200,7 +199,7 @@ const BookingRoomForm = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {/* Branch Selection */}
-        <SelectField
+        {/* <SelectField
           ref={fieldRefs.branch_id}
           label="Branch"
           name="branch_id"
@@ -213,11 +212,11 @@ const BookingRoomForm = () => {
             })) || []
           }
           error={errors.branch_id}
-          required
+          
           startIcon={<MapPin size={18} />}
-        />
+        /> */}
 
-        {/* Guest Information */}
+     
  
             <InputField
           ref={fieldRefs.guest_name}
@@ -243,6 +242,18 @@ const BookingRoomForm = () => {
           error={errors.guest_email}
           required
         />
+         <InputField
+          ref={fieldRefs.guest_mobile_number}
+          label="Mobile number"
+          type="text"
+          name="guest_mobile_number"
+          value={formData.guest_mobile_number}
+          onChange={handleChange}
+          placeholder="Enter 10-digit number"
+          startIcon={<Phone size={18} />}
+          error={errors.guest_mobile_number}
+          required
+        />
        <div className=' col-span-1 md:col-span-2 lg:col-span-3'>
         <InputField
           ref={fieldRefs.guest_full_name}
@@ -258,19 +269,8 @@ const BookingRoomForm = () => {
 
         </div>
 
-        <InputField
-          ref={fieldRefs.guest_mobile_number}
-          label="Mobile number"
-          type="text"
-          name="guest_mobile_number"
-          value={formData.guest_mobile_number}
-          onChange={handleChange}
-          placeholder="Enter 10-digit number"
-          startIcon={<Phone size={18} />}
-          error={errors.guest_mobile_number}
-          required
-        />
-
+       
+        <div className=' col-span-1 md:col-span-2  '>
         {/* Location Information */}
         <InputField
           ref={fieldRefs.guest_native}
@@ -284,7 +284,9 @@ const BookingRoomForm = () => {
           required
         />
 
-        <InputField
+       
+</div>
+<InputField
           ref={fieldRefs.guest_city}
           label="City you are coming from"
           name="guest_city"
@@ -295,7 +297,6 @@ const BookingRoomForm = () => {
           error={errors.guest_city}
           required
         />
-
         <InputField
           ref={fieldRefs.guest_no_people}
           label="Total number of Guests"

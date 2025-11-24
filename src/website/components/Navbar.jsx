@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import MobileBottomNav from "./MobileBottomNav";
-import { Home, Info, Image, Users, User, Phone, House, HousePlus } from "lucide-react";
+import { Home, Info, Image, Users, User, Phone, House, HousePlus, IndianRupee } from "lucide-react";
 import DesktopNavbar from "./DesktopNavbar";
 
 function Navbar() {
@@ -38,6 +38,12 @@ function Navbar() {
       onClick: () => setOpen(false),
     },
     {
+      label: "Bhavan Form",
+      path: "/bhavan-rorm",
+      icon: <User className="h-5 w-5" />,
+      onClick: () => setOpen(false),
+    },
+    {
       label: "Gallery",
       path: "/gallery",
       icon: <Image className="h-5 w-5" />,
@@ -49,12 +55,8 @@ function Navbar() {
       icon: <Phone className="h-5 w-5" />,
       onClick: () => setOpen(false),
     },
-    {
-      label: "Booking Room",
-      path: "/booking-room",
-      icon: <HousePlus className="h-5 w-5" />,
-      onClick: () => setOpen(false),
-    },
+   
+    
   ];
   useEffect(() => {
     const handleScroll = () => {
