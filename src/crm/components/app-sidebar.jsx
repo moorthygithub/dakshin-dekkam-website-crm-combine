@@ -19,6 +19,7 @@ import {
   SidebarRail,
 } from "@/crm/components/ui/sidebar";
 import { useSelector } from "react-redux";
+import Logo from "./common/Logo";
 
 export function AppSidebar({ ...props }) {
   const nameL = useSelector((state) => state.auth.name);
@@ -33,7 +34,7 @@ export function AppSidebar({ ...props }) {
     teams: [
       {
         name: "Dakshin Ekkam",
-        logo: Factory,
+        logo: Logo,
       },
       {
         name: "Acme Corp.",
@@ -103,6 +104,12 @@ export function AppSidebar({ ...props }) {
       {
         title: "Booking Form",
         url: "/crm/booking-form",
+        icon: House,
+        isActive: false,
+      },
+      {
+        title: "Booking Hall",
+        url: "/crm/booking-hall",
         icon: House,
         isActive: false,
       },

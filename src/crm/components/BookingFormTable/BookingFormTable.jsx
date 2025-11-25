@@ -33,7 +33,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { ChevronDown, Search, Trash2 } from "lucide-react";
+import { ChevronDown, Edit, Search, Trash2 } from "lucide-react";
 import { useState } from "react";
 import {
   DropdownMenu,
@@ -48,6 +48,7 @@ import axios from "axios";
 import { useToast } from "@/hooks/use-toast";
 import useToken from "@/api/usetoken";
 import { BOOKING_FORM_LIST, BOOKING_FORM_UPDATE_LIST } from "@/api";
+import { encryptId } from "@/crm/utils/encyrption/Encyrption";
 
 const BookingFormTable = ({ data, refetch, navigate, title }) => {
      const { toast } = useToast();
@@ -145,7 +146,12 @@ const BookingFormTable = ({ data, refetch, navigate, title }) => {
       deleteMutation.mutate(bookingToDelete.id);
     }
   };
-
+  const handleEditClick = (bookingId) => {
+    navigate(`/crm/booking-room-edit/${encodeURIComponent(
+      encryptId(bookingId)
+    )}`);
+   
+  };
   const statusOptions = [
     { value: "Pending", label: "Pending", color: "bg-yellow-100 text-yellow-800" },
     { value: "CheckIn", label: "Check In", color: "bg-green-100 text-green-800" },
@@ -256,6 +262,18 @@ const BookingFormTable = ({ data, refetch, navigate, title }) => {
         const booking = row.original;
         
         return (
+<div className="flex items-center space-x-2">
+
+           <Button
+                          variant="ghost"
+                          size="icon"
+                          onClick={() => handleEditClick(booking.id)}
+                          className="hover:bg-blue-50"
+                        >
+                          <Edit className="h-4 w-4 text-blue-500" />
+                        </Button>
+            
+
           <AlertDialog open={deleteDialogOpen && bookingToDelete?.id === booking.id} onOpenChange={setDeleteDialogOpen}>
             <AlertDialogTrigger asChild>
               <Button
@@ -289,6 +307,7 @@ const BookingFormTable = ({ data, refetch, navigate, title }) => {
               </AlertDialogFooter>
             </AlertDialogContent>
           </AlertDialog>
+          </div>
         );
       },
     },
