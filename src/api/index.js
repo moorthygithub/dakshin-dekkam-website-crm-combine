@@ -21,6 +21,10 @@ export const CREATE_BOOKING_ROOM = `/create-booking-room`;
 export const BOOKING_FORM_LIST = `/booking-room`;
 
 
+// BOOKING_HALL_LIST
+
+export const BOOKING_HALL_LIST = `/booking-hall`;
+export const BOOKING_HALL_UPDATE_STATUS = `booking-halls`;
 
 // CREATE_BOOKING_HALL
 export const CREATE_BOOKING_HALL = `/create-booking-hall`;

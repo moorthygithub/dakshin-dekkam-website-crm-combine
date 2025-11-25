@@ -40,6 +40,13 @@ import LoanIndex from "@/website/pages/loan/LoanIndex";
 import BookingFormList from "@/crm/app/booking-form/BookingFormList";
 import BhavanIndex from "@/website/pages/bhavan/BhavanIndex";
 
+
+import BookingHall from "@/crm/app/bookingHall/BookingHall";
+import BookingHallEdit from "@/crm/app/bookingHall/BookingHallEdit";
+
+
+import BookingRoomEdit from "@/crm/app/booking-form/BookingRoomEdit";
+
 // Website Imports
 
 const AppRoutes = () => {
@@ -90,6 +97,11 @@ const AppRoutes = () => {
 
 
         <Route path="booking-form" element={<BookingFormList />} />
+        <Route path="booking-room-edit/:id" element={<BookingRoomEdit />} />
+
+        <Route path="booking-hall" element={<BookingHall />} />
+        <Route path="booking-hall-edit/:id" element={<BookingHallEdit />} />
+      
 
 
         <Route path="report-event" element={<EventReport />} />

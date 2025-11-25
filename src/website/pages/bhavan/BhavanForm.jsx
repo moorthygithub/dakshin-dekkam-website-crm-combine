@@ -119,6 +119,7 @@ const BhavanForm = () => {
     let newErrors = {};
 
     if (!formData.guest_name?.trim()) newErrors.guest_name = 'Guest name is required';
+    if (!formData.guest_address?.trim()) newErrors.guest_address = 'Address  is required';
     if (!formData.guest_mobile_number) {
       newErrors.guest_mobile_number = 'Mobile number is required';
     } else if (!/^[0-9]{10}$/.test(formData.guest_mobile_number)) {
@@ -391,16 +392,23 @@ const BhavanForm = () => {
             <div className="flex flex-col">
               <label className="font-medium text-gray-700 text-sm mb-2 flex items-center gap-1">
                 <User className="w-4 h-4 text-blue-600" />
-                Address
+                Address <span className='text-red-700'>*</span>
               </label>
               <textarea
                 name="guest_address"
                 value={formData.guest_address}
                 onChange={handleChange}
                 rows="2"
+                
                 className="border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
                 placeholder="Enter complete address"
               />
+                {errors.guest_address && (
+                  <span className="text-red-500 text-sm flex items-center gap-1">
+             
+                    {errors.guest_address}
+                  </span>
+                )}
             </div>
           </div>
         )}
@@ -430,6 +438,7 @@ const BhavanForm = () => {
                 onChange={handleChange}
                 placeholder="Enter number of days"
                 startIcon={<Calendar size={18} />}
+                required
               />
 
             
