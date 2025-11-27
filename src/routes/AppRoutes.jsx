@@ -46,6 +46,8 @@ import BookingHallEdit from "@/crm/app/bookingHall/BookingHallEdit";
 
 
 import BookingRoomEdit from "@/crm/app/booking-form/BookingRoomEdit";
+import LoanForm from "@/crm/app/loan-form/LoanForm";
+import LoanFormView from "@/crm/app/loan-form/LoanFormView";
 
 // Website Imports
 
@@ -101,6 +103,9 @@ const AppRoutes = () => {
 
         <Route path="booking-hall" element={<BookingHall />} />
         <Route path="booking-hall-edit/:id" element={<BookingHallEdit />} />
+
+        <Route path="loan" element={<LoanForm />} />
+        <Route path="loan-view/:id" element={<LoanFormView />} />
       
 
 
