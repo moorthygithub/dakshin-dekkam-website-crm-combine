@@ -114,6 +114,12 @@ export function AppSidebar({ ...props }) {
         isActive: false,
       },
       {
+        title: "Loan Form",
+        url: "/crm/loan",
+        icon: House,
+        isActive: false,
+      },
+      {
         title: "Report",
         url: "#",
         isActive: false,

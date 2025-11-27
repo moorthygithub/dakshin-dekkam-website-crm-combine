@@ -19,8 +19,13 @@ export const CREATE_BOOKING_ROOM = `/create-booking-room`;
 
 // BOOKING_FORM_LIST
 export const BOOKING_FORM_LIST = `/booking-room`;
+// Loan_FORM_LIST
+export const Loan_FORM_LIST = `/loan`;
 
 
+
+// CREATE_LOAN_API
+export const CREATE_LOAN_API = `/create-loan`;
 // BOOKING_HALL_LIST
 
 export const BOOKING_HALL_LIST = `/booking-hall`;
