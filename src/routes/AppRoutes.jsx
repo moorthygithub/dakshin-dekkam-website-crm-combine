@@ -48,6 +48,7 @@ import BookingHallEdit from "@/crm/app/bookingHall/BookingHallEdit";
 import BookingRoomEdit from "@/crm/app/booking-form/BookingRoomEdit";
 import LoanForm from "@/crm/app/loan-form/LoanForm";
 import LoanFormView from "@/crm/app/loan-form/LoanFormView";
+import BhavanWebsite from "@/website/pages/bhavan/BhavanPage";
 
 // Website Imports
 
@@ -126,7 +127,8 @@ const AppRoutes = () => {
         <Route path="contact" element={<Contact />} />
         <Route path="booking-room" element={<BookingRoom />} />
         <Route path="loan" element={<LoanIndex />} />
-        <Route path="bhavan-rorm" element={<BhavanIndex />} />
+        <Route path="bhavan-form" element={<BhavanIndex />} />
+        <Route path="bhavan" element={<BhavanWebsite />} />
         <Route path="*" element={<WebsiteNotFound />} />
       </Route>
       <Route path="extra" element={<Extra />} />

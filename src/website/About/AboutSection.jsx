@@ -1,6 +1,7 @@
-import ImageSlider from "../components/ImageCarsol";
+import { useNavigate } from "react-router-dom";
 
 function AboutSection() {
+  const navigate = useNavigate();
   return (
     <div className="container px-4 sm:px-6 lg:px-8 mx-auto max-w-screen-xl text-gray-700">
       <div className="mt-24 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
@@ -38,7 +39,10 @@ function AboutSection() {
             </p>
 
             <div>
-              <button className="flex items-center space-x-3 pl-3 border-b border-l border-t border-yellow-500 text-yellow-500 font-medium my-4 focus:outline-none transform transition hover:scale-110 duration-300 ease-in-out rounded-full">
+              <button
+                className="flex items-center space-x-3 pl-3 border-b border-l border-t border-yellow-500 text-yellow-500 font-medium my-4 focus:outline-none transform transition hover:scale-110 duration-300 ease-in-out rounded-full"
+                onClick={() => navigate("/aboutus")}
+              >
                 <span>More Info</span>
                 <div className="border border-yellow-500 h-14 w-14 rounded-full flex items-center justify-center">
                   <svg
