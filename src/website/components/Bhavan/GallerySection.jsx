@@ -7,31 +7,31 @@ export default function GallerySection() {
   const galleryImages = [
     {
       id: 1,
-      src: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&h=500&fit=crop",
+      src: "/img/gallery.jpg",
       title: "Community Events",
       category: "Celebrations",
     },
     {
       id: 2,
-      src: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=500&fit=crop",
+      src: "/img/gallery1.jpg",
       title: "Cultural Programs",
       category: "Heritage",
     },
     {
       id: 3,
-      src: "https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=800&h=500&fit=crop",
+      src: "/img/gallery2.jpg",
       title: "Workshops",
       category: "Learning",
     },
     {
       id: 4,
-      src: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&h=500&fit=crop",
+      src: "/img/gallery3.jpg",
       title: "Social Gatherings",
       category: "Bonding",
     },
     {
       id: 5,
-      src: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&h=500&fit=crop",
+      src: "/img/gallery4.jpg",
       title: "Educational Events",
       category: "Knowledge",
     },
