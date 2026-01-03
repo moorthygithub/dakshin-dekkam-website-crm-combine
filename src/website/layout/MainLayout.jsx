@@ -16,7 +16,7 @@ function MainLayout() {
   return (
     <div className="flex flex-col min-h-screen">
       <Toaster position="top-right" reverseOrder={false} />
-      {/* <Navbar /> */}
+      <Navbar />
       <CompanyData />
       <ScrollToTop />
       <RouteLoader />
