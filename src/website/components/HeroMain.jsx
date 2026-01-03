@@ -22,7 +22,7 @@ const PrevArrow = ({ onClick }) => (
 );
 
 const images = [
-  "https://demo.gloriathemes.com/eventchamp/demo/wp-content/uploads/2018/11/event-14-1920x1100.jpg",
+  "/img/banner.jpeg",
   "https://demo.gloriathemes.com/eventchamp/demo/wp-content/uploads/2018/11/venue-3-1920x1100.jpg",
   "https://demo.gloriathemes.com/eventchamp/demo/wp-content/uploads/2018/11/event-12-1920x1100.jpg",
 ];
