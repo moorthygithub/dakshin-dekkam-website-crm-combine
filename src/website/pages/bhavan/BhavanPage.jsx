@@ -1,17 +1,12 @@
 import GallerySection from "@/website/components/Bhavan/GallerySection";
-import {
-  ArrowRight,
-  BookOpen,
-  MapPin,
-  Star,
-  Users,
-  UtensilsCrossed,
-} from "lucide-react";
-import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import VenueWebsite from "@/website/components/Bhavan/VenueWebsite";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import VenueWebsite from "@/website/components/Bhavan/VenueWebsite";
+import {
+  Star
+} from "lucide-react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function BhavanWebsite() {
   const navigate = useNavigate();

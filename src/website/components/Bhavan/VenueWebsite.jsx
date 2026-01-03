@@ -240,7 +240,7 @@ export default function VenueWebsite() {
               onClick={() => navigate("/booking-room")}
               className="bg-white text-amber-600 px-8 py-4 rounded-full font-bold text-lg hover:bg-amber-50 transform hover:scale-105 transition shadow-2xl"
             >
-              Book Your Event
+              Book Now
               <ChevronRight className="inline ml-2" />
             </button>
           </div>
