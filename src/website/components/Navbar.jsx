@@ -1,7 +1,17 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import MobileBottomNav from "./MobileBottomNav";
-import { Home, Info, Image, Users, User, Phone, House, HousePlus, IndianRupee } from "lucide-react";
+import {
+  Home,
+  Info,
+  Image,
+  Users,
+  User,
+  Phone,
+  House,
+  HousePlus,
+  IndianRupee,
+} from "lucide-react";
 import DesktopNavbar from "./DesktopNavbar";
 
 function Navbar() {
@@ -38,8 +48,8 @@ function Navbar() {
       onClick: () => setOpen(false),
     },
     {
-      label: "Bhavan Form",
-      path: "/bhavan-rorm",
+      label: "Bhavan",
+      path: "/bhavan",
       icon: <User className="h-5 w-5" />,
       onClick: () => setOpen(false),
     },
@@ -55,8 +65,6 @@ function Navbar() {
       icon: <Phone className="h-5 w-5" />,
       onClick: () => setOpen(false),
     },
-   
-    
   ];
   useEffect(() => {
     const handleScroll = () => {
@@ -99,9 +107,8 @@ function Navbar() {
               className="text-lg relative z-50 flex flex-row items-center gap-2 font-bold tracking-widest rounded-lg focus:outline-none focus:shadow-outline"
             >
               <img src="./logo.png" alt="app_logo" className="w-10  h-10" />
-             <span> Dhakshin Ekkam</span>
+              <span> Dhakshin Ekkam</span>
             </Link>
-           
           </div>
           <DesktopNavbar menuItems={menuItems} />
         </div>
