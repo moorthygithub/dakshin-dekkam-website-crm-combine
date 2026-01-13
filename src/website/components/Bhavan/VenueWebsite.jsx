@@ -1,36 +1,19 @@
-import React, { useState, useEffect } from "react";
 import {
-  MapPin,
-  Phone,
-  Mail,
-  Calendar,
-  Users,
-  Music,
-  Sparkles,
-  UtensilsCrossed,
-  Menu,
-  X,
-  ChevronRight,
-  Star,
-  Clock,
   Award,
-  Heart,
-  Zap,
-  Utensils,
   Bed,
+  ChevronRight,
+  Heart,
+  MapPin,
+  Music,
+  Users,
+  Utensils,
+  UtensilsCrossed,
+  Zap,
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export default function VenueWebsite() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  const navigate = useNavigate();
 
   const features = [
     {
@@ -110,14 +93,6 @@ export default function VenueWebsite() {
       description: "State-of-the-art facilities for seminars",
     },
   ];
-
-  const scrollToSection = (id) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-      setIsMenuOpen(false);
-    }
-  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-amber-50 to-white">
