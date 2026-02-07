@@ -48,7 +48,7 @@ function Navbar() {
       onClick: () => setOpen(false),
     },
     {
-      label: "Bhavan",
+      label: "Kutchi Bhavan",
       path: "/bhavan",
       icon: <User className="h-5 w-5" />,
       onClick: () => setOpen(false),
