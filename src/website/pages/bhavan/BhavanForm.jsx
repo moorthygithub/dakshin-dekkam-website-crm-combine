@@ -1,7 +1,7 @@
-import { useState, useRef } from 'react';
-import { 
-  Mail, 
-  Phone, 
+import { useState, useRef } from "react";
+import {
+  Mail,
+  Phone,
   FileText,
   Building,
   Loader,
@@ -9,15 +9,12 @@ import {
   Calendar,
   Clock,
   AlertCircle,
-  MessageCircle
-} from 'lucide-react';
-import { useApiMutation } from '@/hooks/useApiMutation';
-import InputField from '@/website/components/common/InputField';
-import { showErrorToast, showSuccessToast } from '../../utils/toast';
-import { CREATE_BOOKING_HALL } from '@/api';
-
-
-
+  MessageCircle,
+} from "lucide-react";
+import { useApiMutation } from "@/hooks/useApiMutation";
+import InputField from "@/website/components/common/InputField";
+import { showErrorToast, showSuccessToast } from "../../utils/toast";
+import { CREATE_BOOKING_HALL } from "@/api";
 
 const AlertModal = ({ isOpen, onClose, title, children }) => {
   if (!isOpen) return null;
@@ -31,14 +28,22 @@ const AlertModal = ({ isOpen, onClose, title, children }) => {
             onClick={onClose}
             className="text-gray-400 hover:text-gray-600 transition"
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
             </svg>
           </button>
         </div>
-        <div className="p-6 overflow-y-auto max-h-[60vh]">
-          {children}
-        </div>
+        <div className="p-6 overflow-y-auto max-h-[60vh]">{children}</div>
         <div className="flex justify-end p-6 border-t border-gray-200">
           <button
             onClick={onClose}
@@ -54,26 +59,26 @@ const AlertModal = ({ isOpen, onClose, title, children }) => {
 
 const BhavanForm = () => {
   const [formData, setFormData] = useState({
-    guest_name: '',
-    company_name: '',
-    guest_mobile_number: '',
-    guest_landline_number: '',
-    guest_address: '',
-    guest_email: '',
-    function_type: '',
-    guest_no_days: '',
-    guest_checkIn_date: '',
-    guest_checkIn_time: '',
-    guest_checkOut_date: '',
-    guest_checkOut_time: '',
-    special_instructions: '',
-    no_of_guest: '',
-    terms_accepted: false
+    guest_name: "",
+    company_name: "",
+    guest_mobile_number: "",
+    guest_landline_number: "",
+    guest_address: "",
+    guest_email: "",
+    function_type: "",
+    guest_no_days: "",
+    guest_checkIn_date: "",
+    guest_checkIn_time: "",
+    guest_checkOut_date: "",
+    guest_checkOut_time: "",
+    special_instructions: "",
+    no_of_guest: "",
+    terms_accepted: false,
   });
 
   const { trigger: submitTrigger, loading: submitLoading } = useApiMutation();
   const [errors, setErrors] = useState({});
-  const [activeSection, setActiveSection] = useState('guest');
+  const [activeSection, setActiveSection] = useState("guest");
   const [showTermsModal, setShowTermsModal] = useState(false);
 
   const fieldRefs = {
@@ -86,57 +91,66 @@ const BhavanForm = () => {
     guest_checkOut_date: useRef(null),
     guest_checkOut_time: useRef(null),
     no_of_guest: useRef(null),
-    terms_accepted: useRef(null)
+    terms_accepted: useRef(null),
   };
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
 
-    if (name === 'guest_mobile_number' || name === 'guest_landline_number') {
-      const numericValue = value.replace(/\D/g, '');
+    if (name === "guest_mobile_number" || name === "guest_landline_number") {
+      const numericValue = value.replace(/\D/g, "");
       if (numericValue.length <= 10) {
         setFormData({ ...formData, [name]: numericValue });
-        setErrors({ ...errors, [name]: '' });
+        setErrors({ ...errors, [name]: "" });
       }
       return;
     }
 
-    if (name === 'no_of_guest' || name === 'guest_no_days') {
-      const numericValue = value.replace(/\D/g, '');
+    if (name === "no_of_guest" || name === "guest_no_days") {
+      const numericValue = value.replace(/\D/g, "");
       setFormData({ ...formData, [name]: numericValue });
-      setErrors({ ...errors, [name]: '' });
+      setErrors({ ...errors, [name]: "" });
       return;
     }
 
-    setFormData({ 
-      ...formData, 
-      [name]: type === 'checkbox' ? checked : value 
+    setFormData({
+      ...formData,
+      [name]: type === "checkbox" ? checked : value,
     });
-    setErrors({ ...errors, [name]: '' });
+    setErrors({ ...errors, [name]: "" });
   };
 
   const validate = () => {
     let newErrors = {};
 
-    if (!formData.guest_name?.trim()) newErrors.guest_name = 'Guest name is required';
-    if (!formData.guest_address?.trim()) newErrors.guest_address = 'Address  is required';
+    if (!formData.guest_name?.trim())
+      newErrors.guest_name = "Guest name is required";
+    if (!formData.guest_address?.trim())
+      newErrors.guest_address = "Address  is required";
     if (!formData.guest_mobile_number) {
-      newErrors.guest_mobile_number = 'Mobile number is required';
+      newErrors.guest_mobile_number = "Mobile number is required";
     } else if (!/^[0-9]{10}$/.test(formData.guest_mobile_number)) {
-      newErrors.guest_mobile_number = 'Enter a valid 10-digit number';
+      newErrors.guest_mobile_number = "Enter a valid 10-digit number";
     }
     if (!formData.guest_email?.trim()) {
-      newErrors.guest_email = 'Email is required';
+      newErrors.guest_email = "Email is required";
     } else if (!/\S+@\S+\.\S+/.test(formData.guest_email)) {
-      newErrors.guest_email = 'Enter a valid email';
+      newErrors.guest_email = "Enter a valid email";
     }
-    if (!formData.function_type?.trim()) newErrors.function_type = 'Function type is required';
-    if (!formData.guest_checkIn_date) newErrors.guest_checkIn_date = 'Check-in date is required';
-    if (!formData.guest_checkIn_time) newErrors.guest_checkIn_time = 'Check-in time is required';
-    if (!formData.guest_checkOut_date) newErrors.guest_checkOut_date = 'Check-out date is required';
-    if (!formData.guest_checkOut_time) newErrors.guest_checkOut_time = 'Check-out time is required';
-    if (!formData.no_of_guest) newErrors.no_of_guest = 'Number of guests is required';
-    if (!formData.terms_accepted) newErrors.terms_accepted = 'You must accept the terms and conditions';
+    if (!formData.function_type?.trim())
+      newErrors.function_type = "Function type is required";
+    if (!formData.guest_checkIn_date)
+      newErrors.guest_checkIn_date = "Check-in date is required";
+    if (!formData.guest_checkIn_time)
+      newErrors.guest_checkIn_time = "Check-in time is required";
+    if (!formData.guest_checkOut_date)
+      newErrors.guest_checkOut_date = "Check-out date is required";
+    if (!formData.guest_checkOut_time)
+      newErrors.guest_checkOut_time = "Check-out time is required";
+    if (!formData.no_of_guest)
+      newErrors.no_of_guest = "Number of guests is required";
+    if (!formData.terms_accepted)
+      newErrors.terms_accepted = "You must accept the terms and conditions";
 
     return newErrors;
   };
@@ -149,83 +163,92 @@ const BhavanForm = () => {
     if (Object.keys(validationErrors).length > 0) {
       const firstErrorKey = Object.keys(validationErrors)[0];
       const ref = fieldRefs[firstErrorKey];
-      
-      
-      if (firstErrorKey === 'terms_accepted') {
-        setActiveSection('booking');
+
+      if (firstErrorKey === "terms_accepted") {
+        setActiveSection("booking");
       } else {
-        setActiveSection('guest');
+        setActiveSection("guest");
       }
 
-    
       setTimeout(() => {
         if (ref?.current) {
           ref.current.scrollIntoView({
-            behavior: 'smooth',
-            block: 'center',
-            inline: 'nearest'
+            behavior: "smooth",
+            block: "center",
+            inline: "nearest",
           });
         }
       }, 100);
-      
+
       return;
     }
 
     try {
       const response = await submitTrigger({
         url: CREATE_BOOKING_HALL,
-        method: 'post',
-        data: formData
+        method: "post",
+        data: formData,
       });
 
       if (response?.code === 201) {
-        showSuccessToast(response.message || 'Banquet order submitted successfully!');
-        
+        showSuccessToast(
+          response.message || "Banquet order submitted successfully!"
+        );
+
         // Reset form
         setFormData({
-          guest_name: '',
-          company_name: '',
-          guest_mobile_number: '',
-          guest_landline_number: '',
-          guest_address: '',
-          guest_email: '',
-          function_type: '',
-          guest_no_days: '',
-          guest_checkIn_date: '',
-          guest_checkIn_time: '',
-          guest_checkOut_date: '',
-          guest_checkOut_time: '',
-          special_instructions: '',
-          no_of_guest: '',
-          terms_accepted: false
+          guest_name: "",
+          company_name: "",
+          guest_mobile_number: "",
+          guest_landline_number: "",
+          guest_address: "",
+          guest_email: "",
+          function_type: "",
+          guest_no_days: "",
+          guest_checkIn_date: "",
+          guest_checkIn_time: "",
+          guest_checkOut_date: "",
+          guest_checkOut_time: "",
+          special_instructions: "",
+          no_of_guest: "",
+          terms_accepted: false,
         });
       } else {
-        showErrorToast(response.message || 'Something went wrong');
+        showErrorToast(response.message || "Something went wrong");
       }
     } catch (error) {
-      showErrorToast(error?.response?.data?.message || 'Failed to submit banquet order');
+      showErrorToast(
+        error?.response?.data?.message || "Failed to submit banquet order"
+      );
     }
   };
 
   const sectionButtons = [
-    { id: 'guest', label: 'Guest Details', icon: User },
-    { id: 'booking', label: 'Booking Details', icon: Calendar }
+    { id: "guest", label: "Guest Details", icon: User },
+    { id: "booking", label: "Booking Details", icon: Calendar },
   ];
 
   const hasErrorsInSection = (sectionId) => {
     const sectionFields = {
-      guest: ['guest_name', 'guest_mobile_number', 'guest_email'],
-      booking: ['function_type', 'guest_checkIn_date', 'guest_checkIn_time', 'guest_checkOut_date', 'guest_checkOut_time', 'no_of_guest', 'terms_accepted']
+      guest: ["guest_name", "guest_mobile_number", "guest_email"],
+      booking: [
+        "function_type",
+        "guest_checkIn_date",
+        "guest_checkIn_time",
+        "guest_checkOut_date",
+        "guest_checkOut_time",
+        "no_of_guest",
+        "terms_accepted",
+      ],
     };
-    
-    return sectionFields[sectionId]?.some(field => errors[field]);
+
+    return sectionFields[sectionId]?.some((field) => errors[field]);
   };
 
   return (
     <div className="max-w-7xl mx-auto bg-gradient-to-br from-blue-50 to-indigo-50 my-4 overflow-hidden">
-   
-      <AlertModal 
-        isOpen={showTermsModal} 
+      <AlertModal
+        isOpen={showTermsModal}
         onClose={() => setShowTermsModal(false)}
         title="Terms & Conditions"
       >
@@ -242,7 +265,7 @@ const BhavanForm = () => {
             "Hall cancellations shall be considered in writing only from the host and the same should be acknowledged by the G.M. or the Management.",
             "Usage of extra hours is permissible only if the hall is available at the hour and the cost for the additional hour will be charged @ Rs. 5,000/- per hour.",
             "The hall timings will be from 6:00 a.m. to 12:00 midnight, which will be as one day.",
-            "The possession of the hall and the kitchen will be given strictly at the time mentioned above and only when supported by the Photo ID Card / facsimile of the banquet order form."
+            "The possession of the hall and the kitchen will be given strictly at the time mentioned above and only when supported by the Photo ID Card / facsimile of the banquet order form.",
           ].map((term, index) => (
             <p key={index} className="flex items-start gap-2">
               <span className="text-blue-600 mt-0.5">•</span>
@@ -252,8 +275,7 @@ const BhavanForm = () => {
         </div>
       </AlertModal>
 
-     
-      <div className="bg-white border-b border-gray-200 px-8 py-4">
+      {/* <div className="bg-white border-b border-gray-200 px-8 py-4">
         <div className="text-center flex flex-row items-center justify-between mb-4">
           <div className="flex items-center justify-center gap-3 mb-2">
             <div className="w-10 h-10 bg-yellow-500 rounded-md flex items-center justify-center">
@@ -291,23 +313,22 @@ const BhavanForm = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
-     
       <div className="bg-white border-b border-gray-200 px-8">
         <div className="flex overflow-x-auto scrollbar-hide">
           {sectionButtons.map((section) => {
             const Icon = section.icon;
             const hasError = hasErrorsInSection(section.id);
-            
+
             return (
               <button
                 key={section.id}
                 onClick={() => setActiveSection(section.id)}
                 className={`flex items-center gap-2 px-4 py-3 border-b-2 transition-all whitespace-nowrap relative ${
                   activeSection === section.id
-                    ? 'border-blue-500 text-blue-600 bg-blue-50'
-                    : 'border-transparent text-gray-500 hover:text-gray-700'
+                    ? "border-blue-500 text-blue-600 bg-blue-50"
+                    : "border-transparent text-gray-500 hover:text-gray-700"
                 }`}
               >
                 <Icon className="w-4 h-4" />
@@ -321,240 +342,223 @@ const BhavanForm = () => {
         </div>
       </div>
 
-
       <form onSubmit={handleSubmit} className="px-8 py-6 bg-white">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {/* Guest Name */}
+          <InputField
+            ref={fieldRefs.guest_name}
+            label="Name of the Guest"
+            name="guest_name"
+            value={formData.guest_name}
+            onChange={handleChange}
+            placeholder="Enter guest name"
+            startIcon={<User size={18} />}
+            error={errors.guest_name}
+            required
+          />
 
-        {activeSection === 'guest' && (
-          <div className="">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {/* Guest Name */}
-              <InputField
-                ref={fieldRefs.guest_name}
-                label="Name of the Guest"
-                name="guest_name"
-                value={formData.guest_name}
-                onChange={handleChange}
-                placeholder="Enter guest name"
-                startIcon={<User size={18} />}
-                error={errors.guest_name}
-                required
-              />
+          {/* Company Name */}
+          <InputField
+            label="Company's Name"
+            name="company_name"
+            value={formData.company_name}
+            onChange={handleChange}
+            placeholder="Enter company name"
+            startIcon={<Building size={18} />}
+          />
 
-              {/* Company Name */}
-              <InputField
-                label="Company's Name"
-                name="company_name"
-                value={formData.company_name}
-                onChange={handleChange}
-                placeholder="Enter company name"
-                startIcon={<Building size={18} />}
-              />
+          {/* Contact Mobile */}
+          <InputField
+            ref={fieldRefs.guest_mobile_number}
+            label="Contact Mob No"
+            name="guest_mobile_number"
+            value={formData.guest_mobile_number}
+            onChange={handleChange}
+            placeholder="Enter 10-digit number"
+            startIcon={<Phone size={18} />}
+            error={errors.guest_mobile_number}
+            required
+          />
 
-              {/* Contact Mobile */}
-              <InputField
-                ref={fieldRefs.guest_mobile_number}
-                label="Contact Mob No"
-                name="guest_mobile_number"
-                value={formData.guest_mobile_number}
-                onChange={handleChange}
-                placeholder="Enter 10-digit number"
-                startIcon={<Phone size={18} />}
-                error={errors.guest_mobile_number}
-                required
-              />
+          {/* Landline No */}
+          <InputField
+            label="Landline No"
+            name="guest_landline_number"
+            value={formData.guest_landline_number}
+            onChange={handleChange}
+            placeholder="Enter landline number"
+            startIcon={<Phone size={18} />}
+          />
 
-              {/* Landline No */}
-              <InputField
-                label="Landline No"
-                name="guest_landline_number"
-                value={formData.guest_landline_number}
-                onChange={handleChange}
-                placeholder="Enter landline number"
-                startIcon={<Phone size={18} />}
-              />
+          {/* Email */}
+          <InputField
+            ref={fieldRefs.guest_email}
+            label="Email"
+            type="email"
+            name="guest_email"
+            value={formData.guest_email}
+            onChange={handleChange}
+            placeholder="Enter email"
+            startIcon={<Mail size={18} />}
+            error={errors.guest_email}
+            required
+          />
 
-              {/* Email */}
-              <InputField
-                ref={fieldRefs.guest_email}
-                label="Email"
-                type="email"
-                name="guest_email"
-                value={formData.guest_email}
-                onChange={handleChange}
-                placeholder="Enter email"
-                startIcon={<Mail size={18} />}
-                error={errors.guest_email}
-                required
-              />
-            </div>
+          <InputField
+            ref={fieldRefs.function_type}
+            label="Type of Function"
+            name="function_type"
+            value={formData.function_type}
+            onChange={handleChange}
+            placeholder="Enter function type"
+            startIcon={<Calendar size={18} />}
+            error={errors.function_type}
+            required
+          />
 
-   
-            <div className="flex flex-col">
-              <label className="font-medium text-gray-700 text-sm mb-2 flex items-center gap-1">
-                <User className="w-4 h-4 text-blue-600" />
-                Address <span className='text-red-700'>*</span>
-              </label>
-              <textarea
-                name="guest_address"
-                value={formData.guest_address}
-                onChange={handleChange}
-                rows="2"
-                
-                className="border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
-                placeholder="Enter complete address"
-              />
-                {errors.guest_address && (
-                  <span className="text-red-500 text-sm flex items-center gap-1">
-             
-                    {errors.guest_address}
-                  </span>
-                )}
-            </div>
+          <InputField
+            label="No. of Days"
+            name="guest_no_days"
+            value={formData.guest_no_days}
+            onChange={handleChange}
+            placeholder="Enter number of days"
+            startIcon={<Calendar size={18} />}
+            required
+          />
+
+          <InputField
+            ref={fieldRefs.guest_checkIn_date}
+            label="Check In Date"
+            type="date"
+            name="guest_checkIn_date"
+            value={formData.guest_checkIn_date}
+            onChange={handleChange}
+            startIcon={<Calendar size={18} />}
+            error={errors.guest_checkIn_date}
+            required
+          />
+
+          <InputField
+            ref={fieldRefs.guest_checkIn_time}
+            label="Check In Time"
+            type="time"
+            name="guest_checkIn_time"
+            value={formData.guest_checkIn_time}
+            onChange={handleChange}
+            startIcon={<Clock size={18} />}
+            error={errors.guest_checkIn_time}
+            required
+          />
+
+          <InputField
+            ref={fieldRefs.guest_checkOut_date}
+            label="Check Out Date"
+            type="date"
+            name="guest_checkOut_date"
+            value={formData.guest_checkOut_date}
+            onChange={handleChange}
+            startIcon={<Calendar size={18} />}
+            error={errors.guest_checkOut_date}
+            required
+          />
+
+          <InputField
+            ref={fieldRefs.guest_checkOut_time}
+            label="Check Out Time"
+            type="time"
+            name="guest_checkOut_time"
+            value={formData.guest_checkOut_time}
+            onChange={handleChange}
+            startIcon={<Clock size={18} />}
+            error={errors.guest_checkOut_time}
+            required
+          />
+
+          <InputField
+            ref={fieldRefs.no_of_guest}
+            label="No. of Guests expected"
+            name="no_of_guest"
+            value={formData.no_of_guest}
+            onChange={handleChange}
+            placeholder="Enter number of guests"
+            startIcon={<User size={18} />}
+            error={errors.no_of_guest}
+            required
+          />
+        </div>
+
+        <div className="flex flex-col">
+          <label className="font-medium text-gray-700 text-sm mb-2 flex items-center gap-1">
+            <User className="w-4 h-4 text-blue-600" />
+            Address <span className="text-red-700">*</span>
+          </label>
+          <textarea
+            name="guest_address"
+            value={formData.guest_address}
+            onChange={handleChange}
+            rows="2"
+            className="border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+            placeholder="Enter complete address"
+          />
+          {errors.guest_address && (
+            <span className="text-red-500 text-sm flex items-center gap-1">
+              {errors.guest_address}
+            </span>
+          )}
+        </div>
+
+        <div className="">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"></div>
+
+          <div className="md:col-span-2 lg:col-span-3">
+            <InputField
+              label="Special Instructions"
+              name="special_instructions"
+              type="textarea"
+              value={formData.special_instructions}
+              onChange={handleChange}
+              placeholder="Enter any special instructions or requests"
+              startIcon={<MessageCircle size={18} />}
+            />
           </div>
-        )}
 
-      
-        {activeSection === 'booking' && (
-          <div className="">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        
-              <InputField
-                ref={fieldRefs.function_type}
-                label="Type of Function"
-                name="function_type"
-                value={formData.function_type}
-                onChange={handleChange}
-                placeholder="Enter function type"
-                startIcon={<Calendar size={18} />}
-                error={errors.function_type}
-                required
-              />
-
-         
-              <InputField
-                label="No. of Days"
-                name="guest_no_days"
-                value={formData.guest_no_days}
-                onChange={handleChange}
-                placeholder="Enter number of days"
-                startIcon={<Calendar size={18} />}
-                required
-              />
-
-            
-              <InputField
-                ref={fieldRefs.guest_checkIn_date}
-                label="Check In Date"
-                type="date"
-                name="guest_checkIn_date"
-                value={formData.guest_checkIn_date}
-                onChange={handleChange}
-                startIcon={<Calendar size={18} />}
-                error={errors.guest_checkIn_date}
-                required
-              />
-
-      
-              <InputField
-                ref={fieldRefs.guest_checkIn_time}
-                label="Check In Time"
-                type="time"
-                name="guest_checkIn_time"
-                value={formData.guest_checkIn_time}
-                onChange={handleChange}
-                startIcon={<Clock size={18} />}
-                error={errors.guest_checkIn_time}
-                required
-              />
-
-              <InputField
-                ref={fieldRefs.guest_checkOut_date}
-                label="Check Out Date"
-                type="date"
-                name="guest_checkOut_date"
-                value={formData.guest_checkOut_date}
-                onChange={handleChange}
-                startIcon={<Calendar size={18} />}
-                error={errors.guest_checkOut_date}
-                required
-              />
-
-          
-              <InputField
-                ref={fieldRefs.guest_checkOut_time}
-                label="Check Out Time"
-                type="time"
-                name="guest_checkOut_time"
-                value={formData.guest_checkOut_time}
-                onChange={handleChange}
-                startIcon={<Clock size={18} />}
-                error={errors.guest_checkOut_time}
-                required
-              />
-
-   
-              <InputField
-                ref={fieldRefs.no_of_guest}
-                label="No. of Guests expected"
-                name="no_of_guest"
-                value={formData.no_of_guest}
-                onChange={handleChange}
-                placeholder="Enter number of guests"
-                startIcon={<User size={18} />}
-                error={errors.no_of_guest}
-                required
-              />
-            </div>
-
-          
-            <div className="md:col-span-2 lg:col-span-3">
-              <InputField
-                label="Special Instructions"
-                name="special_instructions"
-                type="textarea"
-                value={formData.special_instructions}
-                onChange={handleChange}
-                placeholder="Enter any special instructions or requests"
-                startIcon={<MessageCircle size={18} />}
-              />
-            </div>
-
-        
-            <div className="bg-white rounded-lg  px-4 py-2 mt-2">
-          
-              
-              <div className="space-y-4">
-                <div className="flex items-start gap-3">
-                  <input
-                    ref={fieldRefs.terms_accepted}
-                    type="checkbox"
-                    name="terms_accepted"
-                    checked={formData.terms_accepted}
-                    onChange={handleChange}
-                    className={`h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-300 rounded mt-0.5 ${
-                      errors.terms_accepted ? 'border-red-500' : ''
-                    }`}
-                  />
-                  <label className="text-sm text-gray-700">
-                    I have gone through the above <span role='button' className='underline text-blue-700' onClick={() => setShowTermsModal(true)}>
+          <div className="bg-white rounded-lg  px-4 py-2 mt-2">
+            <div className="space-y-4">
+              <div className="flex items-start gap-3">
+                <input
+                  ref={fieldRefs.terms_accepted}
+                  type="checkbox"
+                  name="terms_accepted"
+                  checked={formData.terms_accepted}
+                  onChange={handleChange}
+                  className={`h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-300 rounded mt-0.5 ${
+                    errors.terms_accepted ? "border-red-500" : ""
+                  }`}
+                />
+                <label className="text-sm text-gray-700">
+                  I have gone through the above{" "}
+                  <span
+                    role="button"
+                    className="underline text-blue-700"
+                    onClick={() => setShowTermsModal(true)}
+                  >
                     Terms and Conditions
-                    </span> and accept the same.
-                  </label>
-                </div>
-                {errors.terms_accepted && (
-                  <span className="text-red-500 text-sm flex items-center gap-1">
-                    <AlertCircle className="w-4 h-4" />
-                    {errors.terms_accepted}
-                  </span>
-                )}
+                  </span>{" "}
+                  and accept the same.
+                </label>
               </div>
+              {errors.terms_accepted && (
+                <span className="text-red-500 text-sm flex items-center gap-1">
+                  <AlertCircle className="w-4 h-4" />
+                  {errors.terms_accepted}
+                </span>
+              )}
             </div>
           </div>
-        )}
+        </div>
 
-     
-        <div className="flex flex-col sm:flex-row gap-4 justify-between items-center mt-8 pt-6 border-t border-gray-200">
-          <div className="flex gap-2">
+        <div className="flex flex-col sm:flex-row gap-4 justify-end items-center mt-8 pt-6 border-t border-gray-200">
+          {/* <div className="flex gap-2">
             {sectionButtons.map((section, index) => {
               const hasError = hasErrorsInSection(section.id);
               return (
@@ -564,8 +568,8 @@ const BhavanForm = () => {
                   onClick={() => setActiveSection(section.id)}
                   className={`px-4 py-2 rounded-lg text-sm font-medium transition relative ${
                     activeSection === section.id
-                      ? 'bg-blue-500 text-white'
-                      : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                      ? "bg-blue-500 text-white"
+                      : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                   }`}
                 >
                   {index + 1}
@@ -575,17 +579,17 @@ const BhavanForm = () => {
                 </button>
               );
             })}
-          </div>
-          
+          </div> */}
+
           <button
             type="submit"
             disabled={submitLoading}
             className={`bg-green-600 hover:bg-green-700 text-white font-medium py-3 px-8 rounded-lg transition flex items-center justify-center gap-2 min-w-[200px] ${
-              submitLoading ? 'cursor-not-allowed opacity-70' : ''
+              submitLoading ? "cursor-not-allowed opacity-70" : ""
             }`}
           >
             {submitLoading && <Loader className="w-5 h-5 animate-spin" />}
-            {submitLoading ? 'Submitting...' : 'Submit Banquet Order'}
+            {submitLoading ? "Submitting..." : "Submit Banquet Order"}
           </button>
         </div>
       </form>

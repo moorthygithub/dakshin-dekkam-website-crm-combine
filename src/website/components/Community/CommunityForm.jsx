@@ -278,7 +278,7 @@ const CommunityForm = () => {
           startIcon={<Home size={18} />}
         />
         <InputField
-          label="Native Place"
+          label="Native Placein Kutch"
           name="native_place"
           value={formData.native_place}
           onChange={handleChange}

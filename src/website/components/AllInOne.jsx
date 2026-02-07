@@ -2,7 +2,7 @@ import { Users, LifeBuoy, Calendar } from "lucide-react";
 
 function OurObjectives() {
   return (
-    <div className="container px-4 lg:px-8 mx-auto max-w-screen-xl text-gray-700">
+    <div className="container px-4 lg:px-8 mx-auto max-w-screen-xl text-gray-700 mb-4">
       {/* Heading */}
       <div data-aos="flip-up" className="max-w-xl mx-auto text-center mt-24">
         <h1 className="font-bold text-darken my-3 text-2xl">
