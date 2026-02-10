@@ -2,9 +2,7 @@ import GallerySection from "@/website/components/Bhavan/GallerySection";
 import VenueWebsite from "@/website/components/Bhavan/VenueWebsite";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import {
-  Star
-} from "lucide-react";
+import { Star } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -65,7 +63,7 @@ export default function BhavanWebsite() {
                 <img
                   src="/img/bhavan.png"
                   alt="Bhavan Building"
-                  className="relative w-full h-full object-cover rounded-3xl shadow-xl hover:shadow-2xl transform hover:scale-105 transition duration-500"
+                  className="relative w-full h-full object-cover rounded-md shadow-xl hover:shadow-2xl transform hover:scale-105 transition duration-500"
                 />
               </div>
             </div>
@@ -86,33 +84,57 @@ export default function BhavanWebsite() {
                   <p className="text-amber-700">Kutchi Bhavan</p>
                 </h1>
 
-                {/* Description */}
-                <p
-                  className={`text-xl text-gray-700 text-justify transition-all duration-500 ${
+                <div
+                  className={`text-sm text-gray-700 text-justify transition-all duration-500 ${
                     showMore
                       ? "max-h-[2000px]"
                       : "max-h-[380px] overflow-hidden"
                   }`}
                 >
-                  Kutchi Bhavan, JP Nagar, Bangalore, makes for an idyllic venue
-                  for grandiose weddings, receptions, birthday parties, wedding
-                  anniversaries, sangeet, mehndi, haldi, rasam, and engagement
-                  parties, baby showers, and even outdoor corporate events. The
-                  halls offered by the venue are of varying capacities and can
-                  accommodate a large number of guests. At Kutchi Bhavan,
-                  Bangalore, you have the complete liberty to hire a caterer of
-                  your choice to serve delicious and good quality vegetarian
-                  food. The team of in-house decorators at the venue provides
-                  decor that adds a charming look to your special event. This
-                  elegant venue is located just off 1st Main Road and about 10
-                  minutes away from Rashtriya Vidyalaya Road Metro Station. The
-                  helpful staff here takes care of your requirements so nothing
-                  falls short during the celebrations of your special day. You
-                  can avail of the changing rooms and a few lodging rooms that
-                  the venue offers. The gorgeous venue lets you beautifully
-                  celebrate your most important days. You will go home with a
-                  ton of happy memories to cherish for an entire lifetime.
-                </p>
+                  <p className="mb-4">
+                    Kutchi Bhavan, JP Nagar, Bangalore, is an idyllic venue
+                    perfect for hosting grand celebrations and memorable
+                    occasions. With spacious halls of varying capacities, the
+                    venue comfortably accommodates both intimate gatherings and
+                    large-scale events.
+                  </p>
+
+                  <p className="mb-4">
+                    The venue offers complete flexibility when it comes to
+                    catering. You are free to hire a caterer of your choice to
+                    serve delicious, high-quality vegetarian cuisine. In-house
+                    decorators are also available to enhance the ambience and
+                    add a charming touch to your special event.
+                  </p>
+
+                  <p className="mb-4">
+                    Conveniently located just off 1st Main Road and only 10
+                    minutes from Rashtriya Vidyalaya Road Metro Station, Kutchi
+                    Bhavan is easily accessible for guests. The professional and
+                    attentive staff ensures every detail is taken care of,
+                    allowing you to celebrate stress-free.
+                  </p>
+
+                  <p className="mb-3 font-semibold">
+                    Events that can be organized here:
+                  </p>
+
+                  <ul className="list-disc pl-6 space-y-2 mb-4">
+                    <li>Weddings & Wedding Receptions</li>
+                    <li>Engagements, Sangeet, Mehndi & Haldi ceremonies</li>
+                    <li>Birthday parties & Wedding anniversaries</li>
+                    <li>Baby showers & Family celebrations</li>
+                    <li>Corporate meetings & Outdoor corporate events</li>
+                  </ul>
+
+                  <p>
+                    Additional facilities include changing rooms and limited
+                    lodging rooms for added convenience. Kutchi Bhavan allows
+                    you to celebrate your most important moments in a beautiful
+                    setting, creating memories that will be cherished for a
+                    lifetime.
+                  </p>
+                </div>
 
                 {/* Toggle Button */}
                 <button
@@ -126,11 +148,10 @@ export default function BhavanWebsite() {
           </div>
         </div>
       </section>
+      <GallerySection />
 
       <VenueWebsite />
-      <div data-aos="fade-up">
-        <GallerySection />
-      </div>
+      <div data-aos="fade-up"></div>
       <section id="testimonials" className="bg-white mb-6">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-16">

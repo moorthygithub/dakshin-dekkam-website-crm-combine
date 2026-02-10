@@ -1,25 +1,20 @@
-import PageMeta from '@/website/components/common/PageMeta';
-import HeroSub from '@/website/components/HeroSub';
+import PageMeta from "@/website/components/common/PageMeta";
+import HeroSub from "@/website/components/HeroSub";
 
-import BookingRoomForm from './BookingRoomForm';
+import BookingRoomForm from "./BookingRoomForm";
 
 const BookingRoom = () => {
-     const breadcrumbLinks = [
+  const breadcrumbLinks = [
     { href: "/", text: "Home" },
-    { href: "/booking-room", text: "Booking Room" },
+    { href: "/booking-room", text: "Hall Booking" },
   ];
   return (
- <>
-      <PageMeta title="Booking Room | Dhakshin Ekkam" />
-      <HeroSub
-        title="Booking Room"
-        breadcrumbLinks={breadcrumbLinks}
-      />
+    <>
+      <PageMeta title="Hall Booking | Dhakshin Ekkam" />
+      <HeroSub title="Hall Booking" breadcrumbLinks={breadcrumbLinks} />
       <BookingRoomForm />
     </>
-  )
-}
+  );
+};
 
-export default BookingRoom
-
-
+export default BookingRoom;
