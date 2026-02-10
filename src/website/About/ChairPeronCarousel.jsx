@@ -127,7 +127,7 @@ const CommitteeGrid = () => {
   return (
     <section className="container mx-auto px-4 py-12">
       <h1 className="text-3xl font-bold text-center mb-4">
-        OUR ASSOCIATED <span className="text-yellow-500">MAHAJANS</span>
+        OUR ASSOCIATE <span className="text-yellow-500">MAHAJANS</span>
       </h1>
       <p className="text-center text-gray-500 mb-12">
         Dedicated members serving the community
@@ -142,7 +142,9 @@ const CommitteeGrid = () => {
         onPointerDown={() => setCoOptPaused(true)}
         onPointerUp={() => setCoOptPaused(false)}
       >
-        <h2 className="text-2xl font-semibold mb-6">Associated Members</h2>
+        <h2 className="text-2xl font-semibold mb-6">
+          Associate K.D.O. JAIN MAHAJANS
+        </h2>
         <Slider ref={coOptRef} {...sliderSettings}>
           {CO_OPT_MEMBERS.map((p, i) => (
             <div key={i} className="px-2 my-1">

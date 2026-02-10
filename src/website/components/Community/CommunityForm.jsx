@@ -26,6 +26,7 @@ import {
 } from "@/hooks/useApi";
 import { MarriedStatus } from "@/website/constants/selectOptions";
 import { CREATE_MEMBER } from "@/api";
+import { associateMahajan } from "@/website/data/associatemahajan";
 
 const CommunityForm = () => {
   const [formData, setFormData] = useState({
@@ -269,14 +270,28 @@ const CommunityForm = () => {
 
         {/* Address */}
 
-        <InputField
+        {/* <InputField
           label="Place of Residence"
           name="place_of_residence"
           value={formData.place_of_residence}
           onChange={handleChange}
           placeholder="Enter place of residence"
           startIcon={<Home size={18} />}
+        /> */}
+        <SelectField
+          label="Place of Residence"
+          name="place_of_residence"
+          value={formData.place_of_residence}
+          onChange={handleChange}
+          options={
+            associateMahajan?.map((occupation) => ({
+              value: occupation.value,
+              label: occupation.label,
+            })) || []
+          }
+          startIcon={<Home size={18} />}
         />
+        {/*  */}
         <InputField
           label="Native Placein Kutch"
           name="native_place"
@@ -348,14 +363,14 @@ const CommunityForm = () => {
         />
 
         {/* Group ID */}
-        <InputField
+        {/* <InputField
           label="MID"
           name="user_group_mid"
           value={formData.user_group_mid}
           onChange={handleChange}
           placeholder="Enter MID"
           startIcon={<Group size={18} />}
-        />
+        /> */}
         <div className="md:col-span-2">
           <InputField
             label="Residential Address"

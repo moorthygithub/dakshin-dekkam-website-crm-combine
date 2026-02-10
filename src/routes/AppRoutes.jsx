@@ -40,10 +40,8 @@ import LoanIndex from "@/website/pages/loan/LoanIndex";
 import BookingFormList from "@/crm/app/booking-form/BookingFormList";
 import BhavanIndex from "@/website/pages/bhavan/BhavanIndex";
 
-
 import BookingHall from "@/crm/app/bookingHall/BookingHall";
 import BookingHallEdit from "@/crm/app/bookingHall/BookingHallEdit";
-
 
 import BookingRoomEdit from "@/crm/app/booking-form/BookingRoomEdit";
 import LoanForm from "@/crm/app/loan-form/LoanForm";
@@ -98,7 +96,6 @@ const AppRoutes = () => {
         <Route path="event-register" element={<EventRegisterList />} />
         <Route path="event-track" element={<EventMemberTractList />} />
 
-
         <Route path="booking-form" element={<BookingFormList />} />
         <Route path="booking-room-edit/:id" element={<BookingRoomEdit />} />
 
@@ -107,8 +104,6 @@ const AppRoutes = () => {
 
         <Route path="loan" element={<LoanForm />} />
         <Route path="loan-view/:id" element={<LoanFormView />} />
-      
-
 
         <Route path="report-event" element={<EventReport />} />
         <Route path="report-event-summary" element={<EventSummaryReport />} />

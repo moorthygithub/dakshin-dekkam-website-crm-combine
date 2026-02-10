@@ -42,7 +42,8 @@ const Info = () => {
               <strong>Andhra Pradesh</strong>, <strong>Tamil Nadu</strong>,{" "}
               <strong>Kerala</strong>, <strong>Pondicherry</strong>, or{" "}
               <strong>Goa</strong>, and above 18 years of age, you are eligible
-              to become a <strong>Life Member</strong>.
+              to become a <strong>Life Member</strong>and from the KDO Jain
+              Community .
             </p>
 
             <p className="text-gray-700 leading-relaxed mb-2">

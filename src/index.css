@@ -167,6 +167,25 @@ html {
   display: none;
 }
 .scrollbar-hide {
-  -ms-overflow-style: none; 
-  scrollbar-width: none; 
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+/* Amber scrollbar */
+.amber-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.amber-scrollbar::-webkit-scrollbar-track {
+  background: #fef3c7; /* amber-100 */
+  border-radius: 10px;
+}
+
+.amber-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #fbbf24; /* amber-300 */
+  border-radius: 10px;
+}
+
+.amber-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: #f59e0b; /* amber-400 */
 }

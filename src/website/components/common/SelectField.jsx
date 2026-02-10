@@ -113,7 +113,7 @@ const CustomSelect = ({
         <ul
           role="listbox"
           tabIndex={-1}
-          className="absolute z-50 mt-1 w-full max-h-60 overflow-auto bg-white border rounded-lg shadow-lg py-1"
+          className="absolute top-16 z-50 mt-1 w-full max-h-60 overflow-auto bg-white border rounded-lg shadow-lg py-1"
           onKeyDown={onKeyDown}
         >
           <li
