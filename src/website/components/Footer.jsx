@@ -183,10 +183,10 @@ function Footer() {
 
   return (
     <footer className="bg-[#252641] text-white pt-12">
-      <div className="container mx-auto px-4 lg:px-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8">
+      <div className="mx-auto px-4 lg:px-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8">
         {/* Column 1: Company Info */}
         <div className="lg:col-span-4">
-          <h1 className="text-2xl font-bold mb-3 relative inline-block">
+          {/* <h1 className="text-2xl font-bold mb-3 relative inline-block">
             <span className="z-10">{websitecompany?.store_name || ""}</span>
             <svg
               className="w-6 h-6 absolute -top-0 -left-3 z-20"
@@ -200,7 +200,14 @@ function Footer() {
                 strokeWidth="2"
               />
             </svg>
-          </h1>
+          </h1> */}
+          <Link
+            to="/"
+            className="text-lg relative z-50 flex flex-row items-center gap-2 font-bold tracking-widest rounded-lg focus:outline-none focus:shadow-outline"
+          >
+            <img src="./logo.png" alt="app_logo" className="w-10  h-10" />
+            <span> Dhakshin Ekkam</span>
+          </Link>
           <p className="text-gray-400 mt-3 text-sm leading-relaxed">
             {websitecompany?.store_description || ""}
           </p>
@@ -273,7 +280,7 @@ function Footer() {
         </div>
 
         {/* Column 3: Contact Info */}
-        <div className="lg:col-span-3">
+        <div className="lg:col-span-4">
           <h2 className="font-semibold text-lg mb-4">Contact Us</h2>
           <div className="space-y-3 text-sm">
             <p className="flex items-start gap-2 text-gray-400">
@@ -301,7 +308,7 @@ function Footer() {
           </div>
 
           {/* Newsletter */}
-          <div className="mt-4">
+          {/* <div className="mt-4">
             <h3 className="font-semibold text-sm mb-2">Subscribe Newsletter</h3>
             <div className="flex gap-2">
               <input
@@ -317,13 +324,13 @@ function Footer() {
                 <Send size={16} />
               </button>
             </div>
-          </div>
+          </div> */}
         </div>
 
         {/* Column 4: Google Map */}
-        <div className="lg:col-span-3">
+        <div className="lg:col-span-2">
           <h2 className="font-semibold text-lg mb-4">Our Location</h2>
-          <div className="w-full h-48 sm:h-56 lg:h-64 rounded-lg overflow-hidden shadow-lg">
+          <div className="w-full h-40 rounded-lg overflow-hidden shadow-lg">
             <iframe
               src={
                 websitecompany?.google_map_url ||

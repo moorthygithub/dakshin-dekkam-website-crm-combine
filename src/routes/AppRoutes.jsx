@@ -47,6 +47,7 @@ import BookingRoomEdit from "@/crm/app/booking-form/BookingRoomEdit";
 import LoanForm from "@/crm/app/loan-form/LoanForm";
 import LoanFormView from "@/crm/app/loan-form/LoanFormView";
 import BhavanWebsite from "@/website/pages/bhavan/BhavanPage";
+import AGMReport from "@/crm/app/report/AGMReport/AGMReport";
 
 // Website Imports
 
@@ -108,6 +109,7 @@ const AppRoutes = () => {
         <Route path="report-event" element={<EventReport />} />
         <Route path="report-event-summary" element={<EventSummaryReport />} />
         <Route path="report-member" element={<MemberReport />} />
+        <Route path="report-agm" element={<AGMReport />} />
         <Route path="*" element={<PanelNotFound />} />
       </Route>
 

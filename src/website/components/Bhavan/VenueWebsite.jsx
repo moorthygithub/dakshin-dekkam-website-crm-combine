@@ -36,10 +36,10 @@ export default function VenueWebsite() {
     },
     {
       icon: <MapPin className="w-10 h-10" />,
-      title: "Metro connectivity",
+      title: "Prime Locations",
       description:
-        "Centrally located in JP Nagar, Bangalore with excellent connectivity and easy access from all parts of the city.",
-      highlights: ["JP Nagar", "Central Location"],
+        "Centrally located in JP Nagar, Bangalore wi'th excellent connectivity and easy access from all parts of the city.",
+      highlights: ["JP Nagar", "Central Location", "Metro connectivity"],
     },
     {
       icon: <Bed className="w-10 h-10" />,

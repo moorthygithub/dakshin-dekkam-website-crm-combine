@@ -310,14 +310,14 @@ export default function GallerySection() {
             </div>
 
             {/* Progress Bar */}
-            <div className="mt-6 h-1.5 bg-gray-200 rounded-full overflow-hidden">
+            {/* <div className="mt-6 h-1.5 bg-gray-200 rounded-full overflow-hidden">
               <div
                 className="h-full bg-amber-500 transition-all duration-300 rounded-full"
                 style={{
                   width: `${((currentSlide + 1) / galleryImages.length) * 100}%`,
                 }}
               />
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
