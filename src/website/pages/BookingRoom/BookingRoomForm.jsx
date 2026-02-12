@@ -177,7 +177,7 @@ const BookingRoomForm = () => {
         
         <div className="text-sm text-gray-600 space-y-1">
           <p>This form is for KDO Community. Please use this form for booking room at Kutchi Bhavan - Bangalore</p>
-          <div className="flex flex-wrap justify-center items-center gap-x-4 gap-y-1 text-xs">
+          {/* <div className="flex flex-wrap justify-center items-center gap-x-4 gap-y-1 text-xs">
             <span className="flex items-center gap-1">
               <Phone className="w-3 h-3" />
               <strong>Contact:</strong> Mr. Devaru Bhatt, Ph: 080-43705354 / 9606922996
@@ -194,7 +194,7 @@ const BookingRoomForm = () => {
                 Location
               </a>
             </span>
-          </div>
+          </div> */}
         </div>
       </div>
 

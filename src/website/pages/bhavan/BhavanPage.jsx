@@ -5,6 +5,7 @@ import "aos/dist/aos.css";
 import { Star } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Testimonials from "./Testimonials";
 
 export default function BhavanWebsite() {
   const navigate = useNavigate();
@@ -17,27 +18,6 @@ export default function BhavanWebsite() {
       offset: 100,
     });
   }, []);
-
-  const testimonials = [
-    {
-      name: "Priya & Raj",
-      event: "Wedding Reception",
-      text: "The venue exceeded our expectations! The staff was incredibly helpful, and our guests loved the ambiance.",
-      rating: 5,
-    },
-    {
-      name: "Tech Solutions Inc.",
-      event: "Annual Conference",
-      text: "Perfect location for our 300+ attendee conference. The audio-visual equipment was top-notch.",
-      rating: 5,
-    },
-    {
-      name: "Meera Shah",
-      event: "Birthday Celebration",
-      text: "Beautiful venue with excellent catering options. Made my mother's 60th birthday truly special.",
-      rating: 5,
-    },
-  ];
 
   return (
     <div className="min-h-screen bg-white overflow-hidden">
@@ -151,41 +131,7 @@ export default function BhavanWebsite() {
       <GallerySection />
 
       <VenueWebsite />
-      <div data-aos="fade-up"></div>
-      <section id="testimonials" className="bg-white mb-6">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-              What Our Clients Say
-            </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-amber-400 to-orange-300 mx-auto rounded-full"></div>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, idx) => (
-              <div
-                key={idx}
-                className="bg-amber-50 p-8 rounded-2xl shadow-md hover:shadow-lg transition"
-              >
-                <div className="flex mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star
-                      key={i}
-                      className="w-5 h-5 fill-amber-400 text-amber-400"
-                    />
-                  ))}
-                </div>
-                <p className="text-gray-700 mb-6 italic">
-                  "{testimonial.text}"
-                </p>
-                <div className="border-t border-amber-200 pt-4">
-                  <p className="font-bold text-gray-900">{testimonial.name}</p>
-                  <p className="text-sm text-gray-600">{testimonial.event}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <Testimonials />
     </div>
   );
 }

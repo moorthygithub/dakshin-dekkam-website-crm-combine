@@ -6,6 +6,7 @@ import Navbar from "../components/Navbar";
 import ScrollToTop from "../components/ScrollToTop";
 import RouteLoader from "../components/common/RouteLoader";
 import CompanyData from "../utils/CompanyData";
+import FloatingContact from "../components/common/FloatingContact";
 
 function MainLayout() {
   const { pathname } = useLocation();
@@ -18,6 +19,7 @@ function MainLayout() {
       <Toaster position="top-right" reverseOrder={false} />
       <Navbar />
       <CompanyData />
+      <FloatingContact />
       <ScrollToTop />
       <RouteLoader />
       <main className="flex-grow">
