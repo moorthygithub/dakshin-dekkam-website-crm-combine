@@ -54,7 +54,6 @@ export function AppSidebar({ ...props }) {
         icon: House,
         isActive: false,
       },
-      
 
       {
         title: "Member",
@@ -116,6 +115,12 @@ export function AppSidebar({ ...props }) {
       {
         title: "Loan Form",
         url: "/crm/loan",
+        icon: House,
+        isActive: false,
+      },
+      {
+        title: "AGM Report",
+        url: "/crm/report-agm",
         icon: House,
         isActive: false,
       },

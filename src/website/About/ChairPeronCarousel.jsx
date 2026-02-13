@@ -21,14 +21,73 @@ const COMMITTEE_MEMBERS = [
   { name: "Hema Gulab Chheda", role: "", place: "Bangalore" },
 ];
 
-const CO_OPT_MEMBERS = [
-  { name: "Bharat L Dharamshi", role: "Joint Secretary", place: "Hubli" },
-  { name: "Mitesh P Lodaya", role: "Joint Secretary", place: "Bangalore" },
-  { name: "Satish P Luthia", role: "Joint Treasurer", place: "Gadag" },
-  { name: "Litin N Lodaya", role: "", place: "Coimbatore" },
-  { name: "Sujeev J Soni", role: "", place: "Gadag" },
-  { name: "Hiren K Chheda", role: "", place: "Hubli" },
-  { name: "Chetan S Munvar", role: "", place: "Bellary" },
+// const CO_OPT_MEMBERS = [
+//   { name: "Bharat L Dharamshi", role: "Joint Secretary", place: "Hubli" },
+//   { name: "Mitesh P Lodaya", role: "Joint Secretary", place: "Bangalore" },
+//   { name: "Satish P Luthia", role: "Joint Treasurer", place: "Gadag" },
+//   { name: "Litin N Lodaya", role: "", place: "Coimbatore" },
+//   { name: "Sujeev J Soni", role: "", place: "Gadag" },
+//   { name: "Hiren K Chheda", role: "", place: "Hubli" },
+//   { name: "Chetan S Munvar", role: "", place: "Bellary" },
+// ];
+const BRANCH_MEMBERS = [
+  { name: "gulabhchand soni", role: "President", place: "Bagalkot" },
+
+  { name: "Satish D. Shah", role: "President", place: "Banglore" },
+  { name: "Mitesh Pravinchandra Lodaya", role: "Secretary", place: "Banglore" },
+
+  { name: "Chetan Somchand Munvar", role: "President", place: "Bellari" },
+
+  { name: "Dhirish Javerchand Dharamshi", role: "President", place: "Bijapur" },
+
+  { name: "Kishorchand Mulji Lodaya", role: "President", place: "Dhavangere" },
+  { name: "Kishorchand Shah", role: "Secretary", place: "Dhavangere" },
+
+  { name: "Vijay Pravinchand Luthia", role: "President", place: "Gadag" },
+  { name: "Sanjay Thakarshi Mota", role: "Secretary", place: "Gadag" },
+
+  { name: "Bharat Bhanji Khona", role: "President", place: "Hubli" },
+  { name: "Sharad S Momaya", role: "Secretary", place: "Hubli" },
+
+  { name: "Rajendra Umarshi Lapasia", role: "President", place: "Raichur" },
+  { name: "Sanjay Raichsand Gada", role: "Secretary", place: "Raichur" },
+
+  { name: "Hanskumar Jitendra Khona", role: "President", place: "Sirsi" },
+  { name: "Dayalal Jivraj Momaya", role: "Secretary", place: "Sirsi" },
+
+  { name: "Jitendra kunverji Meisheri", role: "President", place: "Alleppey" },
+  { name: "Chandresh Tokarshi Lodaya", role: "Secretary", place: "Alleppey" },
+
+  { name: "Chandrakant Khimji Khona", role: "President", place: "Calicut" },
+  { name: "Bhavesh K Shah", role: "Secretary", place: "Calicut" },
+
+  { name: "Jivraj Vershi Poladia", role: "President", place: "Badagara" },
+  { name: "Narendra Premji Lodaya", role: "Secretary", place: "Badagara" },
+
+  { name: "Viren Kalyanji Khona", role: "President", place: "Cochin" },
+  { name: "Arvind J. Shah", role: "Secretary", place: "Cochin" },
+
+  {
+    name: "Shrimati Jayshree Praful Mota",
+    role: "President",
+    place: "Chennai",
+  },
+  { name: "Rajesh Gangajar Momaya", role: "Secretary", place: "Chennai" },
+
+  { name: "Pradeep R. Lodaya", role: "President", place: "Coimbatore" },
+  { name: "Manish Pravin Momaya", role: "Secretary", place: "Coimbatore" },
+
+  { name: "Arvind V Nagda", role: "President", place: "Guntur" },
+  { name: "Litin Chandulal Lodaya", role: "Secretary", place: "Guntur" },
+
+  { name: "Hemang Manikant Momaya", role: "President", place: "Hyderabad" },
+  { name: "Monik Dharamshi", role: "Secretary", place: "Hyderabad" },
+
+  { name: "Raichand Malshi Mota", role: "President", place: "Salem" },
+  { name: "Manoj Chandrakant Munvar", role: "Secretary", place: "Salem" },
+
+  { name: "Ratilal Vershi Lodaya", role: "President", place: "Tirupur" },
+  { name: "Prathapkumar kumar Hansraj", role: "Secretary", place: "Tirupur" },
 ];
 
 const Card = ({ person, isAlt }) => (
@@ -69,7 +128,7 @@ const CommitteeGrid = () => {
       if (!coOptPaused) {
         setCoOptProgress((prev) => {
           if (prev >= 100) {
-            const next = (coOptIndex + 1) % CO_OPT_MEMBERS.length;
+            const next = (coOptIndex + 1) % BRANCH_MEMBERS.length;
             setCoOptIndex(next);
             coOptRef.current?.slickGoTo(next);
             return 0;
@@ -98,14 +157,33 @@ const CommitteeGrid = () => {
     return () => clearInterval(interval);
   }, [committeeIndex, committeePaused]);
 
+  // const sliderSettings = {
+  //   dots: false,
+  //   arrows: false,
+  //   infinite: true,
+  //   speed: 600,
+  //   autoplay: false,
+  //   slidesToShow: 4,
+  //   slidesToScroll: 1,
+  //   responsive: [
+  //     { breakpoint: 1024, settings: { slidesToShow: 3 } },
+  //     { breakpoint: 768, settings: { slidesToShow: 1 } },
+  //   ],
+  // };
   const sliderSettings = {
     dots: false,
     arrows: false,
     infinite: true,
-    speed: 600,
-    autoplay: false,
+    speed: 5000,
+    autoplay: true,
+    autoplaySpeed: 0,
+    cssEase: "linear",
     slidesToShow: 4,
     slidesToScroll: 1,
+    pauseOnHover: true,
+    swipe: true,
+    draggable: true,
+    swipeToSlide: true,
     responsive: [
       { breakpoint: 1024, settings: { slidesToShow: 3 } },
       { breakpoint: 768, settings: { slidesToShow: 1 } },
@@ -146,20 +224,20 @@ const CommitteeGrid = () => {
           Associate K.D.O. JAIN MAHAJANS
         </h2>
         <Slider ref={coOptRef} {...sliderSettings}>
-          {CO_OPT_MEMBERS.map((p, i) => (
+          {BRANCH_MEMBERS.map((p, i) => (
             <div key={i} className="px-2 my-1">
               <Card person={p} isAlt={i % 2 === 0} />
             </div>
           ))}
         </Slider>
-        <div className="flex justify-center mt-3">
+        {/* <div className="flex justify-center mt-3">
           <ProgressDots
-            slidesCount={CO_OPT_MEMBERS.length}
+            slidesCount={BRANCH_MEMBERS.length}
             activeIndex={coOptIndex}
             progress={coOptProgress}
             onDotClick={handleCoOptDotClick}
           />
-        </div>
+        </div> */}
       </div>
       {/* Committee Members */}
       <h2 className="text-2xl font-semibold mt-12 mb-6">Committee Members</h2>
@@ -183,14 +261,14 @@ const CommitteeGrid = () => {
             </div>
           ))}
         </Slider>
-        <div className="flex justify-center mt-3">
+        {/* <div className="flex justify-center mt-3">
           <ProgressDots
             slidesCount={COMMITTEE_MEMBERS.length}
             activeIndex={committeeIndex}
             progress={committeeProgress}
             onDotClick={handleCommitteeDotClick}
           />
-        </div>
+        </div> */}
       </div>
     </section>
   );
