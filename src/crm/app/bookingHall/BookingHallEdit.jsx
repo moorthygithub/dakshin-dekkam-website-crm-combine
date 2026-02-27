@@ -86,7 +86,8 @@ const BookingHallEdit = () => {
   });
 
   const { trigger: submitTrigger, loading: submitLoading } = useApiMutation();
-  const { data: bookingHallById, loading: isFetching } = useFetchBookingHall(decryptedId);
+  const { data: bookingHallById, loading: isFetching } =
+    useFetchBookingHall(decryptedId);
 
   useEffect(() => {
     if (decryptedId && bookingHallById?.data) {
@@ -150,9 +151,9 @@ const BookingHallEdit = () => {
     e.preventDefault();
 
     const missingFields = [];
-    
+
     // Required fields validation
-    if (!formData.guest_name) missingFields.push("Guest Name");
+    if (!formData.guest_name) missingFields.push("Guest's Full Name");
     if (!formData.guest_mobile_number) missingFields.push("Mobile Number");
     if (!formData.guest_address) missingFields.push("Address");
     if (!formData.guest_email) missingFields.push("Email");
@@ -189,7 +190,7 @@ const BookingHallEdit = () => {
         method: "put",
         data: formData,
       });
-      
+
       if (response?.code === 201) {
         toast({
           title: "Success",
@@ -207,7 +208,8 @@ const BookingHallEdit = () => {
     } catch (error) {
       toast({
         title: "Error",
-        description: error?.response?.data?.message || "Failed to update booking",
+        description:
+          error?.response?.data?.message || "Failed to update booking",
         variant: "destructive",
       });
     }
@@ -233,8 +235,11 @@ const BookingHallEdit = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                   {/* Guest Name */}
                   <div>
-                    <label className={`block ${ButtonConfig.cardLabel} text-sm mb-2 font-medium`}>
-                      Guest Name<span className="text-red-500">*</span>
+                    <label
+                      className={`block ${ButtonConfig.cardLabel} text-sm mb-2 font-medium`}
+                    >
+                      Guest's Full Name
+                    <span className="text-red-500">*</span>
                     </label>
                     <Input
                       className="bg-white border border-gray-300 rounded-lg w-full focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
@@ -247,7 +252,9 @@ const BookingHallEdit = () => {
 
                   {/* Company Name */}
                   <div>
-                    <label className={`block ${ButtonConfig.cardLabel} text-sm mb-2 font-medium`}>
+                    <label
+                      className={`block ${ButtonConfig.cardLabel} text-sm mb-2 font-medium`}
+                    >
                       Company Name
                     </label>
                     <Input
@@ -261,13 +268,17 @@ const BookingHallEdit = () => {
 
                   {/* Mobile Number */}
                   <div>
-                    <label className={`block ${ButtonConfig.cardLabel} text-sm mb-2 font-medium`}>
+                    <label
+                      className={`block ${ButtonConfig.cardLabel} text-sm mb-2 font-medium`}
+                    >
                       Mobile Number<span className="text-red-500">*</span>
                     </label>
                     <Input
                       className="bg-white border border-gray-300 rounded-lg w-full focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                       value={formData.guest_mobile_number}
-                      onChange={(e) => handleInputChange(e, "guest_mobile_number")}
+                      onChange={(e) =>
+                        handleInputChange(e, "guest_mobile_number")
+                      }
                       maxLength={10}
                       placeholder="Enter mobile number"
                     />
@@ -275,13 +286,17 @@ const BookingHallEdit = () => {
 
                   {/* Landline Number */}
                   <div>
-                    <label className={`block ${ButtonConfig.cardLabel} text-sm mb-2 font-medium`}>
+                    <label
+                      className={`block ${ButtonConfig.cardLabel} text-sm mb-2 font-medium`}
+                    >
                       Landline Number
                     </label>
                     <Input
                       className="bg-white border border-gray-300 rounded-lg w-full focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                       value={formData.guest_landline_number}
-                      onChange={(e) => handleInputChange(e, "guest_landline_number")}
+                      onChange={(e) =>
+                        handleInputChange(e, "guest_landline_number")
+                      }
                       maxLength={15}
                       placeholder="Enter landline number"
                     />
@@ -289,7 +304,9 @@ const BookingHallEdit = () => {
 
                   {/* Email */}
                   <div>
-                    <label className={`block ${ButtonConfig.cardLabel} text-sm mb-2 font-medium`}>
+                    <label
+                      className={`block ${ButtonConfig.cardLabel} text-sm mb-2 font-medium`}
+                    >
                       Email<span className="text-red-500">*</span>
                     </label>
                     <Input
@@ -304,7 +321,9 @@ const BookingHallEdit = () => {
 
                   {/* Function Type */}
                   <div>
-                    <label className={`block ${ButtonConfig.cardLabel} text-sm mb-2 font-medium`}>
+                    <label
+                      className={`block ${ButtonConfig.cardLabel} text-sm mb-2 font-medium`}
+                    >
                       Function Type<span className="text-red-500">*</span>
                     </label>
                     <Input
@@ -318,7 +337,9 @@ const BookingHallEdit = () => {
 
                   {/* Number of Guests */}
                   <div>
-                    <label className={`block ${ButtonConfig.cardLabel} text-sm mb-2 font-medium`}>
+                    <label
+                      className={`block ${ButtonConfig.cardLabel} text-sm mb-2 font-medium`}
+                    >
                       Number of Guests<span className="text-red-500">*</span>
                     </label>
                     <Input
@@ -333,7 +354,9 @@ const BookingHallEdit = () => {
 
                   {/* Number of Days */}
                   <div>
-                    <label className={`block ${ButtonConfig.cardLabel} text-sm mb-2 font-medium`}>
+                    <label
+                      className={`block ${ButtonConfig.cardLabel} text-sm mb-2 font-medium`}
+                    >
                       Number of Days<span className="text-red-500">*</span>
                     </label>
                     <Input
@@ -348,60 +371,78 @@ const BookingHallEdit = () => {
 
                   {/* Check-in Date */}
                   <div>
-                    <label className={`block ${ButtonConfig.cardLabel} text-sm mb-2 font-medium`}>
+                    <label
+                      className={`block ${ButtonConfig.cardLabel} text-sm mb-2 font-medium`}
+                    >
                       Check-in Date<span className="text-red-500">*</span>
                     </label>
                     <Input
                       type="date"
                       className="bg-white border border-gray-300 rounded-lg w-full focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                       value={formData.guest_checkIn_date}
-                      onChange={(e) => handleInputChange(e, "guest_checkIn_date")}
+                      onChange={(e) =>
+                        handleInputChange(e, "guest_checkIn_date")
+                      }
                     />
                   </div>
 
                   {/* Check-in Time */}
                   <div>
-                    <label className={`block ${ButtonConfig.cardLabel} text-sm mb-2 font-medium`}>
+                    <label
+                      className={`block ${ButtonConfig.cardLabel} text-sm mb-2 font-medium`}
+                    >
                       Check-in Time<span className="text-red-500">*</span>
                     </label>
                     <Input
                       type="time"
                       className="bg-white border border-gray-300 rounded-lg w-full focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                       value={formData.guest_checkIn_time}
-                      onChange={(e) => handleInputChange(e, "guest_checkIn_time")}
+                      onChange={(e) =>
+                        handleInputChange(e, "guest_checkIn_time")
+                      }
                     />
                   </div>
 
                   {/* Check-out Date */}
                   <div>
-                    <label className={`block ${ButtonConfig.cardLabel} text-sm mb-2 font-medium`}>
+                    <label
+                      className={`block ${ButtonConfig.cardLabel} text-sm mb-2 font-medium`}
+                    >
                       Check-out Date<span className="text-red-500">*</span>
                     </label>
                     <Input
                       type="date"
                       className="bg-white border border-gray-300 rounded-lg w-full focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                       value={formData.guest_checkOut_date}
-                      onChange={(e) => handleInputChange(e, "guest_checkOut_date")}
+                      onChange={(e) =>
+                        handleInputChange(e, "guest_checkOut_date")
+                      }
                     />
                   </div>
 
                   {/* Check-out Time */}
                   <div>
-                    <label className={`block ${ButtonConfig.cardLabel} text-sm mb-2 font-medium`}>
+                    <label
+                      className={`block ${ButtonConfig.cardLabel} text-sm mb-2 font-medium`}
+                    >
                       Check-out Time<span className="text-red-500">*</span>
                     </label>
                     <Input
                       type="time"
                       className="bg-white border border-gray-300 rounded-lg w-full focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                       value={formData.guest_checkOut_time}
-                      onChange={(e) => handleInputChange(e, "guest_checkOut_time")}
+                      onChange={(e) =>
+                        handleInputChange(e, "guest_checkOut_time")
+                      }
                     />
                   </div>
 
                   {/* Status Dropdown */}
                   <div className="mb-4">
                     <div className="flex items-center justify-between mb-2">
-                      <label className={`text-sm font-medium ${ButtonConfig.cardLabel}`}>
+                      <label
+                        className={`text-sm font-medium ${ButtonConfig.cardLabel}`}
+                      >
                         Status <span className="text-red-500">*</span>
                       </label>
                     </div>
@@ -415,7 +456,9 @@ const BookingHallEdit = () => {
 
                   {/* Address - Full width */}
                   <div className="md:col-span-2">
-                    <label className={`block ${ButtonConfig.cardLabel} text-sm mb-2 font-medium`}>
+                    <label
+                      className={`block ${ButtonConfig.cardLabel} text-sm mb-2 font-medium`}
+                    >
                       Address<span className="text-red-500">*</span>
                     </label>
                     <Textarea
@@ -430,13 +473,17 @@ const BookingHallEdit = () => {
 
                   {/* Special Instructions - Full width */}
                   <div className="md:col-span-2">
-                    <label className={`block ${ButtonConfig.cardLabel} text-sm mb-2 font-medium`}>
+                    <label
+                      className={`block ${ButtonConfig.cardLabel} text-sm mb-2 font-medium`}
+                    >
                       Special Instructions
                     </label>
                     <Textarea
                       className="bg-white border border-gray-300 rounded-lg w-full focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                       value={formData.special_instructions}
-                      onChange={(e) => handleInputChange(e, "special_instructions")}
+                      onChange={(e) =>
+                        handleInputChange(e, "special_instructions")
+                      }
                       maxLength={1000}
                       placeholder="Enter any special instructions or requirements"
                       rows={3}
@@ -445,7 +492,7 @@ const BookingHallEdit = () => {
                 </div>
               </CardContent>
             </Card>
-            
+
             <div className="flex flex-row items-center gap-2 justify-end">
               <Button
                 type="submit"

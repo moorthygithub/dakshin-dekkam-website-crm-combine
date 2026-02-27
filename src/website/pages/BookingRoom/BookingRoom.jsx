@@ -6,12 +6,12 @@ import BookingRoomForm from "./BookingRoomForm";
 const BookingRoom = () => {
   const breadcrumbLinks = [
     { href: "/", text: "Home" },
-    { href: "/booking-room", text: "Hall Booking" },
+    { href: "/booking-room", text: "Room Booking" },
   ];
   return (
     <>
-      <PageMeta title="Hall Booking | Dhakshin Ekkam" />
-      <HeroSub title="Hall Booking" breadcrumbLinks={breadcrumbLinks} />
+      <PageMeta title="Room Booking | Dhakshin Ekkam" />
+      <HeroSub title="Room Booking" breadcrumbLinks={breadcrumbLinks} />
       <BookingRoomForm />
     </>
   );

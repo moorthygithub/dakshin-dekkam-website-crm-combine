@@ -349,7 +349,7 @@ const MemberForm = () => {
                     <label
                       className={`block  ${ButtonConfig.cardLabel} text-sm mb-2 font-medium `}
                     >
-                      Email<span className="text-red-500">*</span>
+                      Email
                     </label>
                     <Input
                       type="email"
@@ -472,7 +472,7 @@ const MemberForm = () => {
                       <label
                         className={`block  ${ButtonConfig.cardLabel} text-sm mb-2 font-medium `}
                       >
-                        MID<span className="text-red-500">*</span>
+                        Member ID<span className="text-red-500">*</span>
                       </label>
                       <Input
                         className="bg-white border border-gray-300 rounded-lg w-full focus:ring-2 "

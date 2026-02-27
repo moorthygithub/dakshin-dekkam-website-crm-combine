@@ -192,7 +192,7 @@ const BhavanForm = () => {
 
       if (response?.code === 201) {
         showSuccessToast(
-          response.message || "Banquet order submitted successfully!"
+          response.message || "Banquet order submitted successfully!",
         );
 
         // Reset form
@@ -218,15 +218,15 @@ const BhavanForm = () => {
       }
     } catch (error) {
       showErrorToast(
-        error?.response?.data?.message || "Failed to submit banquet order"
+        error?.response?.data?.message || "Failed to submit banquet order",
       );
     }
   };
 
-  const sectionButtons = [
-    { id: "guest", label: "Guest Details", icon: User },
-    { id: "booking", label: "Booking Details", icon: Calendar },
-  ];
+  // const sectionButtons = [
+  //   { id: "guest", label: "Guest Details", icon: User },
+  //   { id: "booking", label: "Booking Details", icon: Calendar },
+  // ];
 
   const hasErrorsInSection = (sectionId) => {
     const sectionFields = {
@@ -315,7 +315,7 @@ const BhavanForm = () => {
         </div>
       </div> */}
 
-      <div className="bg-white border-b border-gray-200 px-8">
+      {/* <div className="bg-white border-b border-gray-200 px-8">
         <div className="flex overflow-x-auto scrollbar-hide">
           {sectionButtons.map((section) => {
             const Icon = section.icon;
@@ -340,7 +340,7 @@ const BhavanForm = () => {
             );
           })}
         </div>
-      </div>
+      </div> */}
 
       <form onSubmit={handleSubmit} className="px-8 py-6 bg-white">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -507,9 +507,7 @@ const BhavanForm = () => {
           )}
         </div>
 
-        <div className="">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"></div>
-
+        <div className="mt-4">
           <div className="md:col-span-2 lg:col-span-3">
             <InputField
               label="Special Instructions"

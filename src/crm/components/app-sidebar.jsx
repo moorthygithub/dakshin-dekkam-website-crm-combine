@@ -69,14 +69,14 @@ export function AppSidebar({ ...props }) {
             title: "All",
             url: "/crm/member",
           },
-          {
-            title: "Active",
-            url: "/crm/active-member",
-          },
-          {
-            title: "Inactive",
-            url: "/crm/inactive-member",
-          },
+          // {
+          //   title: "Active",
+          //   url: "/crm/active-member",
+          // },
+          // {
+          //   title: "Inactive",
+          //   url: "/crm/inactive-member",
+          // },
         ],
       },
       {
@@ -101,13 +101,13 @@ export function AppSidebar({ ...props }) {
         ],
       },
       {
-        title: "Booking Form",
+        title: "Room Bookings",
         url: "/crm/booking-form",
         icon: House,
         isActive: false,
       },
       {
-        title: "Booking Hall",
+        title: "Hall Bookings",
         url: "/crm/booking-hall",
         icon: House,
         isActive: false,

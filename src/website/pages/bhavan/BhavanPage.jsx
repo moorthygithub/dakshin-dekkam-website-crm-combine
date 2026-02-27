@@ -6,6 +6,8 @@ import { Star } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Testimonials from "./Testimonials";
+import MiddleBanner from "@/website/components/Bhavan/MiddleBanner";
+import Occasion from "@/website/components/Bhavan/Occasion";
 
 export default function BhavanWebsite() {
   const navigate = useNavigate();
@@ -51,17 +53,17 @@ export default function BhavanWebsite() {
             {/* Right Content */}
             <div className="space-y-8 order-1 lg:order-2" data-aos="fade-left">
               <div>
-                {/* Badge */}
-                <div className="inline-block mb-4 px-4 py-2 bg-amber-100 rounded-full border border-amber-300">
+                {/* <div className="inline-block mb-4 px-4 py-2 bg-amber-100 rounded-full border border-amber-300">
                   <span className="text-amber-900 text-sm font-semibold">
                     Welcome to Bhavan
                   </span>
-                </div>
+                </div> */}
 
                 {/* Heading */}
-                <h1 className="text-4xl font-bold text-gray-900 mb-4">
+                <h1 className="text-3xl font-bold text-gray-900 mb-4 ">
                   Know More About
-                  <p className="text-amber-700">Kutchi Bhavan</p>
+                  <span className="text-amber-700 ml-2">Kutchi Bhavan ? </span>
+                  {/* <p className="text-amber-700">Kutchi Bhavan</p> */}
                 </h1>
 
                 <div
@@ -88,11 +90,11 @@ export default function BhavanWebsite() {
                   </p>
 
                   <p className="mb-4">
-                    Conveniently located just off 1st Main Road and only 10
-                    minutes from Rashtriya Vidyalaya Road Metro Station, Kutchi
-                    Bhavan is easily accessible for guests. The professional and
-                    attentive staff ensures every detail is taken care of,
-                    allowing you to celebrate stress-free.
+                    Conveniently located just off 1st Main Road and only 5min
+                    walk from the Jaydeva Metro Station, Kutchi Bhavan is easily
+                    accessible for guests. The professional and attentive staff
+                    ensures every detail is taken care of, allowing you to
+                    celebrate stress-free.
                   </p>
 
                   <p className="mb-3 font-semibold">
@@ -128,10 +130,12 @@ export default function BhavanWebsite() {
           </div>
         </div>
       </section>
-      <GallerySection />
 
       <VenueWebsite />
+      <MiddleBanner />
       <Testimonials />
+      <Occasion />
+      <GallerySection />
     </div>
   );
 }
