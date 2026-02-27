@@ -270,10 +270,10 @@ function Footer() {
             </li>
             <li>
               <Link
-                to="/booking-room"
+                to="/booking-hall"
                 className="hover:text-yellow-500 transition-colors"
               >
-                Booking Now
+                Hall Booking
               </Link>
             </li>
           </ul>
@@ -334,17 +334,17 @@ function Footer() {
             <iframe
               src={
                 websitecompany?.google_map_url ||
-                "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31111.508527197977!2d77.5629830360412!3d12.911670044002692!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae15052638c655%3A0xa554dfefe0a1b47e!2sKutchi%20Bhavan!5e0!3m2!1sen!2sin!4v1770878268643!5m2!1sen!2sin"
+                "https://www.google.com/maps?q=Kutchi%20Bhavan&output=embed"
               }
               width="100%"
               height="100%"
               style={{ border: 0 }}
-              allowFullScreen=""
+              allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               title="Google Map Location"
               className="transition-all duration-300"
-            ></iframe>
+            />
           </div>
         </div>
       </div>

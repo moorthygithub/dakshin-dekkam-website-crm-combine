@@ -240,12 +240,9 @@ const CommitteeGrid = () => {
         </div> */}
       </div>
       {/* Committee Members */}
-      <h2 className="text-2xl font-semibold mt-12 mb-6">Committee Members</h2>
-      <div
-        // onMouseEnter={() => setCommitteePaused(true)}
-        // onMouseLeave={() => setCommitteePaused(false)}
-        // onTouchStart={() => setCommitteePaused(true)}
-        // onTouchEnd={() => setCommitteePaused(false)}
+      {/* <h2 className="text-2xl font-semibold mt-12 mb-6">Committee Members</h2> */}
+      {/* <div
+
         onMouseEnter={() => setCommitteePaused(true)}
         onMouseLeave={() => setCommitteePaused(false)}
         onTouchStart={() => setCommitteePaused(true)}
@@ -261,15 +258,8 @@ const CommitteeGrid = () => {
             </div>
           ))}
         </Slider>
-        {/* <div className="flex justify-center mt-3">
-          <ProgressDots
-            slidesCount={COMMITTEE_MEMBERS.length}
-            activeIndex={committeeIndex}
-            progress={committeeProgress}
-            onDotClick={handleCommitteeDotClick}
-          />
-        </div> */}
-      </div>
+    
+      </div> */}
     </section>
   );
 };

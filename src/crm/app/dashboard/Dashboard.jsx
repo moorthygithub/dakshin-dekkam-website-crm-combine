@@ -104,7 +104,7 @@ const Dashboard = () => {
   const filteredEvents =
     formData.branch_id && formData.branch_id !== 0
       ? dashboard.upcomingEvent.filter(
-          (event) => event.branch_id === formData.branch_id
+          (event) => event.branch_id === formData.branch_id,
         )
       : dashboard.upcomingEvent;
 
@@ -159,7 +159,7 @@ const Dashboard = () => {
           <div className="space-y-4  py-2 px-1">
             <div className="flex justify-between">
               <h3 className="text-md font-semibold">Upcoming Events</h3>
-              {userType === 3 && (
+              {userType === 3 && filteredEvents?.length > 0 && (
                 <div className="mb-4">
                   <Select
                     value={String(formData.branch_id)}

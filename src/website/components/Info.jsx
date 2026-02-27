@@ -47,7 +47,7 @@ const Info = () => {
             </p>
 
             <p className="text-gray-700 leading-relaxed mb-2">
-              Societies, trusts, and Mahajans with{" "}
+              Societies, trusts, and {" "}
               <strong>75 or more members</strong> can also enroll as{" "}
               <strong>Associate Life Members</strong>.
             </p>

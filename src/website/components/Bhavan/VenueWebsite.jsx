@@ -1,8 +1,5 @@
 import {
-  Award,
   Bed,
-  ChevronRight,
-  Heart,
   MapPin,
   Music,
   Users,
@@ -71,32 +68,8 @@ export default function VenueWebsite() {
     },
   ];
 
-  const events = [
-    {
-      icon: <Heart className="w-8 h-8" />,
-      title: "Weddings",
-      description: "Create magical memories in our elegant spaces",
-    },
-    {
-      icon: <Users className="w-8 h-8" />,
-      title: "Corporate Events",
-      description: "Professional settings for your business gatherings",
-    },
-    {
-      icon: <Music className="w-8 h-8" />,
-      title: "Celebrations",
-      description: "Perfect venue for birthdays and anniversaries",
-    },
-    {
-      icon: <Award className="w-8 h-8" />,
-      title: "Conferences",
-      description: "State-of-the-art facilities for seminars",
-    },
-  ];
-
   return (
     <div className="min-h-screen bg-gradient-to-b from-amber-50 to-white">
-      {/* Features Section */}
       <section id="features" className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-16" data-aos="fade-up">
@@ -161,77 +134,6 @@ export default function VenueWebsite() {
               </div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Events Section */}
-      <section
-        id="events"
-        className="py-20 bg-gradient-to-b from-amber-50 to-white"
-      >
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-              Perfect for Every Occasion
-            </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-amber-400 to-orange-300 mx-auto rounded-full"></div>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {events.map((event, idx) => (
-              <div
-                key={idx}
-                className="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition duration-300 text-center group"
-              >
-                <div className="inline-block p-4 bg-gradient-to-br from-amber-400 to-orange-300 text-white rounded-full mb-6 group-hover:scale-110 transition">
-                  {event.icon}
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">
-                  {event.title}
-                </h3>
-                <p className="text-gray-600">{event.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-      <section
-        id="home"
-        className="relative h-[70vh] min-h-[380px] flex items-center justify-center overflow-hidden"
-      >
-        <div className="absolute inset-0 bg-gradient-to-br from-amber-600 via-orange-500 to-amber-700"></div>
-        <div className="absolute inset-0 bg-black opacity-40"></div>
-
-        <div className="relative z-10 text-center text-white px-4 max-w-5xl mx-auto">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in">
-            Your Dream Event
-            <br />
-            <span className="text-amber-200">Starts Here</span>
-          </h1>
-          <p className="text-xl md:text-2xl mb-8 text-amber-100">
-            JP Nagar's Premier Venue for Unforgettable Celebrations
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button
-              onClick={() => navigate("/booking-room")}
-              className="bg-white text-amber-600 px-8 py-4 rounded-full font-bold text-lg hover:bg-amber-50 transform hover:scale-105 transition shadow-2xl"
-            >
-              Book Now
-              <ChevronRight className="inline ml-2" />
-            </button>
-          </div>
-        </div>
-
-        <div className="absolute bottom-0 left-0 right-0">
-          <svg
-            viewBox="0 0 1440 120"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M0 120L60 105C120 90 240 60 360 45C480 30 600 30 720 37.5C840 45 960 60 1080 67.5C1200 75 1320 75 1380 75L1440 75V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z"
-              fill="#fffbeb"
-            />
-          </svg>
         </div>
       </section>
     </div>

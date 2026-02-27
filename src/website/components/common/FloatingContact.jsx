@@ -1,11 +1,37 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function FloatingContact() {
   const [open, setOpen] = useState(false);
-
+  const navigate = useNavigate();
   return (
     <>
-      {/* Floating Button */}
+      <button
+        onClick={() => navigate("/booking-hall")}
+        className="fixed right-0 bottom-1/3 -translate-y-1/2 
+  bg-amber-500 hover:bg-amber-600 
+  text-white px-4 py-3 
+  rounded-l-xl shadow-lg 
+  z-40 transition-all duration-300 
+  flex items-center gap-2 
+  hover:pr-5 group"
+      >
+        <svg
+          className="w-4 h-4 group-hover:rotate-12 transition-transform"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+          />
+        </svg>
+
+        <span className="text-sm font-semibold tracking-wide">Book Now</span>
+      </button>
       <button
         onClick={() => setOpen(true)}
         className="fixed right-0 top-1/2 -translate-y-1/2 bg-gradient-to-br from-[#0F3652] to-[#1a4d6f] text-white pl-4 sm:pl-6 pr-3 sm:pr-4 py-4 sm:py-6 rounded-l-2xl shadow-2xl z-50 hover:pr-5 sm:hover:pr-6 transition-all duration-300 group"
@@ -101,7 +127,7 @@ export default function FloatingContact() {
         {/* Content */}
         <div className="p-5 sm:p-8 space-y-5 sm:space-y-6 overflow-y-auto h-[calc(100%-180px)] sm:h-[calc(100%-160px)]">
           {/* Contact Person Card */}
-          <div className="bg-gradient-to-br from-gray-50 to-white p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-gray-100 shadow-sm">
+          {/* <div className="bg-gradient-to-br from-gray-50 to-white p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-gray-100 shadow-sm">
             <div className="flex items-start gap-3 sm:gap-4">
               <div className="w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br from-[#0F3652] to-[#1a4d6f] rounded-full flex items-center justify-center text-white font-bold text-lg sm:text-xl flex-shrink-0 shadow-lg">
                 DB
@@ -115,7 +141,7 @@ export default function FloatingContact() {
                 </p>
               </div>
             </div>
-          </div>
+          </div> */}
 
           {/* Contact Details */}
           <div className="space-y-3 sm:space-y-4">
@@ -322,7 +348,7 @@ export default function FloatingContact() {
           {/* Book Now Button */}
           <div className="pt-4 sm:pt-6">
             <a
-              href="/booking-room"
+              href="/booking-hall"
               className="w-full flex items-center justify-center gap-3 p-4 sm:p-5 bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 text-white rounded-2xl hover:shadow-2xl hover:shadow-orange-500/50 transition-all hover:scale-105 active:scale-95 group font-bold text-base sm:text-lg"
             >
               <svg
@@ -338,7 +364,7 @@ export default function FloatingContact() {
                   d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
                 />
               </svg>
-              <span>Book Now</span>
+              <span>Hall Booking</span>
               <svg
                 className="w-5 h-5 sm:w-6 sm:h-6 group-hover:translate-x-2 transition-transform"
                 fill="none"

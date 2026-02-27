@@ -147,7 +147,7 @@ const options = {
     },
     title: {
       display: true,
-      text: "Members per Branch",
+      text: "Members - Citywise",
     },
   },
   scales: {

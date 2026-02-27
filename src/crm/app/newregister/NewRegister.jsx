@@ -29,7 +29,7 @@ const NewRegister = () => {
     <Page>
       <div className="w-full space-y-8">
         <MemberTable
-          title="New Register List"
+          title="New Registrations"
           data={filteredData}
           refetch={refetch}
           navigate={navigate}

@@ -124,7 +124,7 @@ const AppRoutes = () => {
         <Route path="contact" element={<Contact />} />
         <Route path="booking-room" element={<BookingRoom />} />
         <Route path="loan" element={<LoanIndex />} />
-        <Route path="bhavan-form" element={<BhavanIndex />} />
+        <Route path="booking-hall" element={<BhavanIndex />} />
         <Route path="bhavan" element={<BhavanWebsite />} />
         <Route path="*" element={<WebsiteNotFound />} />
       </Route>
