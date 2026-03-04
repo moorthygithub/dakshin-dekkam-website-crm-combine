@@ -1,4 +1,4 @@
-import { MEMBER_LIST } from "@/api";
+import { GET_STATES, MEMBER_LIST } from "@/api";
 import Page from "@/crm/app/page/page";
 import { MemoizedSelect } from "@/crm/components/common/MemoizedSelect";
 import PageHeaders from "@/crm/components/common/PageHeaders";
@@ -16,6 +16,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useGetApiMutation } from "@/hooks/useGetApiMutation";
 import { decryptId } from "@/crm/utils/encyrption/Encyrption";
 import { useApiMutation } from "@/hooks/useApiMutation";
+import generateYearOptions from "@/website/utils/generateYearOptions";
 const useFetchMaterial = (id) => {
   return useGetApiMutation({
     url: `${MEMBER_LIST}/${id}`,
@@ -58,18 +59,23 @@ const MemberForm = () => {
       console.error("Failed to decrypt ID:", err.message);
     }
   }
-
+  const { data: statedata } = useGetApiMutation({
+    url: GET_STATES,
+    queryKey: ["statedata-crm"],
+  });
   const isEditMode = Boolean(id);
   const { toast } = useToast();
   const navigate = useNavigate();
   const [progress, setProgress] = useState(0);
+  const yearOptions = generateYearOptions(1950);
 
   const [formData, setFormData] = useState({
     first_name: "",
     middle_name: "",
     last_name: "",
     user_dob: "",
-    user_blood_group: "",
+    user_city: "",
+    user_age: "",
     mobile: "",
     user_whatsapp: "",
     email: "",
@@ -81,7 +87,9 @@ const MemberForm = () => {
     user_doa: "",
     user_married_status: "",
     user_group_mid: "",
-    user_status: isEditMode ? "" : null,
+    user_status: isEditMode ? "" : "Active",
+    user_state: "",
+    user_pincode: "",
   });
   const { trigger: submitTrigger, loading: submitLoading } = useApiMutation();
   const { data: materialByid, loading: isFetching } =
@@ -94,7 +102,8 @@ const MemberForm = () => {
         middle_name: raw?.middle_name || "",
         last_name: raw?.last_name || "",
         user_dob: raw?.user_dob || "",
-        user_blood_group: raw?.user_blood_group || "",
+        user_city: raw?.user_city || "",
+        user_age: raw?.user_age || "",
         mobile: raw?.mobile || "",
         user_whatsapp: raw?.user_whatsapp || "",
         email: raw?.email || "",
@@ -105,8 +114,10 @@ const MemberForm = () => {
         native_place: raw?.native_place || "",
         user_doa: raw?.user_doa || "",
         user_married_status: raw?.user_married_status || "",
+        user_state: raw?.user_state || "",
+        user_pincode: raw?.user_pincode || "",
         user_group_mid: raw?.user_group_mid || "",
-        user_status: raw?.user_status || "",
+        user_status: raw?.user_status || "Active",
       });
     }
   }, [decryptedId, materialByid]);
@@ -116,8 +127,20 @@ const MemberForm = () => {
   const { data: occupationdata, isLoading: loadingoccupation } =
     useFetchOccupation();
 
+  // const handleInputChange = (e, field) => {
+  //   const value = e.target ? e.target.value : e;
+  //   let updatedFormData = { ...formData, [field]: value };
+
+  //   setFormData(updatedFormData);
+  // };
   const handleInputChange = (e, field) => {
-    const value = e.target ? e.target.value : e;
+    let value = e.target ? e.target.value : e;
+    if (
+      ["user_age", "mobile", "user_whatsapp", "user_pincode"].includes(field)
+    ) {
+      value = value.replace(/\D/g, "");
+    }
+
     let updatedFormData = { ...formData, [field]: value };
 
     setFormData(updatedFormData);
@@ -163,20 +186,22 @@ const MemberForm = () => {
 
     const missingFields = [];
     if (!formData.first_name) missingFields.push("First Name");
-    if (!formData.middle_name) missingFields.push("Middle Name");
-    if (!formData.last_name) missingFields.push("Last Name");
-    if (!formData.user_dob) missingFields.push("Date of Birth");
-    if (!formData.user_blood_group) missingFields.push("Blood Group");
+    // if (!formData.middle_name) missingFields.push("Middle Name");
+    if (!formData.user_dob) missingFields.push("Born Year");
+    if (!formData.user_city) missingFields.push("City");
+    if (!formData.user_age) missingFields.push("Age");
     if (!formData.mobile) missingFields.push("Mobile");
-    if (!formData.user_whatsapp) missingFields.push("WhatsApp Number");
+    // if (!formData.user_whatsapp) missingFields.push("WhatsApp Number");
     if (!formData.email) missingFields.push("Email");
     if (!formData.user_occupation) missingFields.push("Occupation");
-    if (!formData.user_education) missingFields.push("Education");
-    if (!formData.resi_address) missingFields.push("Residential Address");
-    if (!formData.place_of_residence) missingFields.push("Place of Residence");
-    if (!formData.native_place) missingFields.push("Native Place");
-    if (!formData.user_doa) missingFields.push("Date of Anniversary");
-    if (!formData.user_married_status) missingFields.push("Marital Status");
+    // if (!formData.user_education) missingFields.push("Education");
+    // if (!formData.resi_address) missingFields.push("Residential Address");
+    // if (!formData.place_of_residence) missingFields.push("Place of Residence");
+    // if (!formData.native_place) missingFields.push("Native Place");
+    // if (!formData.user_doa) missingFields.push("Date of Anniversary");
+    if (!formData.user_state) missingFields.push("State");
+    if (!formData.user_pincode) missingFields.push("Pincode");
+    // if (!formData.user_married_status) missingFields.push("Marital Status");
     if (!formData.user_group_mid && !isEditMode)
       missingFields.push("Group MID");
     if (!formData.user_status && isEditMode)
@@ -262,7 +287,7 @@ const MemberForm = () => {
                     <label
                       className={`block  ${ButtonConfig.cardLabel} text-sm mb-2 font-medium `}
                     >
-                      Middle Name<span className="text-red-500">*</span>
+                      Middle Name
                     </label>
                     <Input
                       className="bg-white border border-gray-300 rounded-lg w-full focus:ring-2 "
@@ -275,7 +300,7 @@ const MemberForm = () => {
                     <label
                       className={`block  ${ButtonConfig.cardLabel} text-sm mb-2 font-medium `}
                     >
-                      Last Name<span className="text-red-500">*</span>
+                      Last Name
                     </label>
                     <Input
                       className="bg-white border border-gray-300 rounded-lg w-full focus:ring-2 "
@@ -288,17 +313,48 @@ const MemberForm = () => {
                     <label
                       className={`block  ${ButtonConfig.cardLabel} text-sm mb-2 font-medium `}
                     >
-                      DOB <span className="text-red-500">*</span>
+                      Born Year <span className="text-red-500">*</span>
                     </label>
-                    <Input
+                    {/* <Input
                       className="bg-white"
                       value={formData.user_dob}
                       onChange={(e) => handleInputChange(e, "user_dob")}
                       type="date"
+                    /> */}
+                    <MemoizedSelect
+                      value={formData.user_dob}
+                      onChange={(e) => handleInputChange(e, "user_dob")}
+                      options={yearOptions}
+                      placeholder="Select Born Year"
                     />
                   </div>
-
-                  <div className="mb-4">
+                  <div>
+                    <label
+                      className={`block  ${ButtonConfig.cardLabel} text-sm mb-2 font-medium `}
+                    >
+                      Age <span className="text-red-500">*</span>
+                    </label>
+                    <Input
+                      className="bg-white"
+                      value={formData.user_age}
+                      onChange={(e) => handleInputChange(e, "user_age")}
+                    />
+                  </div>{" "}
+                  <div>
+                    <label
+                      className={`block  ${ButtonConfig.cardLabel} text-sm mb-2 font-medium `}
+                    >
+                      Email<span className="text-red-500">*</span>
+                    </label>
+                    <Input
+                      type="email"
+                      className="bg-white border border-gray-300 rounded-lg w-full focus:ring-2 "
+                      value={formData.email}
+                      onChange={(e) => handleInputChange(e, "email")}
+                      maxLength={50}
+                    />
+                  </div>
+                  {/* <div className="mb-4">
                     <div className="flex items-center justify-between mb-2">
                       <label
                         className={`text-sm font-medium ${ButtonConfig.cardLabel}`}
@@ -318,7 +374,7 @@ const MemberForm = () => {
                       }
                       placeholder="Select Blood Group"
                     />
-                  </div>
+                  </div> */}
                   <div>
                     <label
                       className={`block  ${ButtonConfig.cardLabel} text-sm mb-2 font-medium `}
@@ -336,7 +392,7 @@ const MemberForm = () => {
                     <label
                       className={`block  ${ButtonConfig.cardLabel} text-sm mb-2 font-medium `}
                     >
-                      Whatsapp<span className="text-red-500">*</span>
+                      Whatsapp
                     </label>
                     <Input
                       className="bg-white border border-gray-300 rounded-lg w-full focus:ring-2 "
@@ -349,13 +405,12 @@ const MemberForm = () => {
                     <label
                       className={`block  ${ButtonConfig.cardLabel} text-sm mb-2 font-medium `}
                     >
-                      Email
+                      Education
                     </label>
                     <Input
-                      type="email"
                       className="bg-white border border-gray-300 rounded-lg w-full focus:ring-2 "
-                      value={formData.email}
-                      onChange={(e) => handleInputChange(e, "email")}
+                      value={formData.user_education}
+                      onChange={(e) => handleInputChange(e, "user_education")}
                       maxLength={50}
                     />
                   </div>
@@ -380,38 +435,42 @@ const MemberForm = () => {
                       placeholder="Select Occupation"
                     />
                   </div>
+                  <div className="mb-4">
+                    <div className="flex items-center justify-between mb-2">
+                      <label
+                        className={`text-sm font-medium ${ButtonConfig.cardLabel}`}
+                      >
+                        Marital Status
+                      </label>
+                    </div>
+
+                    <MemoizedSelect
+                      value={formData.user_married_status}
+                      onChange={(e) =>
+                        handleInputChange(e, "user_married_status")
+                      }
+                      options={MarriedStatus}
+                      placeholder="Select  Marital Status"
+                    />
+                  </div>
                   <div>
                     <label
                       className={`block  ${ButtonConfig.cardLabel} text-sm mb-2 font-medium `}
                     >
-                      Education<span className="text-red-500">*</span>
+                      Date of Anniversary
                     </label>
                     <Input
+                      type="date"
                       className="bg-white border border-gray-300 rounded-lg w-full focus:ring-2 "
-                      value={formData.user_education}
-                      onChange={(e) => handleInputChange(e, "user_education")}
-                      maxLength={50}
-                    />
-                  </div>
-
-                  <div>
-                    <label
-                      className={`block  ${ButtonConfig.cardLabel} text-sm mb-2 font-medium `}
-                    >
-                      Address<span className="text-red-500">*</span>
-                    </label>
-                    <Textarea
-                      className="bg-white border border-gray-300 rounded-lg w-full focus:ring-2 "
-                      value={formData.resi_address}
-                      onChange={(e) => handleInputChange(e, "resi_address")}
-                      maxLength={800}
+                      value={formData.user_doa}
+                      onChange={(e) => handleInputChange(e, "user_doa")}
                     />
                   </div>
                   <div>
                     <label
                       className={`block  ${ButtonConfig.cardLabel} text-sm mb-2 font-medium `}
                     >
-                      Residence<span className="text-red-500">*</span>
+                      Place of Residence
                     </label>
                     <Input
                       className="bg-white border border-gray-300 rounded-lg w-full focus:ring-2 "
@@ -426,7 +485,7 @@ const MemberForm = () => {
                     <label
                       className={`block  ${ButtonConfig.cardLabel} text-sm mb-2 font-medium `}
                     >
-                      Native Place<span className="text-red-500">*</span>
+                      Native Place in Kutch
                     </label>
                     <Input
                       className="bg-white border border-gray-300 rounded-lg w-full focus:ring-2 "
@@ -439,34 +498,45 @@ const MemberForm = () => {
                     <label
                       className={`block  ${ButtonConfig.cardLabel} text-sm mb-2 font-medium `}
                     >
-                      DOA<span className="text-red-500">*</span>
+                      City <span className="text-red-500">*</span>
                     </label>
                     <Input
-                      type="date"
-                      className="bg-white border border-gray-300 rounded-lg w-full focus:ring-2 "
-                      value={formData.user_doa}
-                      onChange={(e) => handleInputChange(e, "user_doa")}
+                      className="bg-white"
+                      value={formData.user_city}
+                      onChange={(e) => handleInputChange(e, "user_city")}
                     />
                   </div>
-                  <div className="mb-4">
-                    <div className="flex items-center justify-between mb-2">
-                      <label
-                        className={`text-sm font-medium ${ButtonConfig.cardLabel}`}
-                      >
-                        Married Status <span className="text-red-500">*</span>
-                      </label>
-                    </div>
-
+                  <div>
+                    <label
+                      className={`block  ${ButtonConfig.cardLabel} text-sm mb-2 font-medium `}
+                    >
+                      State <span className="text-red-500">*</span>
+                    </label>
                     <MemoizedSelect
-                      value={formData.user_married_status}
-                      onChange={(e) =>
-                        handleInputChange(e, "user_married_status")
+                      value={formData.user_state}
+                      onChange={(e) => handleInputChange(e, "user_state")}
+                      options={
+                        statedata?.data?.map((state) => ({
+                          value: state.state_name,
+                          label: state.state_name,
+                        })) || []
                       }
-                      options={MarriedStatus}
-                      placeholder="Select  Married Status"
+                      placeholder="Select State"
                     />
                   </div>
-
+                  <div>
+                    <label
+                      className={`block  ${ButtonConfig.cardLabel} text-sm mb-2 font-medium `}
+                    >
+                      Pincode <span className="text-red-500">*</span>
+                    </label>
+                    <Input
+                      className="bg-white"
+                      value={formData.user_pincode}
+                      onChange={(e) => handleInputChange(e, "user_pincode")}
+                      maxLength={6}
+                    />
+                  </div>
                   {!isEditMode && (
                     <div>
                       <label
@@ -492,8 +562,8 @@ const MemberForm = () => {
                       </div>
 
                       <MemoizedSelect
-                        value={formData.event_status}
-                        onChange={(e) => handleInputChange(e, "event_status")}
+                        value={formData.user_status}
+                        onChange={(e) => handleInputChange(e, "user_status")}
                         options={
                           status?.map((status) => ({
                             value: status.value,
@@ -504,6 +574,19 @@ const MemberForm = () => {
                       />
                     </div>
                   )}
+                  <div className="md:col-span-2">
+                    <label
+                      className={`block  ${ButtonConfig.cardLabel} text-sm mb-2 font-medium `}
+                    >
+                      Address
+                    </label>
+                    <Textarea
+                      className="bg-white border border-gray-300 rounded-lg w-full focus:ring-2 "
+                      value={formData.resi_address}
+                      onChange={(e) => handleInputChange(e, "resi_address")}
+                      maxLength={800}
+                    />
+                  </div>
                 </div>
               </CardContent>
             </Card>

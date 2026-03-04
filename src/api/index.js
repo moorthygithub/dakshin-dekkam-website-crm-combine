@@ -59,3 +59,4 @@ export const COMMITTE_MEMBER = `/getCurrentYearCommitteeMember`;
 export const CREATE_WEB_ENQUIRY = `/createWebenquiry`;
 export const GET_COMPANY_DETAILS = `/getCompany`;
 export const GET_UPCOMING_EVENTS = `/getUpcomingEvent`;
+export const GET_STATES= `/getState`;
