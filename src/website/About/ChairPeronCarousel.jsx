@@ -291,7 +291,7 @@ const COMMITTEE_MEMBERS = [
 ];
 
 const BRANCH_MEMBERS = [
-  { name: "gulabhchand soni", role: "President", place: "Bagalkot" },
+  { name: "Gulabhchand Soni", role: "President", place: "Bagalkot" },
   { name: "Satish D. Shah", role: "President", place: "Banglore" },
   { name: "Mitesh Pravinchandra Lodaya", role: "Secretary", place: "Banglore" },
   { name: "Chetan Somchand Munvar", role: "President", place: "Bellari" },

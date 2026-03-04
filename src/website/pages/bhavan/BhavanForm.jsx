@@ -488,15 +488,14 @@ const BhavanForm = () => {
         </div>
 
         <div className="flex flex-col">
-          <label className="font-medium text-gray-700 text-sm mb-2 flex items-center gap-1">
-            <User className="w-4 h-4 text-blue-600" />
-            Address <span className="text-red-700">*</span>
-          </label>
-          <textarea
+          <InputField
+            label=" Address "
             name="guest_address"
             value={formData.guest_address}
             onChange={handleChange}
             rows="2"
+            required
+            type="textarea"
             className="border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
             placeholder="Enter complete address"
           />

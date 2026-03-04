@@ -32,6 +32,7 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
+import { Input } from "../ui/input";
 import {
   Select,
   SelectContent,
@@ -39,13 +40,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
-import { Input } from "../ui/input";
 const MemberTable = ({ data, refetch, navigate, title, type }) => {
   const [sorting, setSorting] = useState([]);
   const [columnFilters, setColumnFilters] = useState([]);
   const [columnVisibility, setColumnVisibility] = useState({});
   const [rowSelection, setRowSelection] = useState({});
   const [statusFilter, setStatusFilter] = useState("all");
+
   const columns = [
     {
       accessorKey: "index",
@@ -67,7 +68,9 @@ const MemberTable = ({ data, refetch, navigate, title, type }) => {
     },
     { accessorKey: "mobile", header: "Mobile" },
     { accessorKey: "email", header: "Email" },
-    { accessorKey: "user_blood_group", header: "Blood Group" },
+    { accessorKey: "user_age", header: "Age" },
+    { accessorKey: "user_city", header: "City" },
+    { accessorKey: "user_dob", header: "Born Year" },
     { accessorKey: "user_married_status", header: "Married Status" },
     {
       accessorKey: "user_status",
@@ -156,50 +159,24 @@ const MemberTable = ({ data, refetch, navigate, title, type }) => {
             className="pl-8 bg-gray-50 border-gray-200 focus:border-gray-300 focus:ring-gray-200"
           />
         </div>
+
         <div className="space-x-3 flex">
-          {/* <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="outline" className="ml-2">
-                Status <ChevronDown className="ml-2 h-4 w-4" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="start">
-              <DropdownMenuCheckboxItem
-                checked={statusFilter == "all"}
-                onCheckedChange={() => setStatusFilter("all")}
-              >
-                All
-              </DropdownMenuCheckboxItem>
+          {type !== "new" && (
+            <Select
+              value={statusFilter}
+              onValueChange={(value) => setStatusFilter(value)}
+            >
+              <SelectTrigger className="w-[180px] ml-2">
+                <SelectValue placeholder="Select Status" />
+              </SelectTrigger>
 
-              <DropdownMenuCheckboxItem
-                checked={statusFilter == "Active"}
-                onCheckedChange={() => setStatusFilter("Active")}
-              >
-                Active
-              </DropdownMenuCheckboxItem>
-
-              <DropdownMenuCheckboxItem
-                checked={statusFilter == "Inactive"}
-                onCheckedChange={() => setStatusFilter("Inactive")}
-              >
-                Inactive
-              </DropdownMenuCheckboxItem>
-            </DropdownMenuContent>
-          </DropdownMenu> */}
-          <Select
-            value={statusFilter}
-            onValueChange={(value) => setStatusFilter(value)}
-          >
-            <SelectTrigger className="w-[180px] ml-2">
-              <SelectValue placeholder="Select Status" />
-            </SelectTrigger>
-
-            <SelectContent>
-              <SelectItem value="all">All</SelectItem>
-              <SelectItem value="Active">Active</SelectItem>
-              <SelectItem value="Inactive">Inactive</SelectItem>
-            </SelectContent>
-          </Select>
+              <SelectContent>
+                <SelectItem value="all">All</SelectItem>
+                <SelectItem value="Active">Active</SelectItem>
+                <SelectItem value="Inactive">Inactive</SelectItem>
+              </SelectContent>
+            </Select>
+          )}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" className="ml-auto ">

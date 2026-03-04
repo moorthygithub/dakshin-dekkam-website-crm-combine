@@ -1,13 +1,22 @@
+import { CREATE_MEMBER, GET_STATES } from "@/api";
+import {
+  useFetchBloodGroup,
+  useFetchBranch,
+  useFetchOccupation,
+} from "@/hooks/useApi";
+import { useApiMutation } from "@/hooks/useApiMutation";
+import { MarriedStatus } from "@/website/constants/selectOptions";
+import { associateMahajan } from "@/website/data/associatemahajan";
+import generateYearOptions from "@/website/utils/generateYearOptions";
 import {
   Book,
   Briefcase,
   Calendar,
-  Droplet,
   GitBranch,
-  Group,
   Heart,
   Home,
   Loader,
+  Locate,
   Mail,
   MapPin,
   MessageCircle,
@@ -16,17 +25,9 @@ import {
 } from "lucide-react";
 import { useRef, useState } from "react";
 import { showErrorToast, showSuccessToast } from "../../utils/toast";
-import SelectField from "../common/SelectField";
 import InputField from "../common/InputField";
-import { useApiMutation } from "@/hooks/useApiMutation";
-import {
-  useFetchBloodGroup,
-  useFetchBranch,
-  useFetchOccupation,
-} from "@/hooks/useApi";
-import { MarriedStatus } from "@/website/constants/selectOptions";
-import { CREATE_MEMBER } from "@/api";
-import { associateMahajan } from "@/website/data/associatemahajan";
+import SelectField from "../common/SelectField";
+import { useGetApiMutation } from "@/hooks/useGetApiMutation";
 
 const CommunityForm = () => {
   const [formData, setFormData] = useState({
@@ -34,7 +35,8 @@ const CommunityForm = () => {
     middle_name: "",
     last_name: "",
     user_dob: "",
-    user_blood_group: "",
+    user_city: "",
+    user_age: "",
     mobile: "",
     user_whatsapp: "",
     email: "",
@@ -47,12 +49,20 @@ const CommunityForm = () => {
     user_doa: "",
     user_married_status: "",
     user_group_mid: "",
+    user_state: "",
+    user_pincode: "",
   });
   const { trigger: submitTrigger, loading: submitLoading } = useApiMutation();
+  const yearOptions = generateYearOptions(1950);
 
   const [errors, setErrors] = useState({});
   const { data: blodGroupdata } = useFetchBloodGroup();
   const { data: branchdata } = useFetchBranch();
+  const { data: statedata } = useGetApiMutation({
+    url: GET_STATES,
+    queryKey: ["statedata"],
+  });
+  console.log(statedata);
 
   const { data: occupationdata } = useFetchOccupation();
   const fieldRefs = {
@@ -62,13 +72,19 @@ const CommunityForm = () => {
     resi_address: useRef(null),
     user_occupation: useRef(null),
     branch_id: useRef(null),
-    user_blood_group: useRef(null),
+    user_city: useRef(null),
+    user_age: useRef(null),
   };
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    if (name == "mobile" || name == "user_whatsapp") {
-      const numericValue = value.replace(/\D/g, ""); // remove non-digits
+    if (
+      name == "mobile" ||
+      name == "user_whatsapp" ||
+      name == "user_pincode" ||
+      name == "user_age"
+    ) {
+      const numericValue = value.replace(/\D/g, "");
       if (numericValue.length <= 10) {
         setFormData({ ...formData, [name]: numericValue });
         setErrors({ ...errors, [name]: "" });
@@ -106,8 +122,11 @@ const CommunityForm = () => {
 
     if (!formData.branch_id) newErrors.branch_id = "Branch is required";
 
-    if (!formData.user_blood_group)
-      newErrors.user_blood_group = "Blood group is required";
+    if (!formData.user_city) newErrors.user_city = "City is required";
+    if (!formData.user_age) newErrors.user_age = "Age is required";
+    if (!formData.user_dob) newErrors.user_dob = "Born Year is required";
+    if (!formData.user_state) newErrors.user_state = "State is required";
+    if (!formData.user_pincode) newErrors.user_pincode = "Pincode is required";
 
     return newErrors;
   };
@@ -145,7 +164,8 @@ const CommunityForm = () => {
           middle_name: "",
           last_name: "",
           user_dob: "",
-          user_blood_group: "",
+          user_age: "",
+          user_city: "",
           mobile: "",
           user_whatsapp: "",
           email: "",
@@ -158,6 +178,8 @@ const CommunityForm = () => {
           user_doa: "",
           user_married_status: "",
           user_group_mid: "",
+          user_state: "",
+          user_pincode: "",
         });
       } else {
         showErrorToast(response.message || "Something went wrong");
@@ -204,19 +226,19 @@ const CommunityForm = () => {
           startIcon={<User size={18} />}
           placeholder="Enter last name"
         />
-
-        {/* DOB */}
-        <InputField
-          label="Date of Birth"
-          type="date"
+        <SelectField
+          label="Born Year"
           name="user_dob"
           value={formData.user_dob}
           onChange={handleChange}
-          startIcon={<Calendar size={18} />}
+          options={yearOptions}
+          placeholder="Select Born Year"
+          required
+          error={errors.user_dob}
+          ref={fieldRefs.user_dob}
         />
-
         {/* Blood Group */}
-        <SelectField
+        {/* <SelectField
           label="Blood Group"
           name="user_blood_group"
           value={formData.user_blood_group}
@@ -231,9 +253,19 @@ const CommunityForm = () => {
           required
           ref={fieldRefs.user_blood_group}
           startIcon={<Droplet size={18} />}
+        /> */}
+        <InputField
+          label="Age"
+          name="user_age"
+          value={formData.user_age}
+          onChange={handleChange}
+          placeholder="Enter your age"
+          startIcon={<Calendar size={18} />}
+          error={errors.user_age}
+          required
+          ref={fieldRefs.user_age}
+          maxLength={2}
         />
-
-        {/* Contact */}
         <InputField
           label="Email"
           type="email"
@@ -267,41 +299,6 @@ const CommunityForm = () => {
           placeholder="Enter WhatsApp number"
           startIcon={<MessageCircle size={18} />}
         />
-
-        {/* Address */}
-
-        {/* <InputField
-          label="Place of Residence"
-          name="place_of_residence"
-          value={formData.place_of_residence}
-          onChange={handleChange}
-          placeholder="Enter place of residence"
-          startIcon={<Home size={18} />}
-        /> */}
-        <SelectField
-          label="Place of Residence"
-          name="place_of_residence"
-          value={formData.place_of_residence}
-          onChange={handleChange}
-          options={
-            associateMahajan?.map((occupation) => ({
-              value: occupation.value,
-              label: occupation.label,
-            })) || []
-          }
-          startIcon={<Home size={18} />}
-        />
-        {/*  */}
-        <InputField
-          label="Native Placein Kutch"
-          name="native_place"
-          value={formData.native_place}
-          onChange={handleChange}
-          placeholder="Enter native place"
-          startIcon={<MapPin size={18} />}
-        />
-
-        {/* Education & Occupation */}
         <InputField
           label="Education"
           name="user_education"
@@ -327,6 +324,56 @@ const CommunityForm = () => {
           startIcon={<Briefcase size={18} />}
         />
         <SelectField
+          label="Marital Status"
+          name="user_married_status"
+          value={formData.user_married_status}
+          onChange={handleChange}
+          options={MarriedStatus}
+          error={errors.user_married_status}
+          startIcon={<Heart size={18} />}
+        />
+        <InputField
+          label="Date of Anniversary"
+          type="date"
+          name="user_doa"
+          value={formData.user_doa}
+          onChange={handleChange}
+          startIcon={<Heart size={18} />}
+        />
+
+        {/* Address */}
+        {/* <InputField
+          label="Place of Residence"
+          name="place_of_residence"
+          value={formData.place_of_residence}
+          onChange={handleChange}
+          placeholder="Enter place of residence"
+          startIcon={<Home size={18} />}
+        /> */}
+        <SelectField
+          label="Place of Residence"
+          name="place_of_residence"
+          value={formData.place_of_residence}
+          onChange={handleChange}
+          options={
+            associateMahajan?.map((occupation) => ({
+              value: occupation.value,
+              label: occupation.label,
+            })) || []
+          }
+          startIcon={<Home size={18} />}
+        />
+        {/*  */}
+        <InputField
+          label="Native Place in Kutch"
+          name="native_place"
+          value={formData.native_place}
+          onChange={handleChange}
+          placeholder="Enter native place"
+          startIcon={<MapPin size={18} />}
+        />
+
+        <SelectField
           label="Branch"
           name="branch_id"
           value={formData.branch_id}
@@ -342,24 +389,43 @@ const CommunityForm = () => {
           ref={fieldRefs.branch_id}
           startIcon={<GitBranch size={18} />}
         />
-
-        <SelectField
-          label="Marital Status"
-          name="user_married_status"
-          value={formData.user_married_status}
-          onChange={handleChange}
-          options={MarriedStatus}
-          error={errors.user_married_status}
-          startIcon={<Heart size={18} />}
-        />
-
         <InputField
-          label="Date of Anniversary"
-          type="date"
-          name="user_doa"
-          value={formData.user_doa}
+          label="City"
+          name="user_city"
+          value={formData.user_city}
           onChange={handleChange}
-          startIcon={<Heart size={18} />}
+          placeholder="Enter your city"
+          startIcon={<MapPin size={18} />}
+          error={errors.user_city}
+          required
+          ref={fieldRefs.user_city}
+        />
+        <SelectField
+          label="State"
+          name="user_state"
+          value={formData.user_state}
+          onChange={handleChange}
+          options={
+            statedata?.data?.map((state) => ({
+              value: state.state_name,
+              label: state.state_name,
+            })) || []
+          }
+          error={errors.user_state}
+          required
+          ref={fieldRefs.user_state}
+          startIcon={<Home size={18} />}
+        />
+        <InputField
+          label="Pincode"
+          name="user_pincode"
+          value={formData.user_pincode}
+          onChange={handleChange}
+          startIcon={<Locate size={18} />}
+          error={errors.user_pincode}
+          required
+          ref={fieldRefs.user_pincode}
+          maxLength={6}
         />
 
         {/* Group ID */}
@@ -371,7 +437,7 @@ const CommunityForm = () => {
           placeholder="Enter MID"
           startIcon={<Group size={18} />}
         /> */}
-        <div className="md:col-span-2">
+        <div className="md:col-span-3">
           <InputField
             label="Residential Address"
             name="resi_address"
@@ -379,9 +445,9 @@ const CommunityForm = () => {
             value={formData.resi_address}
             onChange={handleChange}
             placeholder="Enter your address"
-            error={errors.resi_address}
-            required
-            ref={fieldRefs.resi_address}
+            // error={errors.resi_address}
+            // required
+            // ref={fieldRefs.resi_address}
           />
         </div>
       </div>
