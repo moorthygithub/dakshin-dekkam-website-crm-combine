@@ -198,7 +198,7 @@ export default function BhavanWebsite() {
               <div>
                 <h1 className="text-3xl font-bold text-gray-900 mb-4">
                   Know More About
-                  <span className="text-[#db2920] ml-2">Kutchi Bhavan ?</span>
+                  <span className="text-[#db2920] ml-2">Kutchi Bhavan</span>
                 </h1>
 
                 <div

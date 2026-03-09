@@ -156,18 +156,17 @@ const Info = () => {
               The <strong>Dakshin Bharat Kutchi Dasha Oswal Jain Ekkam</strong>{" "}
               is a vibrant community dedicated to{" "}
               <strong>service, unity, and cultural enrichment</strong> across
-              South India. If you are a resident of <strong>Karnataka</strong>,{" "}
-              <strong>Andhra Pradesh</strong>, <strong>Tamil Nadu</strong>,{" "}
-              <strong>Kerala</strong>, <strong>Pondicherry</strong>, or{" "}
-              <strong>Goa</strong>, and above 18 years of age, you are eligible
-              to become a <strong>Life Member</strong> and from the KDO Jain
-              Community.
+              South India. If you are a KDO and resident of{" "}
+              <strong>Karnataka</strong>, <strong>Andhra Pradesh</strong>,{" "}
+              <strong>Tamil Nadu</strong>, <strong>Kerala</strong>,{" "}
+              <strong>Pondicherry</strong>, or <strong>Goa</strong>, and above
+              18 years of age, you are eligible to become a{" "}
+              <strong>Life Member .</strong>
             </p>
 
             <p className="text-gray-700 leading-relaxed mb-2">
-              Societies, trusts, and <strong>75 or more members</strong> can
-              also enroll as <strong>Associate Life Members</strong> Mahajans of
-              the KDO Jain Community of South India.
+              Mahajans, Societies or Trusts with<strong> 75 members</strong> can
+              of more can also enroll as <strong>Associate Life Members.</strong>{" "}
             </p>
 
             <p className="text-gray-700 leading-relaxed">

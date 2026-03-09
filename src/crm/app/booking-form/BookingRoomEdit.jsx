@@ -271,7 +271,8 @@ const BookingRoomEdit = () => {
                     <label
                       className={`block ${ButtonConfig.cardLabel} text-sm mb-2 font-medium`}
                     >
-                      Full Name of the person
+                      Name of person booking on behalf of the guest (if
+                      different)
                       <span className="text-red-500">*</span>
                     </label>
                     <Input
@@ -279,7 +280,7 @@ const BookingRoomEdit = () => {
                       value={formData.guest_full_name}
                       onChange={(e) => handleInputChange(e, "guest_full_name")}
                       maxLength={100}
-                      placeholder="Enter full name"
+                      placeholder="Enter Name of person booking on behalf of the guest (if different)"
                     />
                   </div>
 

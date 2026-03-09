@@ -1,4 +1,9 @@
-import { BOOKING_FORM_LIST, BOOKING_HALL_LIST, Loan_FORM_LIST, MEMBER_LIST } from "@/api";
+import {
+  BOOKING_FORM_LIST,
+  BOOKING_HALL_LIST,
+  Loan_FORM_LIST,
+  MEMBER_LIST,
+} from "@/api";
 import { useGetApiMutation } from "./useGetApiMutation";
 
 // ---------------New
@@ -12,6 +17,24 @@ export const useFetchPayment = () => {
   return useGetApiMutation({
     url: "/panel-fetch-payment-mode",
     queryKey: ["payment"],
+  });
+};
+export const useFetchNative = () => {
+  return useGetApiMutation({
+    url: "/panel-fetch-native-place",
+    queryKey: ["native-place"],
+  });
+};
+export const useFetchState = () => {
+  return useGetApiMutation({
+    url: "/getState",
+    queryKey: ["getState"],
+  });
+};
+export const useFetchCity = () => {
+  return useGetApiMutation({
+    url: "/panel-fetch-city",
+    queryKey: ["city-dropdown"],
   });
 };
 export const useFetchOccupation = () => {

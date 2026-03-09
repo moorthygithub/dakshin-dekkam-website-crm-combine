@@ -23,7 +23,7 @@ const Contact = () => {
       <ContactInfo websitecompany={websitecompany} />
       <ContactForm />
       <LazyMap websitecompany={websitecompany} />
-      <ContactLocation websitecompany={websitecompany} />
+      {/* <ContactLocation websitecompany={websitecompany} /> */}
     </>
   );
 };
