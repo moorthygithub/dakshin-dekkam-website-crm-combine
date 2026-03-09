@@ -29,7 +29,7 @@ export default function VenueWebsite() {
         "Elegant dining space with traditional plantain leaf services allowed. Ideal for formal dinners, receptions, and authentic South Indian celebrations.",
       seating: "150",
       capacity: "250",
-      highlights: ["Plantain Leaf Service", "Traditional Setup"],
+      highlights: ["Kitchen Facilitiy", "Traditional Setup"],
     },
     {
       icon: <MapPin className="w-10 h-10" />,
@@ -42,8 +42,8 @@ export default function VenueWebsite() {
       icon: <Bed className="w-10 h-10" />,
       title: "Rooms",
       description:
-        "10 well-appointed rooms available for lodging and changing purposes, ensuring comfort and convenience for your guests.",
-      highlights: ["10 Rooms", "Lodging & Changing"],
+        "53 well-appointed rooms available for lodging and changing purposes, ensuring comfort and convenience for your guests.",
+      highlights: ["53 Rooms", "Lodging & Changing"],
     },
     {
       icon: <Utensils className="w-10 h-10" />,

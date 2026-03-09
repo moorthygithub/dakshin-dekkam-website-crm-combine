@@ -2,7 +2,10 @@ import { CREATE_MEMBER, GET_STATES } from "@/api";
 import {
   useFetchBloodGroup,
   useFetchBranch,
+  useFetchCity,
+  useFetchNative,
   useFetchOccupation,
+  useFetchState,
 } from "@/hooks/useApi";
 import { useApiMutation } from "@/hooks/useApiMutation";
 import { MarriedStatus } from "@/website/constants/selectOptions";
@@ -58,11 +61,9 @@ const CommunityForm = () => {
   const [errors, setErrors] = useState({});
   const { data: blodGroupdata } = useFetchBloodGroup();
   const { data: branchdata } = useFetchBranch();
-  const { data: statedata } = useGetApiMutation({
-    url: GET_STATES,
-    queryKey: ["statedata"],
-  });
-  console.log(statedata);
+  const { data: nativedata, isLoading: loadingnative } = useFetchNative();
+  const { data: citydata, isLoading: loadingcity } = useFetchCity();
+  const { data: statedata, isLoading: loadingstate } = useFetchState();
 
   const { data: occupationdata } = useFetchOccupation();
   const fieldRefs = {
@@ -74,6 +75,8 @@ const CommunityForm = () => {
     branch_id: useRef(null),
     user_city: useRef(null),
     user_age: useRef(null),
+    user_state: useRef(null),
+    native_place: useRef(null),
   };
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -102,11 +105,17 @@ const CommunityForm = () => {
     if (!formData.first_name?.trim())
       newErrors.first_name = "First name is required";
 
-    if (!formData.email) {
-      newErrors.email = "Email is required";
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = "Enter a valid email";
-    }
+    if (!formData.middle_name?.trim())
+      newErrors.middle_name = "Middle name is required";
+
+    if (!formData.last_name?.trim())
+      newErrors.last_name = "Last name is required";
+
+    // if (!formData.email) {
+    //   newErrors.email = "Email is required";
+    // } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+    //   newErrors.email = "Enter a valid email";
+    // }
 
     if (!formData.mobile) {
       newErrors.mobile = "Mobile number is required";
@@ -125,6 +134,8 @@ const CommunityForm = () => {
     if (!formData.user_city) newErrors.user_city = "City is required";
     if (!formData.user_age) newErrors.user_age = "Age is required";
     if (!formData.user_dob) newErrors.user_dob = "Born Year is required";
+    if (!formData.native_place)
+      newErrors.native_place = "Native Place is required";
     if (!formData.user_state) newErrors.user_state = "State is required";
     if (!formData.user_pincode) newErrors.user_pincode = "Pincode is required";
 
@@ -217,6 +228,8 @@ const CommunityForm = () => {
           onChange={handleChange}
           startIcon={<User size={18} />}
           placeholder="Enter middle name"
+          error={errors.middle_name}
+          required
         />
         <InputField
           label="Last Name"
@@ -225,6 +238,8 @@ const CommunityForm = () => {
           onChange={handleChange}
           startIcon={<User size={18} />}
           placeholder="Enter last name"
+          error={errors.last_name}
+          required
         />
         <SelectField
           label="Born Year"
@@ -274,9 +289,9 @@ const CommunityForm = () => {
           onChange={handleChange}
           placeholder="Enter email"
           startIcon={<Mail size={18} />}
-          error={errors.email}
-          required
-          ref={fieldRefs.email}
+          // error={errors.email}
+          // required
+          // ref={fieldRefs.email}
         />
         <InputField
           label="Mobile"
@@ -364,15 +379,31 @@ const CommunityForm = () => {
           startIcon={<Home size={18} />}
         />
         {/*  */}
-        <InputField
+        {/* <InputField
           label="Native Place in Kutch"
           name="native_place"
           value={formData.native_place}
           onChange={handleChange}
           placeholder="Enter native place"
           startIcon={<MapPin size={18} />}
-        />
+        /> */}
 
+        <SelectField
+          label="Native Place in Kutch"
+          name="native_place"
+          value={formData.native_place}
+          onChange={handleChange}
+          options={
+            nativedata?.data?.map((native_place) => ({
+              value: native_place.native_place,
+              label: native_place.native_place,
+            })) || []
+          }
+          error={errors.native_place}
+          required
+          ref={fieldRefs.native_place}
+          startIcon={<MapPin size={18} />}
+        />
         <SelectField
           label="Branch"
           name="branch_id"
@@ -389,7 +420,7 @@ const CommunityForm = () => {
           ref={fieldRefs.branch_id}
           startIcon={<GitBranch size={18} />}
         />
-        <InputField
+        {/* <InputField
           label="City"
           name="user_city"
           value={formData.user_city}
@@ -399,6 +430,22 @@ const CommunityForm = () => {
           error={errors.user_city}
           required
           ref={fieldRefs.user_city}
+        /> */}
+        <SelectField
+          label="City"
+          name="user_city"
+          value={formData.user_city}
+          onChange={handleChange}
+          options={
+            citydata?.data?.map((city) => ({
+              value: city.city,
+              label: city.city,
+            })) || []
+          }
+          error={errors.user_city}
+          required
+          ref={fieldRefs.user_city}
+          startIcon={<MapPin size={18} />}
         />
         <SelectField
           label="State"

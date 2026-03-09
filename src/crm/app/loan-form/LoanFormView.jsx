@@ -16,7 +16,8 @@ import {
 
   Eye,
   Loader2,
-  Printer
+  Printer,
+  IndianRupee
 } from 'lucide-react';
 import Page from "@/crm/app/page/page";
 import { MemoizedSelect } from "@/crm/components/common/MemoizedSelect";
@@ -690,7 +691,7 @@ const LoanFormView = () => {
                   <div className="md:col-span-1">
                     <label className="block text-sm font-medium text-gray-600 mb-1">Total Fees of the Course (INR)</label>
                     <div className="flex items-center gap-2 text-gray-800">
-                      <DollarSign size={16} className="text-purple-500" />
+                      <IndianRupee  size={16} className="text-purple-500" />
                       <span>{loan.user_total_fees ? `₹${loan.user_total_fees}` : 'N/A'}</span>
                     </div>
                   </div>

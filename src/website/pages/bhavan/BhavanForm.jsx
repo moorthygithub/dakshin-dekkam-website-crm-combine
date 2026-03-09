@@ -533,7 +533,7 @@ const BhavanForm = () => {
                   }`}
                 />
                 <label className="text-sm text-gray-700">
-                  I have gone through the above{" "}
+                  I have gone through the {" "}
                   <span
                     role="button"
                     className="underline text-blue-700"
@@ -603,7 +603,7 @@ const BhavanForm = () => {
             }}
           >
             {submitLoading && <Loader className="w-5 h-5 animate-spin" />}
-            {submitLoading ? "Submitting..." : "Submit Banquet Order"}
+            {submitLoading ? "Submitting..." : "Submit"}
           </button>
         </div>
       </form>

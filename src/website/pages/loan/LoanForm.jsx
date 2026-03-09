@@ -14,6 +14,7 @@ import {
   DollarSign,
   Users,
   Loader,
+  IndianRupee,
 } from "lucide-react";
 import { useApiMutation } from "@/hooks/useApiMutation";
 import { useFetchBranch } from "@/hooks/useApi";
@@ -927,7 +928,7 @@ const LoanForm = () => {
             value={formData.user_total_fees}
             onChange={handleChange}
             placeholder="Enter total fees amount"
-            startIcon={<DollarSign size={18} />}
+            startIcon={<IndianRupee size={18} />}
             error={errors.user_total_fees}
             required
           />
@@ -1146,7 +1147,7 @@ const LoanForm = () => {
         }}
       >
         {submitLoading && <Loader className="w-5 h-5 animate-spin" />}
-        {submitLoading ? "Submitting..." : "Submit Loan Application"}
+        {submitLoading ? "Submitting..." : "Submit"}
       </button>
     </form>
   );
