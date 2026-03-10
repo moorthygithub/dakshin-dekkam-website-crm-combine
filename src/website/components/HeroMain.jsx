@@ -29,17 +29,17 @@ const HeroMain = () => {
     arrows: true,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
-    // infinite: true,
-    // autoplay: true,
-    // autoplaySpeed: 8000,
-    // speed: 1000,
-    // slidesToShow: 1,
-    // slidesToScroll: 1,
-    // pauseOnHover: false,
+    infinite: true,
+    autoplay: true,
+    autoplaySpeed: 8000,
+    speed: 1000,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    pauseOnHover: false,
   };
 
   return (
-    <div className="relative w-full mt-16">
+    <div className="relative w-full">
       <Slider {...settings}>
         {images.map((src, idx) => (
           <div key={idx} className="relative w-full">
