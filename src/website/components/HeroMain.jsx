@@ -21,11 +21,7 @@ const PrevArrow = ({ onClick }) => (
   </div>
 );
 
-const images = [
-  "/img/banner.jpeg",
-  "https://demo.gloriathemes.com/eventchamp/demo/wp-content/uploads/2018/11/venue-3-1920x1100.jpg",
-  "https://demo.gloriathemes.com/eventchamp/demo/wp-content/uploads/2018/11/event-12-1920x1100.jpg",
-];
+const images = ["/img/banner-1.png", "/img/banner-2.png", "/img/banner-3.png"];
 
 const HeroMain = () => {
   const settings = {
@@ -33,24 +29,24 @@ const HeroMain = () => {
     arrows: true,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
-    infinite: true,
-    autoplay: true,
-    autoplaySpeed: 8000,
-    speed: 1000,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    pauseOnHover: false,
+    // infinite: true,
+    // autoplay: true,
+    // autoplaySpeed: 8000,
+    // speed: 1000,
+    // slidesToShow: 1,
+    // slidesToScroll: 1,
+    // pauseOnHover: false,
   };
 
   return (
-    <div className="relative w-full h-screen">
+    <div className="relative w-full mt-16">
       <Slider {...settings}>
         {images.map((src, idx) => (
-          <div key={idx} className="relative w-full h-screen">
+          <div key={idx} className="relative w-full">
             <img
               src={src}
               alt={`Slide ${idx + 1}`}
-              className="w-full h-full object-cover"
+              className="w-full h-auto object-contain"
             />
             <div className="absolute inset-0 bg-black/30" />
           </div>

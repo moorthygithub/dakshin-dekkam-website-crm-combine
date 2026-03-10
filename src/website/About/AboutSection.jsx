@@ -76,16 +76,20 @@ function AboutSection() {
   const navigate = useNavigate();
   return (
     <div className="container px-4 sm:px-6 lg:px-8 mx-auto max-w-screen-xl text-gray-700">
-      <div className="mt-24 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+      <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
         <div data-aos="fade-right" className="w-full">
           <div className="relative w-full overflow-hidden rounded-lg">
             <img src="/img/testimonials.png" />
           </div>
         </div>
-        <div data-aos="fade-up" data-aos-delay={200} className="w-full">
+        <div data-aos="fade-up" data-aos-delay={100} className="w-full">
           <div className="flex flex-col justify-center">
-            <h1 className="font-semibold text-darken text-xl sm:text-2xl lg:text-3xl mb-5">
+            {/* <h1 className="font-semibold text-darken text-xl sm:text-2xl lg:text-3xl mb-5">
               Our Story: How Ekkam Started?
+            </h1> */}
+            <h1 className="text-3xl font-bold text-gray-900 mb-4">
+              Our Story: How
+              <span className="text-[#db2920] ml-2">Ekkam Started?</span>
             </h1>
             <p className="text-gray-500 mb-4 text-justify">
               Dakshin Bharat Kutchi Dasha Oswal Jain Ekkam is a South India
