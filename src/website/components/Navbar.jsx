@@ -96,7 +96,7 @@ function Navbar() {
           showNavbar
             ? isScrolled
               ? "bg-[#fdf0ef] shadow-md !text-black"
-              : "bg-transparent"
+              : "bg-[#fdf0ef] !text-black"
             : "-translate-y-full"
         } ${isHome ? "text-white" : "text-black"}`}
       >
